@@ -1,7 +1,11 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
-    <section       id="home"
- className="min-h-screen bg-[#F8F5EF] flex items-center pt-20">
+    <section
+      id="home"
+      className="min-h-screen bg-[#F8F5EF] flex items-center pt-20"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
         {/* Left Content */}
@@ -22,22 +26,25 @@ export default function Hero() {
             ingredients to nourish your hair and elevate your daily self-care
             ritual.
           </p>
-          <br />
 
           {/* Buttons */}
           <div className="mt-12 flex flex-wrap items-center gap-5">
 
-            <button
-              className="h-12 px-6  bg-[#2E473B] text-white rounded-full text-sm uppercase tracking-[0.15em] font-medium shadow-md hover:bg-[#23392F] hover:shadow-xl transition-all duration-300"
+            {/* Shop */}
+            <Link
+              href="/shop"
+              className="h-12 px-6 bg-[#2E473B] text-white rounded-full text-sm uppercase tracking-[0.15em] font-medium shadow-md hover:bg-[#23392F] hover:shadow-xl transition-all duration-300 flex items-center justify-center"
             >
               Shop Collection
-            </button>
+            </Link>
 
-            <button
-              className="h-12 px-6 border border-[#2E473B] text-[#2E473B] rounded-full text-sm uppercase tracking-[0.15em] font-medium hover:bg-[#2E473B] hover:text-white hover:shadow-lg transition-all duration-300"
+            {/* Our Story */}
+            <Link
+              href="/#story"
+              className="h-12 px-6 border border-[#2E473B] text-[#2E473B] rounded-full text-sm uppercase tracking-[0.15em] font-medium hover:bg-[#2E473B] hover:text-white hover:shadow-lg transition-all duration-300 flex items-center justify-center"
             >
               Our Story
-            </button>
+            </Link>
 
           </div>
 

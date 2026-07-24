@@ -5,16 +5,14 @@ import Image from "next/image";
 import { useCart } from "@/app/context/CartContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { PRODUCT } from "@/app/constants/product";
 
 
 export default function ProductDetail() {
   const router = useRouter();
-  const images = [
-    "/images/product.png",
-    "/images/product.png",
-    "/images/product.png",
-    "/images/product.png",
-  ];
+  const images = PRODUCT.images;
+
+  
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
@@ -28,49 +26,34 @@ export default function ProductDetail() {
     }
   };
 
-const handleAddToCart = () => {
-  console.log("🔥 Add to Cart clicked");
 
+const handleAddToCart = () => {
   addToCart({
-    id: 1,
-    name: "R & N Botanics Signature Hair Oil",
-    price: 1400,
-    image: "/images/product.png",
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
     quantity,
   });
 
-  console.log("✅ addToCart finished");
-
-  toast.success(
-    "R & N Botanics Signature Hair Oil added to your cart.",
-    {
-      duration: 2500,
-    }
-  );
+  toast.success(`${PRODUCT.name} added to your cart.`, {
+    duration: 2500,
+  });
 };
 
 const handleBuyNow = () => {
-  alert("Inside handleBuyNow");
-    console.log("BUY NOW CLICKED");
-
-  const product = {
-    id: 1,
-    name: "R & N Botanics Signature Hair Oil",
-    price: 1400,
-    image: "/images/product.png",
+  addToCart({
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
     quantity,
-  };
+  });
 
-  console.log("Adding:", product);
-
-  addToCart(product);
-
-  console.log("Product added.");
-
-  setTimeout(() => {
-    router.push("/checkout");
-  }, 500);
+  router.push("/checkout");
 };
+  
+
   return (
     <section className="grid lg:grid-cols-2 gap-20 items-start">
 
@@ -82,21 +65,10 @@ const handleBuyNow = () => {
 
         <div className="relative bg-white rounded-[40px] p-10 shadow-xl w-full max-w-[520px] flex justify-center">
 
-          {/* Offer Badge */}
-
-          <div className="absolute top-6 left-6 bg-[#C7A25A] text-[#2E473B] px-5 py-2 rounded-full text-sm font-semibold">
-            30% OFF
-          </div>
-
-          {/* Bottle Size */}
-
-          <div className="absolute top-6 right-6 bg-[#2E473B] text-white px-5 py-2 rounded-full text-sm font-medium">
-            100 ml
-          </div>
-
+         
           <Image
             src={selectedImage}
-            alt="R & N Botanics Hair Oil"
+            alt={PRODUCT.name}
             width={430}
             height={430}
             className="object-contain"
@@ -142,10 +114,8 @@ const handleBuyNow = () => {
         </p>
 
         <h1 className="mt-4 text-5xl font-bold leading-tight text-[#2E473B]">
-          R & N Botanics
-          <br />
-          Signature Hair Oil
-        </h1>
+  {PRODUCT.name}
+</h1>
 
         {/* Rating */}
 
@@ -155,34 +125,30 @@ const handleBuyNow = () => {
           </span>
 
           <span className="text-gray-500">
-            Premium Botanical Formula
-          </span>
+            {PRODUCT.tagline}          </span>
         </div>
 
         {/* Description */}
 
         <p className="mt-8 text-lg leading-8 text-gray-600">
-          A luxurious botanical hair oil handcrafted with carefully selected
-          herbs and premium oils to nourish the scalp, strengthen roots,
-          reduce hair fall and restore naturally healthy, shiny hair.
-        </p>
+  {PRODUCT.description}
+</p>
 
         {/* Price */}
 
         <div className="mt-10">
 
           <p className="text-2xl text-gray-400 line-through">
-            Rs. 2,000
-          </p>
+           Rs. {PRODUCT.originalPrice.toLocaleString()}          </p>
 
           <div className="flex items-center gap-4 mt-3 flex-wrap">
 
             <h2 className="text-5xl font-bold text-[#2E473B]">
-              Rs. 1,400
+              Rs. {PRODUCT.salePrice.toLocaleString()}
             </h2>
 
             <span className="bg-[#E8F3EA] text-[#2E473B] px-4 py-2 rounded-full font-semibold">
-              Save 30%
+             Save {PRODUCT.discount}%
             </span>
 
           </div>
@@ -207,9 +173,8 @@ const handleBuyNow = () => {
             </button>
 
             <span className="px-10 text-lg font-semibold">
-              {quantity}
-            </span>
-
+  {quantity}
+</span>
             <button
               onClick={increase}
               className="px-6 py-4 text-2xl hover:bg-[#F8F5EF] transition"
@@ -262,27 +227,29 @@ const handleBuyNow = () => {
 
           <div className="flex justify-between">
             <span className="text-gray-500">Bottle Size</span>
-            <span className="font-semibold text-[#2E473B]">100 ml</span>
+            <span className="font-semibold text-[#2E473B]">
+  {PRODUCT.bottleSize}
+</span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Formula</span>
             <span className="font-semibold text-[#2E473B]">
-              100% Botanical
+              {PRODUCT.formula}
             </span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Suitable For</span>
             <span className="font-semibold text-[#2E473B]">
-              All Hair Types
+              {PRODUCT.suitableFor}
             </span>
           </div>
 
           <div className="flex justify-between">
             <span className="text-gray-500">Availability</span>
             <span className="font-semibold text-green-700">
-              In Stock
+              {PRODUCT.stock}
             </span>
           </div>
 

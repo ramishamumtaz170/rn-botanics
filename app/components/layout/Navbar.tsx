@@ -68,10 +68,11 @@ const [cartOpen, setCartOpen] = useState(false);
 
           {/* Cart */}
 
-          <button
+         <button
   onClick={() => setCartOpen(true)}
-  className="relative hidden md:flex items-center justify-center w-11 h-11 rounded-full border border-[#E8E3DA] hover:bg-white transition"
+  className="relative flex items-center justify-center w-11 h-11 rounded-full border border-[#E8E3DA] hover:bg-white transition"
 >
+
   <ShoppingBag
     size={22}
     className="text-[#2E473B]"
@@ -120,22 +121,25 @@ const [cartOpen, setCartOpen] = useState(false);
               Shop
             </Link>
 
-            <Link
-              href="/about"
-              onClick={() => setOpen(false)}
-              className="text-[#2E473B]"
-            >
-              About
-            </Link>
+       <Link
+  href="/#ingredients"
+  onClick={() => {
+    setTimeout(() => setOpen(false), 100);
+  }}
+  className="text-[#2E473B]"
+>
+  About
+</Link>
 
-            <Link
-              href="/contact"
-              onClick={() => setOpen(false)}
-              className="text-[#2E473B]"
-            >
-              Contact
-            </Link>
-
+<a
+  href="https://wa.me/923094289165"
+  target="_blank"
+  rel="noopener noreferrer"
+  onClick={() => setOpen(false)}
+  className="text-[#2E473B]"
+>
+  Contact
+</a>
           </nav>
 
         </div>

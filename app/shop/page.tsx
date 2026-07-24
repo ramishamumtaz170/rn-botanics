@@ -3,6 +3,8 @@ import Benefits from "../components/shop/Benefits";
 import Ingredients from "../components/shop/Ingredients";
 import HowToUse from "../components/shop/HowToUse";
 import CallToAction from "../components/shop/CallToAction";
+import { PRODUCT } from "@/app/constants/product";
+
 
 export default function Shop() {
   return (
@@ -22,10 +24,10 @@ export default function Shop() {
           </h1>
 
         <div className="flex justify-center">
-  <p className="mt-8 max-w-2xl text-center text-lg text-gray-600 leading-8">
-    Discover handcrafted botanical products created to elevate your
-    everyday hair care ritual.
-  </p>
+ <p className="mt-8 max-w-2xl text-center text-lg text-gray-600 leading-8">
+  {PRODUCT.description}
+</p>
+
 </div>
         </div>
 
