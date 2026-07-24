@@ -5,8 +5,7 @@ export const PRODUCT = {
 
   tagline: "Premium Botanical Formula",
 
-  shortDescription:
-    "Discover handcrafted botanical products created to elevate your everyday hair care ritual.",
+  shortDescription: "Signature Botanical Hair Oil",
 
   description:
     "A luxurious botanical hair oil handcrafted with carefully selected herbs and premium oils to nourish the scalp, strengthen roots, reduce hair fall and restore naturally healthy, shiny hair.",
@@ -26,4 +25,11 @@ export const PRODUCT = {
   stock: "In Stock",
 
   image: "/images/product.png",
+
+  images: [
+    "/images/product.png",
+    "/images/product.png",
+    "/images/product.png",
+    "/images/product.png",
+  ],
 };
