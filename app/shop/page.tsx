@@ -27,7 +27,7 @@ export default function Shop() {
  <p className="mt-8 max-w-2xl text-center text-lg text-gray-600 leading-8">
   {PRODUCT.description}
 </p>
-
+ 
 </div>
         </div>
 

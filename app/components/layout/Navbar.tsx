@@ -14,8 +14,7 @@ const [cartOpen, setCartOpen] = useState(false);
   const { cartCount } = useCart();
 
   return (
-    <header className="sticky top-0 w-full bg-[#F8F5EF]/90 backdrop-blur-md border-b border-[#E8E3DA] z-50">
-
+    <header className="fixed top-0 left-0 right-0 w-full bg-[#F8F5EF]/90 backdrop-blur-md border-b border-[#E8E3DA] z-50">
       <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
 
         {/* Logo */}
@@ -101,8 +100,7 @@ const [cartOpen, setCartOpen] = useState(false);
 
       {open && (
 
-        <div className="md:hidden bg-[#F8F5EF] border-t border-[#E8E3DA] px-6 py-6">
-
+        <div className="absolute top-full left-0 w-full md:hidden bg-[#F8F5EF] border-t border-[#E8E3DA] px-6 py-6 shadow-lg">
           <nav className="flex flex-col gap-5">
 
             <Link

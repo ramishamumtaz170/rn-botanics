@@ -1,6 +1,39 @@
+"use client";
+
 import Link from "next/link";
+import { useCart } from "@/app/context/CartContext";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { PRODUCT } from "@/app/constants/product";
+
 
 export default function CallToAction() {
+  const router = useRouter();
+const { addToCart } = useCart();
+
+const handleAddToCart = () => {
+  addToCart({
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
+    quantity: 1,
+  });
+
+  toast.success(`${PRODUCT.name} added to your cart.`);
+};
+
+const handleBuyNow = () => {
+  addToCart({
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
+    quantity: 1,
+  });
+
+  router.push("/checkout");
+};
   return (
     <section className="py-32 bg-[#2E473B]">
 
@@ -34,17 +67,15 @@ export default function CallToAction() {
           <div className="mt-12">
 
             <p className="text-[#BDB4A5] line-through text-2xl">
-              Rs. 2,000
-            </p>
-
+  Rs. {PRODUCT.originalPrice.toLocaleString()}
+</p>
             <div className="mt-3 flex justify-center items-center gap-5 flex-wrap">
 
               <h3 className="text-6xl font-bold text-white">
-                Rs. 1,400
-              </h3>
-
+  Rs. {PRODUCT.salePrice.toLocaleString()}
+</h3>
               <span className="bg-[#C7A25A] text-[#2E473B] px-5 py-2 rounded-full font-semibold">
-                Save 30%
+                Save {PRODUCT.discount}%
               </span>
 
             </div>
@@ -58,37 +89,42 @@ export default function CallToAction() {
   {/* Add to Cart */}
 
   <button
-    className="w-full sm:w-auto min-w-[240px]
-               px-10 py-5
-               rounded-full
-               border-2 border-white
-               text-white
-               text-lg font-semibold
-               whitespace-nowrap
-               flex items-center justify-center
-               hover:bg-white hover:text-[#2E473B]
-               transition-all duration-300"
-  >
-    Add to Cart
-  </button>
+  onClick={() => {
+  
+    handleAddToCart();
+  }}
+  className="w-full sm:w-auto min-w-[240px]
+             px-10 py-5
+             rounded-full
+             border-2 border-white
+             text-white
+             text-lg font-semibold
+             whitespace-nowrap
+             flex items-center justify-center
+             hover:bg-white hover:text-[#2E473B]
+             transition-all duration-300"
+>
+  Add to Cart
+</button>
 
-  {/* Buy Now */}
+{/* Buy Now */}
 
-  <Link
-    href="/checkout"
-    className="w-full sm:w-auto min-w-[240px]
-               px-10 py-5
-               rounded-full
-               bg-[#C7A25A]
-               text-[#2E473B]
-               text-lg font-semibold
-               whitespace-nowrap
-               flex items-center justify-center
-               hover:bg-[#D7B56D]
-               transition-all duration-300"
-  >
-    Buy Now
-  </Link>
+  <button
+  type="button"
+  onClick={handleBuyNow}
+  className="w-full sm:w-auto min-w-[240px]
+             px-10 py-5
+             rounded-full
+             bg-[#C7A25A]
+             text-[#2E473B]
+             text-lg font-semibold
+             whitespace-nowrap
+             flex items-center justify-center
+             hover:bg-[#D7B56D]
+             transition-all duration-300"
+>
+  Buy Now
+</button>
 
 </div>
           {/* Bottom Trust Text */}

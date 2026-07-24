@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { PRODUCT } from "@/app/constants/product";
 
 export default function ProductShowcase() {
   const router = useRouter();
@@ -12,31 +13,26 @@ export default function ProductShowcase() {
 
 const handleBuyNow = () => {
   addToCart({
-    id: 1,
-    name: "R & N Botanics Signature Hair Oil",
-    price: 1400,
-    image: "/images/product.png",
-    quantity: 1,
-  });
+  id: PRODUCT.id,
+  name: PRODUCT.name,
+  price: PRODUCT.salePrice,
+  image: PRODUCT.image,
+  quantity: 1,
+});
 
   router.push("/checkout");
 };
 
   const handleAddToCart = () => {
     addToCart({
-      id: 1,
-      name: "R & N Botanics Signature Hair Oil",
-      price: 1400,
-      image: "/images/product.png",
-      quantity: 1,
-    });
+  id: PRODUCT.id,
+  name: PRODUCT.name,
+  price: PRODUCT.salePrice,
+  image: PRODUCT.image,
+  quantity: 1,
+});
 
-    toast.success(
-      "R & N Botanics Signature Hair Oil added to your cart.",
-      {
-        duration: 2500,
-      }
-    );
+toast.success(`${PRODUCT.name} added to your cart.`);
   };
 
   return (
@@ -74,8 +70,9 @@ const handleBuyNow = () => {
   </p>
 
   <h3 className="mt-2 text-3xl font-bold leading-none">
-    30% OFF
-  </h3>
+  {PRODUCT.discount}% OFF
+</h3>
+
 
 </div>
     {/* Size Badge */}
@@ -83,17 +80,16 @@ const handleBuyNow = () => {
     <div className="absolute bottom-10 -right-4 z-20 bg-white px-5 py-3 rounded-full shadow-lg border border-[#ECE6DA]">
 
       <p className="text-sm font-semibold text-[#2E473B]">
-        100 ml
-      </p>
-
+  {PRODUCT.bottleSize}
+</p>
     </div>
 
     {/* Product Image */}
 
     <Image
-      src="/images/product.png"
-      alt="R & N Botanics Hair Oil"
-      width={420}
+      src={PRODUCT.image}
+alt={PRODUCT.name}
+width={420}
       height={420}
       className="relative z-10 object-contain drop-shadow-2xl hover:scale-105 transition duration-500"
     />
@@ -114,17 +110,12 @@ const handleBuyNow = () => {
           {/* Title */}
 
           <h2 className="mt-4 text-5xl font-bold leading-tight text-[#2E473B]">
-            R & N Botanics
-            <br />
-            Signature Hair Oil
-          </h2>
-
+  {PRODUCT.name}
+</h2>
           {/* Description */}
 
           <p className="mt-8 text-lg leading-8 text-gray-600">
-            A luxurious botanical blend handcrafted with premium oils and
-            carefully selected herbs to nourish your scalp, strengthen every
-            strand and restore natural shine.
+            {PRODUCT.description}
           </p>
 
           {/* Rating */}
@@ -136,7 +127,7 @@ const handleBuyNow = () => {
             </span>
 
             <span className="text-gray-500">
-              Premium Botanical Formula
+              {PRODUCT.tagline}
             </span>
 
           </div>
@@ -146,21 +137,18 @@ const handleBuyNow = () => {
           <div className="mt-10">
 
             <p className="text-xl text-gray-400 line-through">
-              Rs. 2,000
-            </p>
+  Rs. {PRODUCT.originalPrice.toLocaleString()}
+</p>
 
-            <div className="flex items-center gap-4 mt-3 flex-wrap">
+<div className="flex items-center gap-4 mt-3 flex-wrap">
+  <h3 className="text-5xl font-bold text-[#2E473B]">
+    Rs. {PRODUCT.salePrice.toLocaleString()}
+  </h3>
 
-              <h3 className="text-5xl font-bold text-[#2E473B]">
-                Rs. 1,400
-              </h3>
-
-              <span className="bg-[#E8F3EA] text-[#2E473B] px-4 py-2 rounded-full text-sm font-semibold">
-                Save 30%
-              </span>
-
-            </div>
-
+  <span className="bg-[#E8F3EA] text-[#2E473B] px-4 py-2 rounded-full text-sm font-semibold">
+    Save {PRODUCT.discount}%
+  </span>
+</div>
           </div>
 
           {/* Features */}
@@ -170,8 +158,8 @@ const handleBuyNow = () => {
             <div className="flex items-center gap-3">
               <span className="text-[#7C9A7D] text-xl">✓</span>
               <p className="text-gray-700">
-                100% Botanical Ingredients
-              </p>
+  {PRODUCT.formula} Ingredients
+</p>
             </div>
 
             <div className="flex items-center gap-3">
@@ -237,7 +225,7 @@ const handleBuyNow = () => {
           <p className="mt-8 text-center sm:text-left text-sm text-gray-500 leading-7">
             ✓ Secure Checkout &nbsp;&nbsp;•&nbsp;&nbsp;
             ✓ Cash on Delivery Available &nbsp;&nbsp;•&nbsp;&nbsp;
-            ✓ Premium Botanical Formula
+            ✓ ✓ {PRODUCT.tagline}
           </p>
           {/* Product Highlights */}
 
@@ -260,8 +248,9 @@ const handleBuyNow = () => {
     </div>
 
     <div>
-      <h4 className="text-3xl font-bold text-[#2E473B]">100 ml</h4>
-      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
+      <h4 className="text-3xl font-bold text-[#2E473B]">
+  {PRODUCT.bottleSize}
+</h4>      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
         Bottle Size
       </p>
     </div>
