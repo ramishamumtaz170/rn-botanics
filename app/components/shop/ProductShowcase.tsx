@@ -54,35 +54,6 @@ toast.success(`${PRODUCT.name} added to your cart.`);
 
     </div>
 
-   {/* Launch Badge */}
-
-<div
-  className="absolute -top-6 -left-6 z-20
-             bg-[#2E473B]
-             text-white
-             px-7 py-5
-             shadow-2xl
-             border border-[#C7A25A]"
->
-
-  <p className="text-[11px] uppercase tracking-[0.25em] text-[#E8D6A7]">
-    Launch Offer
-  </p>
-
-  <h3 className="mt-2 text-3xl font-bold leading-none">
-  {PRODUCT.discount}% OFF
-</h3>
-
-
-</div>
-    {/* Size Badge */}
-
-    <div className="absolute bottom-10 -right-4 z-20 bg-white px-5 py-3 rounded-full shadow-lg border border-[#ECE6DA]">
-
-      <p className="text-sm font-semibold text-[#2E473B]">
-  {PRODUCT.bottleSize}
-</p>
-    </div>
 
     {/* Product Image */}
 
