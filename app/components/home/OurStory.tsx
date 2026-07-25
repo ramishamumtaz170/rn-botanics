@@ -9,14 +9,13 @@ export default function OurStory() {
         <div className="relative">
           <div className="overflow-hidden rounded-[40px] shadow-2xl">
 
-            <Image
-              src="/images/our-story.jpg"
-              alt="Our Story"
-              width={700}
-              height={800}
-              className="w-full h-[600px] object-cover transition-transform duration-700 hover:scale-105"
-            />
-
+           <Image
+  src="/images/our-story.jpg"
+  alt="Our Story"
+  width={700}
+  height={600}
+  className="w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[600px] object-cover transition-transform duration-700 hover:scale-105"
+/>
           </div>
         </div>
 
@@ -27,26 +26,19 @@ export default function OurStory() {
             Our Story
           </p>
 
-          <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
+          <h3 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
             Rooted In Nature,
             <br />
             Crafted With Purpose.
-          </h2>
+          </h3>
 
           <p className="mt-8 text-lg text-gray-600 leading-9">
             At <span className="font-semibold text-[#2E473B]">R & N Botanics</span>,
-            we believe true beauty begins with nature. Inspired by generations of
-            traditional botanical wisdom, we carefully blend premium oils and
-            nourishing herbs to create luxurious hair care that supports healthy,
-            beautiful hair.
+            We believe healthy, beautiful hair begins with nature. Crafted with premium botanical oils and nourishing herbs.
           </p>
 
           <p className="mt-6 text-lg text-gray-600 leading-9">
-            Every bottle is thoughtfully handcrafted in small batches using
-            carefully selected botanical ingredients. Our mission is simple—to
-            bring together nature, tradition, and quality in a luxurious hair care
-            ritual you can trust.
-          </p>
+            Every bottle is handcrafted in small batches using carefully selected botanical ingredients for trusted, luxurious hair care.</p>
 
           <div className="mt-10 w-24 h-[2px] bg-[#2E473B]"></div>
 

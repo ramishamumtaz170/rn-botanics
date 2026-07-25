@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { PRODUCT } from "@/app/constants/product";
 
-
 export default function FeaturedProducts() {
   return (
     <section className="bg-[#F8F5EF] py-28">
@@ -16,14 +15,12 @@ export default function FeaturedProducts() {
             Signature Collection
           </p>
 
-          <h2 className="mt-4 text-5xl font-bold text-[#2E473B]">
+          <h3 className="mt-4 text-5xl font-bold text-[#2E473B]">
             Crafted For Healthy Hair
-          </h2>
+          </h3>
 
           <p className="mt-6 text-lg text-gray-600 leading-8">
-            Experience our handcrafted botanical hair oil made with carefully
-            selected herbs and premium oils to nourish your scalp, reduce hair
-            fall and promote naturally healthy, stronger hair.
+            Nourish your scalp and strengthen your hair with our handcrafted botanical hair oil.
           </p>
 
         </div>
@@ -41,12 +38,13 @@ export default function FeaturedProducts() {
               {/* Discount Badge */}
 
               <span className="absolute top-6 right-6 bg-[#C7A25A] text-[#2E473B] px-4 py-2 rounded-full text-sm font-semibold">
-  {PRODUCT.discount}% OFF
-</span>
+                {PRODUCT.discount}% OFF
+              </span>
+
               <Image
-  src={PRODUCT.image}
-  alt={PRODUCT.name}
-    width={250}
+                src={PRODUCT.image}
+                alt={PRODUCT.name}
+                width={250}
                 height={250}
                 className="object-contain"
               />
@@ -57,14 +55,11 @@ export default function FeaturedProducts() {
 
             <div className="p-8 text-center">
 
-              <h3 className="text-3xl font-bold text-[#2E473B]">
+              <h2 className="text-3xl font-bold text-[#2E473B]">
                 {PRODUCT.name}
-              </h3>
+              </h2>
 
-              <p className="mt-2 text-gray-600">
-                {PRODUCT.tagline}              </p>
-
-              {/* Pricing */}
+              {/* Price */}
 
               <div className="mt-6 flex items-center justify-center gap-3">
 
@@ -73,7 +68,8 @@ export default function FeaturedProducts() {
                 </span>
 
                 <span className="bg-[#E8F3EA] text-[#2E473B] px-3 py-1 rounded-full text-sm font-semibold">
-                  Save Rs. {(PRODUCT.originalPrice - PRODUCT.salePrice).toLocaleString()}                </span>
+                  Save Rs. {(PRODUCT.originalPrice - PRODUCT.salePrice).toLocaleString()}
+                </span>
 
               </div>
 
@@ -81,16 +77,32 @@ export default function FeaturedProducts() {
                 Rs. {PRODUCT.salePrice.toLocaleString()}
               </h4>
 
-              <p className="mt-5 text-sm text-[#7C9A7D] font-medium">
-                {PRODUCT.bottleSize} • {PRODUCT.tagline}
-              </p>
+              {/* Main CTA */}
 
               <Link
                 href="/shop"
-                className="mt-8 inline-flex justify-center items-center w-full bg-[#2E473B] text-white rounded-full py-4 text-lg font-semibold hover:bg-[#23392F] transition-all duration-300"
+                className="mt-8 inline-flex items-center justify-center w-full
+                           bg-[#C7A25A] text-[#2E473B]
+                           rounded-full py-8
+                           text-xl font-bold
+                           shadow-lg
+                           hover:bg-[#D7B56D]
+                           hover:shadow-xl
+                           transition-all duration-300
+                           hover:-translate-y-1"
               >
-                Shop Now
+                Shop Now →
               </Link>
+
+              {/* Product Info */}
+
+              <p className="mt-8 text-gray-600 leading-7">
+                {PRODUCT.tagline}
+              </p>
+
+              <p className="mt-4 text-sm text-[#7C9A7D] font-medium">
+                {PRODUCT.bottleSize} • 100% Botanical Formula
+              </p>
 
             </div>
 
