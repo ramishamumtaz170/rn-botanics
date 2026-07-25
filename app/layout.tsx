@@ -30,12 +30,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${poppins.variable}`}>
+      <body
+        className={`${playfair.variable} ${poppins.variable} min-h-screen`}
+      >
         <CartProvider>
           <CheckoutProvider>
             <Navbar />
 
-            {children}
+           <main className="min-h-screen">
+  {children}
+</main>
 
             <Toaster
               position="top-right"
