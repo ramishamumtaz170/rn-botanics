@@ -4,9 +4,8 @@ import OrderSummary from "@/app/components/checkout/OrderSummary";
 export default function CheckoutPage() {
   return (
     <main className="bg-[#F8F5EF] min-h-screen py-20">
-  <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-    
-       <div className="max-w-3xl mx-auto text-center mb-16">
+ <div className="max-w-7xl mx-auto px-7 sm:px-8 lg:px-10">
+        <div className="max-w-3xl mx-auto text-center mb-16">
   <h1 className="text-5xl font-bold text-[#2E473B]">
     Checkout
   </h1>
