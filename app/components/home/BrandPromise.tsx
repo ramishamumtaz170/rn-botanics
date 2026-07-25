@@ -30,7 +30,7 @@ export default function BrandPromise() {
   ];
 
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-20">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-16">
@@ -39,11 +39,11 @@ export default function BrandPromise() {
             Our Promise
           </p>
 
-          <h3 className="mt-4 text-5xl font-bold text-[#2E473B]">
+          <h4 className="mt-4 text-5xl font-bold text-[#2E473B]">
             Crafted With Nature,
             <br />
             Designed For You
-          </h3>
+          </h4>
 
         </div>
 

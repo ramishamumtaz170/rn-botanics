@@ -3,9 +3,8 @@ import Image from "next/image";
 export default function OurStory() {
   return (
     <section  id="story" className="bg-[#F8F5EF] py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-20 items-center">
-
-        {/* Left Image */}
+    <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+          {/* Left Image */}
         <div className="relative">
           <div className="overflow-hidden rounded-[40px] shadow-2xl">
 
