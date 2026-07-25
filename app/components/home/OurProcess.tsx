@@ -45,9 +45,9 @@ export default function OurProcess() {
             Our Process
           </p>
 
-          <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
+          <h3 className="mt-5 text-2xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
             From Nature To Your Hair
-          </h2>
+          </h3>
 
           <p className="mt-6 max-w-3xl text-lg text-gray-600 leading-8 text-center">
             Every bottle follows a thoughtful journey—from carefully selected

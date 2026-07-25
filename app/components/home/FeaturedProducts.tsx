@@ -15,7 +15,7 @@ export default function FeaturedProducts() {
             Signature Collection
           </p>
 
-          <h3 className="mt-4 text-3xl font-bold text-[#2E473B]">
+          <h3 className="mt-4 text-2xl font-bold text-[#2E473B]">
             Crafted For Healthy Hair
           </h3>
 

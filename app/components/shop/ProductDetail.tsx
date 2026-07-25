@@ -12,7 +12,7 @@ export default function ProductDetail() {
   const router = useRouter();
   const images = PRODUCT.images;
 
-  
+
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
@@ -113,9 +113,9 @@ const handleBuyNow = () => {
           Signature Collection
         </p>
 
-        <h1 className="mt-4 text-5xl font-bold leading-tight text-[#2E473B]">
+        <h2 className="mt-4 text-3xl font-bold leading-tight text-[#2E473B]">
   {PRODUCT.name}
-</h1>
+</h2>
 
         {/* Rating */}
 
@@ -138,7 +138,7 @@ const handleBuyNow = () => {
 
         <div className="mt-10">
 
-          <p className="text-2xl text-gray-400 line-through">
+          <p className="text-4xl text-gray-400 line-through">
            Rs. {PRODUCT.originalPrice.toLocaleString()}          </p>
 
           <div className="flex items-center gap-4 mt-3 flex-wrap">

@@ -50,11 +50,11 @@ export default function FAQ() {
               FAQ
             </p>
 
-            <h2 className="mt-5 text-5xl md:text-6xl lg:text-7xl font-bold text-[#2E473B] leading-[1.05]">
+            <h3 className="mt-5 text-2xl md:text-6xl lg:text-7xl font-bold text-[#2E473B] leading-[1.05]">
               Frequently Asked
               <br />
               Questions
-            </h2>
+            </h3>
 
             <p className="mt-8 text-lg text-gray-600 leading-8">
               Everything you need to know about R & N Botanics Hair Oil.

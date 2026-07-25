@@ -58,11 +58,11 @@ export default function WhyChooseUs() {
             Why Choose Us
           </p>
 
-          <h2 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
+          <h3 className="mt-5 text-2xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
             Crafted With Nature,
             <br />
             Made With Care
-          </h2>
+          </h3>
 
           <p className="mt-6 text-lg text-gray-600 leading-8">
             Every bottle reflects our commitment to quality, craftsmanship,

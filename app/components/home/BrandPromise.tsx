@@ -39,7 +39,7 @@ export default function BrandPromise() {
             Our Promise
           </p>
 
-          <h4 className="mt-4 text-3xl font-bold text-[#2E473B]">
+          <h4 className="mt-4 text-2xl font-bold text-[#2E473B]">
             Crafted With Nature,
             <br />
             Designed For You

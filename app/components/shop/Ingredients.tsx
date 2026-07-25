@@ -29,7 +29,7 @@ export default function Ingredients() {
     Botanical Blend
   </p>
 
-  <h2 className="mt-5 text-5xl font-bold text-[#2E473B]">
+  <h2 className="mt-5 text-2xl font-bold text-[#2E473B]">
     Nature's Finest Ingredients
   </h2>
 

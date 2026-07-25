@@ -34,7 +34,7 @@ export default function Benefits() {
             Why Choose Us
           </p>
 
-          <h2 className="mt-5 text-5xl font-bold text-[#2E473B]">
+          <h2 className="mt-5 text-2xl font-bold text-[#2E473B]">
             Botanical Benefits
           </h2>
 
