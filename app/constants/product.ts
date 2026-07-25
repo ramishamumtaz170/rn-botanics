@@ -11,10 +11,8 @@ export const PRODUCT = {
     "A luxurious botanical hair oil handcrafted with carefully selected herbs and premium oils to nourish the scalp, strengthen roots, reduce hair fall and restore naturally healthy, shiny hair.",
 
   originalPrice: 1500,
-
-  salePrice: 1050,
-
-  discount: 30,
+salePrice: 1200,
+discount: 20,
 
   bottleSize: "100 ml",
 

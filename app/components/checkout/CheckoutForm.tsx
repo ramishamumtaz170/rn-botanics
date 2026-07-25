@@ -25,7 +25,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
 
       {/* Customer Information */}
 
-      <div className="bg-white rounded-[40px] p-10 shadow-sm">
+      <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
 
         <h2 className="text-3xl font-bold text-[#2E473B]">
           Customer Information
@@ -48,7 +48,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.fullName}
   onChange={handleChange}
   placeholder="Enter your name here"
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+  className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 />
           </div>
 
@@ -63,7 +63,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.email}
   onChange={handleChange}
   placeholder="example@email.com"
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+  className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 />
           </div>
 
@@ -78,7 +78,8 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.phone}
   onChange={handleChange}
   placeholder="03XXXXXXXXX"
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+
 />
           </div>
 
@@ -88,7 +89,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
 
       {/* Shipping Address */}
 
-      <div className="bg-white rounded-[40px] p-10 shadow-sm">
+    <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
 
         <h2 className="text-3xl font-bold text-[#2E473B]">
           Shipping Address
@@ -111,7 +112,8 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.address}
   onChange={handleChange}
   placeholder="House No, Street, Area"
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+
 />
           </div>
 
@@ -128,7 +130,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.city}
   onChange={handleChange}
   placeholder="Enter city"
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+  className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 />
             </div>
 
@@ -146,7 +148,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
       province: e.target.value,
     }))
   }
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 >
   <option>Punjab</option>
   <option>Sindh</option>
@@ -172,7 +174,8 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.postalCode}
   onChange={handleChange}
   placeholder="Enter Postal Code here"
-  className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 outline-none focus:border-[#2E473B]"
+className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+
 />
             </div>
 
@@ -185,7 +188,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
                 type="text"
                 value="Pakistan"
                 disabled
-                className="w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 bg-[#F8F5EF] text-gray-500"
+             className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 bg-[#F8F5EF] text-gray-500"
               />
             </div>
 
@@ -197,7 +200,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
 
       {/* Delivery Method */}
 
-      <div className="bg-white rounded-[40px] p-10 shadow-sm">
+      <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
 
         <h2 className="text-3xl font-bold text-[#2E473B]">
           Delivery Method
@@ -265,7 +268,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
 
       {/* Payment */}
 
-      <div className="bg-white rounded-[40px] p-10 shadow-sm">
+      <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
 
         <h2 className="text-3xl font-bold text-[#2E473B]">
           Payment Method
@@ -319,7 +322,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
 
       {/* Order Notes */}
 
-      <div className="bg-white rounded-[40px] p-10 shadow-sm">
+      <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
 
         <h2 className="text-3xl font-bold text-[#2E473B]">
           Order Notes
