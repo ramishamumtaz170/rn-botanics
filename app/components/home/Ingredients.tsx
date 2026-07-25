@@ -65,9 +65,9 @@ export default function Ingredients() {
           </p>
 
 
-          <h2 className="mt-4 text-5xl font-bold text-[#2E473B]">
+          <h3 className="mt-4 text-3xl font-bold text-[#2E473B]">
             Nature's Finest Ingredients
-          </h2>
+          </h3>
 
 
           <p className="mt-6 max-w-3xl text-center text-gray-600 leading-8">
