@@ -9,24 +9,26 @@ import { useCart } from "@/app/context/CartContext";
 import { useCheckout } from "@/app/context/CheckoutContext";
 
 import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 export default function OrderSummary() {
   const {
-  cart,
-  increaseQuantity,
-  decreaseQuantity,
-  removeFromCart,
-  clearCart,
-} = useCart();
+    cart,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    clearCart,
+  } = useCart();
 
-
- const {
-  delivery,
-  checkoutData,
-  resetCheckout,
-} = useCheckout();
+  const {
+    delivery,
+    checkoutData,
+    resetCheckout,
+  } = useCheckout();
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -43,96 +45,83 @@ export default function OrderSummary() {
   const total = subtotal + shipping;
 
   const handlePlaceOrder = async () => {
-  if (cart.length === 0) {
-    alert("Your cart is empty.");
-    return;
-  }
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
 
-  if (!checkoutData.fullName.trim()) {
-    alert("Please enter your full name.");
-    return;
-  }
+    if (!checkoutData.fullName.trim()) {
+      alert("Please enter your full name.");
+      return;
+    }
 
-  if (!checkoutData.phone.trim()) {
-    alert("Please enter your phone number.");
-    return;
-  }
+    if (!checkoutData.phone.trim()) {
+      alert("Please enter your phone number.");
+      return;
+    }
 
-  if (!checkoutData.address.trim()) {
-    alert("Please enter your address.");
-    return;
-  }
+    if (!checkoutData.address.trim()) {
+      alert("Please enter your address.");
+      return;
+    }
 
-  if (!checkoutData.city.trim()) {
-    alert("Please enter your city.");
-    return;
-  }
+    if (!checkoutData.city.trim()) {
+      alert("Please enter your city.");
+      return;
+    }
 
-  if (!checkoutData.termsAccepted) {
-    alert("Please accept the Terms & Conditions.");
-    return;
-  }
+    if (!checkoutData.termsAccepted) {
+      alert("Please accept the Terms & Conditions.");
+      return;
+    }
 
- setLoading(true);
+    setLoading(true);
 
-const orderNumber = "RNB-" + Date.now().toString().slice(-6);
+    const orderNumber =
+      "RNB-" + Date.now().toString().slice(-6);
 
-try {
-  await addDoc(collection(db, "orders"), {
-    orderNumber,
+    try {
+      await addDoc(collection(db, "orders"), {
+        orderNumber,
+        customer: checkoutData,
+        items: cart,
+        subtotal,
+        shipping,
+        total,
+        paymentMethod: "Cash on Delivery",
+        delivery,
+        orderStatus: "Pending",
+        createdAt: serverTimestamp(),
+      });
 
-    customer: checkoutData,
+      // Send order email
+      await fetch("/api/send-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderNumber,
+          customer: checkoutData,
+          items: cart,
+          subtotal,
+          shipping,
+          total,
+          delivery,
+        }),
+      });
 
-    items: cart,
+      clearCart();
+      resetCheckout();
 
-    subtotal,
-
-    shipping,
-
-    total,
-
-    paymentMethod: "Cash on Delivery",
-
-    delivery,
-
-    orderStatus: "Pending",
-
-    createdAt: serverTimestamp(),
-  });
-
-  // Call Email API
-  await fetch("/api/send-order", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      orderNumber,
-      customer: checkoutData,
-      items: cart,
-      subtotal,
-      shipping,
-      total,
-      delivery,
-    }),
-  });
-
-  // Clear cart
-  clearCart();
-
-  // Reset checkout form
-  resetCheckout();
-
-  // Go to success page
-  router.push("/order-success");
-
-} catch (error) {
-  console.error(error);
-  alert("Failed to place order.");
-} finally {
-  setLoading(false);
-}
-};
+      router.push("/order-success");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to place order.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <aside className="bg-white rounded-[40px] p-10 shadow-sm h-fit sticky top-28">
@@ -144,22 +133,19 @@ try {
       <div className="mt-8 space-y-6">
 
         {cart.length === 0 ? (
-
           <p className="text-gray-500">
             Your cart is empty.
           </p>
-
         ) : (
-
           cart.map((item) => (
-
             <div
-              key={item.id}
+              key={`${item.id}-${item.cap}`}
               className="flex gap-4 pb-6 border-b border-[#E8E3DA]"
             >
 
-              <div className="w-20 h-20 rounded-2xl bg-[#F8F5EF] flex items-center justify-center">
+              {/* Product Image */}
 
+              <div className="w-20 h-20 rounded-2xl bg-[#F8F5EF] flex items-center justify-center shrink-0">
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -167,64 +153,81 @@ try {
                   height={60}
                   className="object-contain"
                 />
+              </div>
+
+              {/* Product Details */}
+
+              <div className="flex-1 min-w-0">
+
+                <h3 className="font-semibold text-[#2E473B]">
+                  {item.name}
+                </h3>
+
+                {/* Selected Cap */}
+
+                <p className="mt-1 text-sm text-gray-500">
+                  Cap:{" "}
+                  <span className="font-medium text-[#2E473B]">
+                    {item.cap}
+                  </span>
+                </p>
+
+                <p className="mt-2 font-semibold text-[#2E473B]">
+                  Rs. {item.price.toLocaleString()}
+                </p>
+
+                {/* Quantity Controls */}
+
+                <div className="mt-4 flex items-center justify-between">
+
+                  <div className="flex items-center bg-[#F8F5EF] rounded-full border border-[#E8E3DA] overflow-hidden">
+
+                    <button
+                      onClick={() =>
+                        decreaseQuantity(item.id, item.cap)
+                      }
+                      className="w-9 h-9 flex items-center justify-center hover:bg-[#ECE7DF] transition"
+                    >
+                      <Minus size={15} />
+                    </button>
+
+                    <span className="w-10 text-center font-semibold text-[#2E473B]">
+                      {item.quantity}
+                    </span>
+
+                    <button
+                      onClick={() =>
+                        increaseQuantity(item.id, item.cap)
+                      }
+                      className="w-9 h-9 flex items-center justify-center hover:bg-[#ECE7DF] transition"
+                    >
+                      <Plus size={15} />
+                    </button>
+
+                  </div>
+
+                  <button
+                    onClick={() =>
+                      removeFromCart(item.id, item.cap)
+                    }
+                    className="text-red-500 hover:text-red-600 transition"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+
+                </div>
 
               </div>
 
-              <div className="flex-1">
+              {/* Item Total */}
 
-  <h3 className="font-semibold text-[#2E473B]">
-    {item.name}
-  </h3>
+              <div className="font-bold text-[#2E473B] whitespace-nowrap">
+                Rs.{" "}
+                {(item.price * item.quantity).toLocaleString()}
+              </div>
 
-  <p className="mt-2 font-semibold text-[#2E473B]">
-    Rs. {item.price.toLocaleString()}
-  </p>
-
-  {/* Quantity Controls */}
-
-  <div className="mt-4 flex items-center justify-between">
-
-    <div className="flex items-center bg-[#F8F5EF] rounded-full border border-[#E8E3DA] overflow-hidden">
-
-      <button
-        onClick={() => decreaseQuantity(item.id)}
-        className="w-9 h-9 flex items-center justify-center hover:bg-[#ECE7DF] transition"
-      >
-        <Minus size={15} />
-      </button>
-
-      <span className="w-10 text-center font-semibold text-[#2E473B]">
-        {item.quantity}
-      </span>
-
-      <button
-        onClick={() => increaseQuantity(item.id)}
-        className="w-9 h-9 flex items-center justify-center hover:bg-[#ECE7DF] transition"
-      >
-        <Plus size={15} />
-      </button>
-
-    </div>
-
-    <button
-      onClick={() => removeFromCart(item.id)}
-      className="text-red-500 hover:text-red-600 transition"
-    >
-      <Trash2 size={18} />
-    </button>
-
-  </div>
-
-</div>
-
-<div className="font-bold text-[#2E473B]">
-  Rs. {(item.price * item.quantity).toLocaleString()}
-</div>
-              
             </div>
-
           ))
-
         )}
 
       </div>
@@ -234,7 +237,6 @@ try {
       <div className="mt-10 space-y-5">
 
         <div className="flex justify-between">
-
           <span className="text-gray-500">
             Subtotal
           </span>
@@ -242,11 +244,9 @@ try {
           <span className="font-semibold text-[#2E473B]">
             Rs. {subtotal.toLocaleString()}
           </span>
-
         </div>
 
         <div className="flex justify-between">
-
           <span className="text-gray-500">
             Shipping
           </span>
@@ -254,7 +254,6 @@ try {
           <span className="font-semibold text-[#2E473B]">
             Rs. {shipping.toLocaleString()}
           </span>
-
         </div>
 
         <hr className="border-[#E8E3DA]" />
@@ -273,6 +272,8 @@ try {
 
       </div>
 
+      {/* Place Order */}
+
       <button
         onClick={handlePlaceOrder}
         disabled={loading || cart.length === 0}
@@ -282,7 +283,9 @@ try {
             : "bg-[#2E473B] text-white hover:bg-[#23392F]"
         }`}
       >
-        {loading ? "Placing Order..." : "Place Order"}
+        {loading
+          ? "Placing Order..."
+          : "Place Order"}
       </button>
 
     </aside>

@@ -8,14 +8,15 @@ type CartItem = {
   price: number;
   image: string;
   quantity: number;
+  cap: "Nozzle Applicator Cap" | "Flip Top Cap";
 };
 
 type CartContextType = {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: number) => void;
-  increaseQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
+  removeFromCart: (id: number, cap: CartItem["cap"]) => void;
+  increaseQuantity: (id: number, cap: CartItem["cap"]) => void;
+  decreaseQuantity: (id: number, cap: CartItem["cap"]) => void;
   clearCart: () => void;
   cartCount: number;
 };
@@ -31,11 +32,13 @@ export function CartProvider({
 
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
+      const existing = prev.find(
+        (i) => i.id === item.id && i.cap === item.cap
+      );
 
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id
+          i.id === item.id && i.cap === item.cap
             ? {
                 ...i,
                 quantity: i.quantity + item.quantity,
@@ -48,16 +51,24 @@ export function CartProvider({
     });
   };
 
-  const removeFromCart = (id: number) => {
+  const removeFromCart = (
+    id: number,
+    cap: CartItem["cap"]
+  ) => {
     setCart((prev) =>
-      prev.filter((item) => item.id !== id)
+      prev.filter(
+        (item) => !(item.id === id && item.cap === cap)
+      )
     );
   };
 
-  const increaseQuantity = (id: number) => {
+  const increaseQuantity = (
+    id: number,
+    cap: CartItem["cap"]
+  ) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id
+        item.id === id && item.cap === cap
           ? {
               ...item,
               quantity: item.quantity + 1,
@@ -67,11 +78,14 @@ export function CartProvider({
     );
   };
 
-  const decreaseQuantity = (id: number) => {
+  const decreaseQuantity = (
+    id: number,
+    cap: CartItem["cap"]
+  ) => {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id
+          item.id === id && item.cap === cap
             ? {
                 ...item,
                 quantity: item.quantity - 1,
@@ -82,7 +96,6 @@ export function CartProvider({
     );
   };
 
-  // Clear entire cart
   const clearCart = () => {
     setCart([]);
   };

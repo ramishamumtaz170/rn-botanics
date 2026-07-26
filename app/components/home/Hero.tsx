@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
+import { PRODUCT } from "@/app/constants/product";
+
 
 export default function Hero() {
   return (
@@ -6,7 +9,6 @@ export default function Hero() {
   id="home"
   className="min-h-screen bg-[#F8F5EF] flex items-start lg:items-center pt-28 lg:pt-20"
 >
-  
     <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
         {/* Left */}
@@ -48,18 +50,21 @@ export default function Hero() {
         </div>
 
         {/* Right */}
-        <div className="flex justify-center order-1 lg:order-2">
+       <div className="flex justify-center order-1 lg:order-2">
 
-          <div className="w-full max-w-[260px] sm:max-w-[320px] lg:max-w-[430px] h-[320px] sm:h-[400px] lg:h-[520px] rounded-[32px] lg:rounded-[40px] bg-[#E7E2D8] shadow-xl flex items-center justify-center">
+  <div className="relative w-full max-w-[260px] sm:max-w-[320px] lg:max-w-[430px] h-[320px] sm:h-[400px] lg:h-[520px] rounded-[32px] lg:rounded-[40px] overflow-hidden bg-[#E7E2D8] shadow-xl">
 
-            <p className="text-[#7C9A7D] text-sm md:text-lg tracking-widest uppercase">
-              Product Image
-            </p>
+    <Image
+      src={PRODUCT.image}
+      alt={PRODUCT.name}
+      fill
+      priority
+      className="object-contain p-6"
+    />
 
-          </div>
+  </div>
 
-        </div>
-
+</div>
       </div>
     </section>
   );

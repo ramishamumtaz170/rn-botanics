@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -11,32 +11,38 @@ export default function ProductShowcase() {
   const router = useRouter();
   const { addToCart } = useCart();
 
-const handleBuyNow = () => {
-  addToCart({
-  id: PRODUCT.id,
-  name: PRODUCT.name,
-  price: PRODUCT.salePrice,
-  image: PRODUCT.image,
-  quantity: 1,
-});
+  // Default cap
+  const [selectedCap, setSelectedCap] = useState<
+    "Nozzle Applicator Cap" | "Flip Top Cap"
+  >("Nozzle Applicator Cap");
 
-  router.push("/checkout");
-};
+  const handleBuyNow = () => {
+    addToCart({
+      id: PRODUCT.id,
+      name: PRODUCT.name,
+      price: PRODUCT.salePrice,
+      image: PRODUCT.image,
+      quantity: 1,
+      cap: selectedCap,
+    });
+
+    router.push("/checkout");
+  };
 
   const handleAddToCart = () => {
     addToCart({
-  id: PRODUCT.id,
-  name: PRODUCT.name,
-  price: PRODUCT.salePrice,
-  image: PRODUCT.image,
-  quantity: 1,
-});
+      id: PRODUCT.id,
+      name: PRODUCT.name,
+      price: PRODUCT.salePrice,
+      image: PRODUCT.image,
+      quantity: 1,
+      cap: selectedCap,
+    });
 
-toast.success(`${PRODUCT.name} added to your cart.`);
+    toast.success(`${PRODUCT.name} added to your cart.`);
   };
 
-  return (
-    <section className="w-full bg-white rounded-[40px] shadow-lg overflow-hidden">
+  return (    <section className="w-full bg-white rounded-[40px] shadow-lg overflow-hidden">
 
       <div className="grid lg:grid-cols-2 gap-16 items-center p-10 md:p-16">
 
@@ -155,6 +161,55 @@ width={420}
             </div>
 
           </div>
+
+
+{/* Cap Selection */}
+
+<div className="mt-10">
+
+  <p className="font-semibold text-[#2E473B] mb-4">
+    Choose Your Bottle Cap
+  </p>
+
+  <div className="flex flex-col sm:flex-row gap-4">
+
+    <button
+      type="button"
+      onClick={() => setSelectedCap("Nozzle Applicator Cap")}
+      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+        selectedCap === "Nozzle Applicator Cap"
+          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
+          : "border-[#E8E3DA] text-gray-600"
+      }`}
+    >
+      Nozzle Applicator Cap
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setSelectedCap("Flip Top Cap")}
+      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+        selectedCap === "Flip Top Cap"
+          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
+          : "border-[#E8E3DA] text-gray-600"
+      }`}
+    >
+      Flip Top Cap
+    </button>
+
+  </div>
+
+  <p className="mt-3 text-sm text-gray-500">
+    Selected:{" "}
+    <span className="font-semibold text-[#2E473B]">
+      {selectedCap}
+    </span>
+  </p>
+
+</div>
+
+
+
 
           {/* Buttons */}
 

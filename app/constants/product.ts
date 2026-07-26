@@ -22,12 +22,12 @@ discount: 20,
 
   stock: "In Stock",
 
-  image: "/images/product.png",
+  image: "/images/product.jpg",
 
   images: [
-    "/images/product.png",
-    "/images/product.png",
-    "/images/product.png",
-    "/images/product.png",
+    "/images/product.jpg",
+    "/images/product.jpg",
+    "/images/product.jpg",
+    "/images/product.jpg",
   ],
 };

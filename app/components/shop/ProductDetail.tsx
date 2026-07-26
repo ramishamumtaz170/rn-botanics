@@ -15,8 +15,11 @@ export default function ProductDetail() {
 
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
-  const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useCart();
+ const [quantity, setQuantity] = useState(1);
+const [selectedCap, setSelectedCap] = useState<
+  "Nozzle Applicator Cap" | "Flip Top Cap"
+>("Nozzle Applicator Cap");
+ const { addToCart } = useCart();
 
   const increase = () => setQuantity((prev) => prev + 1);
 
@@ -29,12 +32,13 @@ export default function ProductDetail() {
 
 const handleAddToCart = () => {
   addToCart({
-    id: PRODUCT.id,
-    name: PRODUCT.name,
-    price: PRODUCT.salePrice,
-    image: PRODUCT.image,
-    quantity,
-  });
+  id: PRODUCT.id,
+  name: PRODUCT.name,
+  price: PRODUCT.salePrice,
+  image: PRODUCT.image,
+  quantity,
+  cap: selectedCap,
+});
 
   toast.success(`${PRODUCT.name} added to your cart.`, {
     duration: 2500,
@@ -43,12 +47,13 @@ const handleAddToCart = () => {
 
 const handleBuyNow = () => {
   addToCart({
-    id: PRODUCT.id,
-    name: PRODUCT.name,
-    price: PRODUCT.salePrice,
-    image: PRODUCT.image,
-    quantity,
-  });
+  id: PRODUCT.id,
+  name: PRODUCT.name,
+  price: PRODUCT.salePrice,
+  image: PRODUCT.image,
+  quantity,
+  cap: selectedCap,
+});
 
   router.push("/checkout");
 };
@@ -154,6 +159,53 @@ const handleBuyNow = () => {
           </div>
 
         </div>
+
+
+{/* Cap Selection */}
+
+<div className="mt-10">
+
+  <p className="font-semibold text-[#2E473B] mb-4">
+    Choose Your Bottle Cap
+  </p>
+
+  <div className="flex flex-col sm:flex-row gap-4">
+
+    <button
+      type="button"
+      onClick={() => setSelectedCap("Nozzle Applicator Cap")}
+      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+        selectedCap === "Nozzle Applicator Cap"
+          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
+          : "border-[#E8E3DA] text-gray-600"
+      }`}
+    >
+      Nozzle Applicator Cap
+    </button>
+
+    <button
+      type="button"
+      onClick={() => setSelectedCap("Flip Top Cap")}
+      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+        selectedCap === "Flip Top Cap"
+          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
+          : "border-[#E8E3DA] text-gray-600"
+      }`}
+    >
+      Flip Top Cap
+    </button>
+
+  </div>
+
+  {/* Current Selection */}
+  <p className="mt-4 text-sm text-gray-500">
+    Selected:{" "}
+    <span className="font-semibold text-[#2E473B]">
+      {selectedCap}
+    </span>
+  </p>
+
+</div>
 
         {/* Quantity */}
 

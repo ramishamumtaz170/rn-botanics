@@ -26,16 +26,18 @@ export async function POST(request: Request) {
     const itemsList = items
       .map(
         (item: any) =>
-          `${item.name} × ${item.quantity} = Rs. ${
-            item.price * item.quantity
-          }`
+          `${item.name}
+Cap: ${item.cap || "Nozzle Applicator Cap"}
+Quantity: ${item.quantity}
+Price: Rs. ${item.price * item.quantity}`
       )
-      .join("\n");
+      .join("\n\n");
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: `🛍 New Order - ${orderNumber}`,
+
       text: `
 NEW ORDER RECEIVED
 
@@ -69,7 +71,7 @@ ${customer.postalCode}
 
 ====================================
 
-Items:
+ITEMS ORDERED:
 
 ${itemsList}
 
@@ -82,8 +84,13 @@ Total: Rs. ${total}
 Delivery:
 ${delivery}
 
+Payment Method:
+Cash on Delivery
+
 Status:
 Pending
+
+====================================
       `,
     };
 

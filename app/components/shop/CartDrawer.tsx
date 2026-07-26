@@ -49,7 +49,6 @@ export default function CartDrawer({
         {/* Header */}
 
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#E8E3DA]">
-
           <h2 className="text-2xl font-bold text-[#2E473B]">
             Shopping Cart
           </h2>
@@ -60,13 +59,10 @@ export default function CartDrawer({
           >
             <X size={24} />
           </button>
-
         </div>
 
         {cart.length === 0 ? (
-
           <div className="flex flex-col items-center justify-center h-[70vh] px-8 text-center">
-
             <p className="text-2xl font-semibold text-[#2E473B]">
               Your cart is empty
             </p>
@@ -74,11 +70,8 @@ export default function CartDrawer({
             <p className="mt-3 text-gray-500">
               Add your favourite botanical products to begin shopping.
             </p>
-
           </div>
-
         ) : (
-
           <div className="flex flex-col h-[calc(100%-85px)]">
 
             {/* Products */}
@@ -86,9 +79,8 @@ export default function CartDrawer({
             <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
 
               {cart.map((item) => (
-
                 <div
-                  key={item.id}
+                  key={`${item.id}-${item.cap}`}
                   className="bg-white rounded-[28px] p-5 shadow-sm border border-[#EEE7DD]"
                 >
 
@@ -118,6 +110,15 @@ export default function CartDrawer({
                           {item.name}
                         </h3>
 
+                        {/* Selected Cap */}
+
+                        <p className="mt-2 text-sm text-gray-500">
+                          Bottle Cap:{" "}
+                          <span className="font-semibold text-[#2E473B]">
+                            {item.cap}
+                          </span>
+                        </p>
+
                         <p className="mt-2 text-xl font-semibold text-[#2E473B]">
                           Rs. {item.price.toLocaleString()}
                         </p>
@@ -131,7 +132,9 @@ export default function CartDrawer({
                         <div className="flex items-center bg-[#F8F5EF] rounded-full border border-[#E8E3DA] overflow-hidden">
 
                           <button
-                            onClick={() => decreaseQuantity(item.id)}
+                            onClick={() =>
+                              decreaseQuantity(item.id, item.cap)
+                            }
                             className="w-10 h-10 flex items-center justify-center hover:bg-[#ECE7DF] transition"
                           >
                             <Minus size={16} />
@@ -142,7 +145,9 @@ export default function CartDrawer({
                           </span>
 
                           <button
-                            onClick={() => increaseQuantity(item.id)}
+                            onClick={() =>
+                              increaseQuantity(item.id, item.cap)
+                            }
                             className="w-10 h-10 flex items-center justify-center hover:bg-[#ECE7DF] transition"
                           >
                             <Plus size={16} />
@@ -151,7 +156,9 @@ export default function CartDrawer({
                         </div>
 
                         <button
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() =>
+                            removeFromCart(item.id, item.cap)
+                          }
                           className="flex items-center gap-2 text-red-500 hover:text-red-600 transition"
                         >
                           <Trash2 size={16} />
@@ -165,7 +172,6 @@ export default function CartDrawer({
                   </div>
 
                 </div>
-
               ))}
 
             </div>
@@ -177,7 +183,6 @@ export default function CartDrawer({
               <div className="flex justify-between items-center">
 
                 <div>
-
                   <p className="text-sm text-gray-500">
                     Subtotal
                   </p>
@@ -185,19 +190,19 @@ export default function CartDrawer({
                   <p className="text-3xl font-bold text-[#2E473B] mt-1">
                     Rs. {total.toLocaleString()}
                   </p>
-
                 </div>
 
                 <div className="text-right">
-
                   <p className="text-sm text-gray-500">
                     Items
                   </p>
 
                   <p className="text-lg font-semibold text-[#2E473B]">
-                    {cart.length}
+                    {cart.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    )}
                   </p>
-
                 </div>
 
               </div>
@@ -228,11 +233,9 @@ export default function CartDrawer({
             </div>
 
           </div>
-
         )}
 
       </aside>
-
     </>
   );
 }
