@@ -38,27 +38,30 @@ const [cartOpen, setCartOpen] = useState(false);
           </Link>
 
           <Link
-            href="/shop"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            Shop
-          </Link>
+  href="/shop"
+  onClick={() => setOpen(false)}
+  className="text-[#2E473B]"
+>
+  Shop
+</Link>
 
 <Link
   href="/faq"
-  className="text-[#2E473B] hover:text-[#7C9A7D] transition"
+  onClick={() => setOpen(false)}
+  className="text-[#2E473B]"
 >
   FAQ
 </Link>
 
-
-          <Link
-            href="/#ingredients"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            About
-          </Link>
-
+<Link
+  href="/#ingredients"
+  onClick={() => {
+    setTimeout(() => setOpen(false), 100);
+  }}
+  className="text-[#2E473B]"
+>
+  About
+</Link>
         <a
   href="https://wa.me/923094289165"
   target="_blank"
