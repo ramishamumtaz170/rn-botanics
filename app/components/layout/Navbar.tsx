@@ -44,6 +44,14 @@ const [cartOpen, setCartOpen] = useState(false);
             Shop
           </Link>
 
+<Link
+  href="/faq"
+  className="text-[#2E473B] hover:text-[#7C9A7D] transition"
+>
+  FAQ
+</Link>
+
+
           <Link
             href="/#ingredients"
             className="text-[#2E473B] hover:text-[#7C9A7D] transition"

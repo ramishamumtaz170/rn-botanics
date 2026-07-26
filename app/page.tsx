@@ -3,10 +3,9 @@ import BrandPromise from "./components/home/BrandPromise";
 import FeaturedProducts from "./components/home/FeaturedProducts";
 import Ingredients from "./components/home/Ingredients";
 import WhyChooseUs from "./components/home/WhyChooseUs";
-import OurProcess from "./components/home/OurProcess";
 import OurStory from "./components/home/OurStory";
 import OurPromise from "./components/home/OurPromise";
-import FAQ from "./components/home/FAQ";
+import OurProcess from "./components/home/OurProcess";
 import Footer from "./components/home/Footer";
 
 export default function Home() {
@@ -17,10 +16,10 @@ export default function Home() {
   <FeaturedProducts />
   <Ingredients />
   <WhyChooseUs />
-  <OurProcess />
   <OurStory />
   <OurPromise />
-  <FAQ />
+  <OurProcess />
+  
   <Footer />
 </>
   );
