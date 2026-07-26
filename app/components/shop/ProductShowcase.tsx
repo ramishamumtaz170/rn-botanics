@@ -165,50 +165,80 @@ width={420}
 
 {/* Cap Selection */}
 
-<div className="mt-10">
+<div className="mt-10 mb-18">
 
-  <p className="font-semibold text-[#2E473B] mb-4">
+  <p className="font-semibold text-[#2E473B] mb-5">
     Choose Your Bottle Cap
   </p>
 
-  <div className="flex flex-col sm:flex-row gap-4">
+  <div className="space-y-6">
 
-    <button
-      type="button"
-      onClick={() => setSelectedCap("Nozzle Applicator Cap")}
-      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+    {/* Nozzle Applicator Cap */}
+
+    <label
+      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
         selectedCap === "Nozzle Applicator Cap"
-          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
-          : "border-[#E8E3DA] text-gray-600"
+          ? "border-[#2E473B] bg-[#F8F5EF]"
+          : "border-[#E8E3DA] bg-white hover:border-[#2E473B]/50"
       }`}
     >
-      Nozzle Applicator Cap
-    </button>
 
-    <button
-      type="button"
-      onClick={() => setSelectedCap("Flip Top Cap")}
-      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+      <input
+        type="radio"
+        name="cap"
+        value="Nozzle Applicator Cap"
+        checked={selectedCap === "Nozzle Applicator Cap"}
+        onChange={() => setSelectedCap("Nozzle Applicator Cap")}
+        className="w-5 h-5 accent-[#2E473B]"
+      />
+
+      <div>
+        <p className="font-semibold text-[#2E473B]">
+          Nozzle Applicator Cap
+        </p>
+
+        <p className="text-sm text-gray-500 mt-1">
+          Easy and precise application directly to the scalp
+        </p>
+      </div>
+
+    </label>
+
+
+    {/* Flip Top Cap */}
+
+    <label
+      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
         selectedCap === "Flip Top Cap"
-          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
-          : "border-[#E8E3DA] text-gray-600"
+          ? "border-[#2E473B] bg-[#F8F5EF]"
+          : "border-[#E8E3DA] bg-white hover:border-[#2E473B]/50"
       }`}
     >
-      Flip Top Cap
-    </button>
+
+      <input
+        type="radio"
+        name="cap"
+        value="Flip Top Cap"
+        checked={selectedCap === "Flip Top Cap"}
+        onChange={() => setSelectedCap("Flip Top Cap")}
+        className="w-5 h-5 accent-[#2E473B]"
+      />
+
+      <div>
+        <p className="font-semibold text-[#2E473B]">
+          Flip Top Cap
+        </p>
+
+        <p className="text-sm text-gray-500 mt-1">
+          Simple and convenient everyday application
+        </p>
+      </div>
+
+    </label>
 
   </div>
 
-  <p className="mt-3 text-sm text-gray-500">
-    Selected:{" "}
-    <span className="font-semibold text-[#2E473B]">
-      {selectedCap}
-    </span>
-  </p>
-
 </div>
-
-
 
 
           {/* Buttons */}
