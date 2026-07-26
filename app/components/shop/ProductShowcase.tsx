@@ -13,8 +13,8 @@ export default function ProductShowcase() {
 
   // Default cap
   const [selectedCap, setSelectedCap] = useState<
-    "Nozzle Applicator Cap" | "Flip Top Cap"
-  >("Nozzle Applicator Cap");
+  "Nozzle Applicator Cap" | "Flip Top Cap"
+>("Flip Top Cap");
 
   const handleBuyNow = () => {
     addToCart({
@@ -165,56 +165,23 @@ width={420}
 
 {/* Cap Selection */}
 
-<div className="mt-10 mb-18">
+<div className="mt-10">
 
-  <p className="font-semibold text-[#2E473B] mb-5">
+  <p className="font-semibold text-[#2E473B] mb-4">
     Choose Your Bottle Cap
   </p>
 
-  <div className="space-y-6">
+  <div className="space-y-4">
 
-    {/* Nozzle Applicator Cap */}
-
-    <label
-      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
-        selectedCap === "Nozzle Applicator Cap"
-          ? "border-[#2E473B] bg-[#F8F5EF]"
-          : "border-[#E8E3DA] bg-white hover:border-[#2E473B]/50"
-      }`}
-    >
-
-      <input
-        type="radio"
-        name="cap"
-        value="Nozzle Applicator Cap"
-        checked={selectedCap === "Nozzle Applicator Cap"}
-        onChange={() => setSelectedCap("Nozzle Applicator Cap")}
-        className="w-5 h-5 accent-[#2E473B]"
-      />
-
-      <div>
-        <p className="font-semibold text-[#2E473B]">
-          Nozzle Applicator Cap
-        </p>
-
-        <p className="text-sm text-gray-500 mt-1">
-          Easy and precise application directly to the scalp
-        </p>
-      </div>
-
-    </label>
-
-
-    {/* Flip Top Cap */}
+    {/* Flip Top Cap — Default */}
 
     <label
-      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
+      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all ${
         selectedCap === "Flip Top Cap"
           ? "border-[#2E473B] bg-[#F8F5EF]"
-          : "border-[#E8E3DA] bg-white hover:border-[#2E473B]/50"
+          : "border-[#E8E3DA] bg-white"
       }`}
     >
-
       <input
         type="radio"
         name="cap"
@@ -228,18 +195,43 @@ width={420}
         <p className="font-semibold text-[#2E473B]">
           Flip Top Cap
         </p>
-
         <p className="text-sm text-gray-500 mt-1">
-          Simple and convenient everyday application
+          Easy and convenient for everyday use
         </p>
       </div>
+    </label>
 
+    {/* Nozzle Applicator Cap */}
+
+    <label
+      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all ${
+        selectedCap === "Nozzle Applicator Cap"
+          ? "border-[#2E473B] bg-[#F8F5EF]"
+          : "border-[#E8E3DA] bg-white"
+      }`}
+    >
+      <input
+        type="radio"
+        name="cap"
+        value="Nozzle Applicator Cap"
+        checked={selectedCap === "Nozzle Applicator Cap"}
+        onChange={() => setSelectedCap("Nozzle Applicator Cap")}
+        className="w-5 h-5 accent-[#2E473B]"
+      />
+
+      <div>
+        <p className="font-semibold text-[#2E473B]">
+          Nozzle Applicator Cap
+        </p>
+        <p className="text-sm text-gray-500 mt-1">
+          Precise application directly to the scalp
+        </p>
+      </div>
     </label>
 
   </div>
 
 </div>
-
 
           {/* Buttons */}
 
