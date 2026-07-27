@@ -61,10 +61,10 @@ export default function Ingredients() {
             Nature&apos;s Finest Ingredients
           </h3>
 
-          <p className="mt-3 sm:mt-5 max-w-2xl text-center text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed px-4 sm:px-0">
-            Every bottle is handcrafted using premium botanical oils and
-            carefully selected herbs inspired by traditional hair care rituals.
-          </p>
+          <p className="mt-3 sm:mt-5 text-center text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-xl mx-auto px-6 sm:px-0">
+  Every bottle is handcrafted using premium botanical oils and
+  carefully selected herbs inspired by traditional hair care rituals.
+</p>
         </div>
 
         {/* Ingredient Cards Grid */}
@@ -98,22 +98,21 @@ export default function Ingredients() {
             </div>
           ))}
         </div>
+{/* Additional Ingredients Box */}
+<div className="mt-16 sm:mt-24 mb-12 sm:mb-20 flex justify-center">
+  <div className="w-full max-w-4xl bg-[#F8F5EF] rounded-[24px] sm:rounded-[30px] p-6 sm:p-10 text-center shadow-sm">
+    <h3 className="text-xl sm:text-2xl font-semibold text-[#2E473B]">
+      Enriched With More Botanical Goodness
+    </h3>
 
-        {/* Additional Ingredients Box */}
-        <div className="mt-12 sm:mt-16 flex justify-center">
-          <div className="w-full max-w-4xl bg-[#F8F5EF] rounded-[24px] sm:rounded-[30px] p-6 sm:p-10 text-center shadow-sm">
-            <h3 className="text-xl sm:text-2xl font-semibold text-[#2E473B]">
-              Enriched With More Botanical Goodness
-            </h3>
-
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed px-2 sm:px-0">
-              Infused with Aloe Vera Oil, Vitamin E Oil, Shikakai, Reetha,
-              Curry Leaves, Kalonji (Black Seed), Ratanjot and other carefully
-              selected botanical herbs to create a rich and luxurious hair
-              care experience.
-            </p>
-          </div>
-        </div>
+    <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed px-6 sm:px-0">
+      Infused with Aloe Vera Oil, Vitamin E Oil, Shikakai, Reetha,
+      Curry Leaves, Kalonji (Black Seed), Ratanjot and other carefully
+      selected botanical herbs to create a rich and luxurious hair
+      care experience.
+    </p>
+  </div>
+</div>
 
       </div>
     </section>
