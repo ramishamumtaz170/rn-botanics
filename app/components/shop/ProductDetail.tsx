@@ -7,21 +7,24 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { PRODUCT } from "@/app/constants/product";
 
+type CapOption = "Nozzle Applicator Cap" | "Flip Top Cap";
 
 export default function ProductDetail() {
   const router = useRouter();
+  const { addToCart } = useCart();
+
   const images = PRODUCT.images;
 
-
-
   const [selectedImage, setSelectedImage] = useState(images[0]);
- const [quantity, setQuantity] = useState(1);
-const [selectedCap, setSelectedCap] = useState<
-  "Nozzle Applicator Cap" | "Flip Top Cap"
->("Nozzle Applicator Cap");
- const { addToCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
 
-  const increase = () => setQuantity((prev) => prev + 1);
+  // Flip Top Cap is selected by default
+  const [selectedCap, setSelectedCap] =
+    useState<CapOption>("Flip Top Cap");
+
+  const increase = () => {
+    setQuantity((prev) => prev + 1);
+  };
 
   const decrease = () => {
     if (quantity > 1) {
@@ -29,48 +32,42 @@ const [selectedCap, setSelectedCap] = useState<
     }
   };
 
+  const handleAddToCart = () => {
+    addToCart({
+      id: PRODUCT.id,
+      name: PRODUCT.name,
+      price: PRODUCT.salePrice,
+      image: PRODUCT.image,
+      quantity,
+      cap: selectedCap,
+    });
 
-const handleAddToCart = () => {
-  addToCart({
-  id: PRODUCT.id,
-  name: PRODUCT.name,
-  price: PRODUCT.salePrice,
-  image: PRODUCT.image,
-  quantity,
-  cap: selectedCap,
-});
+    toast.success(`${PRODUCT.name} added to your cart.`, {
+      duration: 2500,
+    });
+  };
 
-  toast.success(`${PRODUCT.name} added to your cart.`, {
-    duration: 2500,
-  });
-};
+  const handleBuyNow = () => {
+    addToCart({
+      id: PRODUCT.id,
+      name: PRODUCT.name,
+      price: PRODUCT.salePrice,
+      image: PRODUCT.image,
+      quantity,
+      cap: selectedCap,
+    });
 
-const handleBuyNow = () => {
-  addToCart({
-  id: PRODUCT.id,
-  name: PRODUCT.name,
-  price: PRODUCT.salePrice,
-  image: PRODUCT.image,
-  quantity,
-  cap: selectedCap,
-});
-
-  router.push("/checkout");
-};
-  
+    router.push("/checkout");
+  };
 
   return (
-    <section className="grid lg:grid-cols-2 gap-10 items-start">
-
-      {/* LEFT SIDE */}
+    <section className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+      {/* LEFT SIDE — PRODUCT IMAGES */}
 
       <div className="flex flex-col items-center">
+        {/* Main Product Image */}
 
-        {/* Main Image */}
-
-        <div className="relative bg-white rounded-[40px] p-10 shadow-xl w-full max-w-[520px] flex justify-center">
-
-         
+        <div className="relative flex w-full max-w-[520px] justify-center rounded-[36px] bg-white p-6 shadow-lg sm:p-8">
           <Image
             src={selectedImage}
             alt={PRODUCT.name}
@@ -79,236 +76,251 @@ const handleBuyNow = () => {
             className="object-contain"
             priority
           />
-
         </div>
 
         {/* Thumbnails */}
 
-        <div className="flex justify-center gap-4 mt-8 flex-wrap">
-
+        <div className="mt-3 flex flex-wrap justify-center gap-3">
           {images.map((image, index) => (
             <button
               key={index}
+              type="button"
               onClick={() => setSelectedImage(image)}
-              className={`rounded-2xl p-2 border-2 transition-all duration-300 ${
+              className={`rounded-xl border-2 p-1.5 transition-all duration-300 ${
                 selectedImage === image
-                  ? "border-[#2E473B] shadow-md"
-                  : "border-[#E8E3DA]"
+                  ? "border-[#2E473B] shadow-sm"
+                  : "border-[#E8E3DA] hover:border-[#7C9A7D]"
               }`}
             >
               <Image
                 src={image}
-                alt={`Thumbnail ${index + 1}`}
-                width={75}
-                height={75}
+                alt={`Product image ${index + 1}`}
+                width={70}
+                height={50}
                 className="object-contain"
               />
             </button>
           ))}
-
         </div>
-
       </div>
 
-      {/* RIGHT SIDE */}
+      {/* RIGHT SIDE — PRODUCT INFORMATION */}
 
-      <div>
+      <div className="pt-1">
+        {/* Collection */}
 
-        <p className="uppercase tracking-[0.3em] text-sm text-[#7C9A7D] font-medium">
+        <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#7C9A7D]">
           Signature Collection
         </p>
 
-        <h2 className="mt-4 text-3xl font-bold leading-tight text-[#2E473B]">
-  {PRODUCT.name}
-</h2>
+        {/* Product Name */}
+
+        <h1 className="mt-2 text-3xl font-bold leading-tight text-[#2E473B] sm:text-4xl">
+          {PRODUCT.name}
+        </h1>
 
         {/* Rating */}
 
-        <div className="mt-6 flex items-center gap-3">
-          <span className="text-[#C7A25A] text-xl">
+        <div className="mt-3 flex flex-wrap items-center gap-1">
+          <span className="text-lg tracking-wide text-[#C7A25A]">
             ★★★★★
           </span>
 
-          <span className="text-gray-500">
-            {PRODUCT.tagline}          </span>
+          <span className="text-sm text-gray-500">
+            {PRODUCT.tagline}
+          </span>
         </div>
 
         {/* Description */}
 
-        <p className="mt-8 text-lg leading-8 text-gray-600">
-  {PRODUCT.description}
-</p>
+        <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
+          {PRODUCT.description}
+        </p>
 
         {/* Price */}
 
-        <div className="mt-10">
+        <div className="mt-6">
+          <p className="text-lg text-gray-400 line-through">
+            Rs. {PRODUCT.originalPrice.toLocaleString()}
+          </p>
 
-          <p className="text-4xl text-gray-400 line-through">
-           Rs. {PRODUCT.originalPrice.toLocaleString()}          </p>
-
-          <div className="flex items-center gap-4 mt-3 flex-wrap">
-
-            <h2 className="text-5xl font-bold text-[#2E473B]">
+          <div className="mt-1.5 flex flex-wrap items-center gap-3">
+            <h2 className="text-4xl font-bold text-[#2E473B] sm:text-5xl">
               Rs. {PRODUCT.salePrice.toLocaleString()}
             </h2>
 
-            <span className="bg-[#E8F3EA] text-[#2E473B] px-4 py-2 rounded-full font-semibold">
-             Save {PRODUCT.discount}%
+            <span className="rounded-full bg-[#E8F3EA] px-3.5 py-1.5 text-sm font-semibold text-[#2E473B]">
+              Save {PRODUCT.discount}%
             </span>
-
           </div>
-
         </div>
 
+        {/* CAP SELECTION */}
 
-{/* Cap Selection */}
+        <div className="mt-5">
+          <p className="mb-3 text-sm font-semibold text-[#2E473B]">
+            Choose Your Bottle Cap
+          </p>
 
-<div className="mt-6">
+          <div className="space-y-2">
+            {/* Flip Top Cap */}
 
-  <p className="font-semibold text-[#2E473B] mb-4">
-    Choose Your Bottle Cap
-  </p>
+            <label
+              className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${
+                selectedCap === "Flip Top Cap"
+                  ? "border-[#2E473B] bg-[#F8F5EF]"
+                  : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
+              }`}
+            >
+              <input
+                type="radio"
+                name="cap"
+                value="Flip Top Cap"
+                checked={selectedCap === "Flip Top Cap"}
+                onChange={() => setSelectedCap("Flip Top Cap")}
+                className="h-2 w-2 accent-[#2E473B]"
+              />
 
-  <div className="flex flex-col sm:flex-row gap-4">
+              <span
+                className={`text-sm font-medium ${
+                  selectedCap === "Flip Top Cap"
+                    ? "text-[#2E473B]"
+                    : "text-gray-600"
+                }`}
+              >
+                Flip Top Cap
+              </span>
+            </label>
 
-    <button
-      type="button"
-      onClick={() => setSelectedCap("Nozzle Applicator Cap")}
-      className={`flex-1 py-2 px-4 rounded-2xl border-2 font-semibold transition ${
-        selectedCap === "Nozzle Applicator Cap"
-          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
-          : "border-[#E8E3DA] text-gray-600"
-      }`}
-    >
-      Nozzle Applicator Cap
-    </button>
+            {/* Nozzle Applicator Cap */}
 
-    <button
-      type="button"
-      onClick={() => setSelectedCap("Flip Top Cap")}
-      className={`flex-1 py-2 px-4 rounded-2xl border-2 font-semibold transition ${
-        selectedCap === "Flip Top Cap"
-          ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
-          : "border-[#E8E3DA] text-gray-600"
-      }`}
-    >
-      Flip Top Cap
-    </button>
+            <label
+              className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${
+                selectedCap === "Nozzle Applicator Cap"
+                  ? "border-[#2E473B] bg-[#F8F5EF]"
+                  : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
+              }`}
+            >
+              <input
+                type="radio"
+                name="cap"
+                value="Nozzle Applicator Cap"
+                checked={selectedCap === "Nozzle Applicator Cap"}
+                onChange={() =>
+                  setSelectedCap("Nozzle Applicator Cap")
+                }
+                className="h-2 w-2 accent-[#2E473B]"
+              />
 
-  </div>
+              <span
+                className={`text-sm font-medium ${
+                  selectedCap === "Nozzle Applicator Cap"
+                    ? "text-[#2E473B]"
+                    : "text-gray-600"
+                }`}
+              >
+                Nozzle Applicator Cap
+              </span>
+            </label>
+          </div>
+        </div>
 
-  {/* Current Selection */}
-  <p className="mt-4 text-sm text-gray-500">
-    Selected:{" "}
-    <span className="font-semibold text-[#2E473B]">
-      {selectedCap}
-    </span>
-  </p>
+        {/* QUANTITY */}
 
-</div>
-
-        {/* Quantity */}
-
-        <div className="mt-12">
-
-          <p className="font-semibold text-[#2E473B] mb-4">
+        <div className="mt-6">
+          <p className="mb-3 text-sm font-semibold text-[#2E473B]">
             Quantity
           </p>
 
-          <div className="flex items-center border border-[#D8D2C7] rounded-full overflow-hidden w-fit">
-
+          <div className="flex w-fit items-center overflow-hidden rounded-full border border-[#D8D2C7] bg-white">
             <button
+              type="button"
               onClick={decrease}
-              className="px-6 py-4 text-2xl hover:bg-[#F8F5EF] transition"
+              className="px-5 py-2.5 text-xl text-[#2E473B] transition hover:bg-[#F8F5EF]"
             >
               −
             </button>
 
-            <span className="px-10 text-lg font-semibold">
-  {quantity}
-</span>
+            <span className="min-w-[55px] text-center text-base font-semibold text-[#2E473B]">
+              {quantity}
+            </span>
+
             <button
+              type="button"
               onClick={increase}
-              className="px-6 py-4 text-2xl hover:bg-[#F8F5EF] transition"
+              className="px-5 py-2.5 text-xl text-[#2E473B] transition hover:bg-[#F8F5EF]"
             >
               +
             </button>
-
           </div>
-
         </div>
 
-        {/* Buttons */}
+        {/* ACTION BUTTONS */}
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-5">
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="flex-1 rounded-full border-2 border-[#2E473B] px-7 py-3.5 text-base font-semibold text-[#2E473B] transition-all duration-300 hover:bg-[#F8F5EF]"
+          >
+            Add to Cart
+          </button>
 
           <button
-  onClick={handleAddToCart}
-  className="flex-1 border-2 border-[#2E473B]
-             text-[#2E473B]
-             py-4 px-8
-             rounded-full
-             text-lg font-semibold
-             flex items-center justify-center
-             hover:bg-[#F8F5EF]
-             transition-all duration-300"
->
-  Add to Cart
-</button>
-
-
-      <button
-  type="button"
-  onClick={handleBuyNow}
-  className="flex-1 bg-[#2E473B]
-             text-white
-             py-4 px-8
-             rounded-full
-             text-lg font-semibold
-             flex items-center justify-center
-             hover:bg-[#23392F]
-             transition-all duration-300"
->
-  Buy Now
-</button>
+            type="button"
+            onClick={handleBuyNow}
+            className="flex-1 rounded-full bg-[#2E473B] px-7 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-[#23392F]"
+          >
+            Buy Now
+          </button>
         </div>
 
-        {/* Product Highlights */}
+        {/* PRODUCT HIGHLIGHTS */}
 
-        <div className="mt-12 border-t border-[#E5DED2] pt-8 space-y-5">
+        <div className="mt-8 border-t border-[#E5DED2] pt-6">
+          <div className="space-y-3.5">
+            <div className="flex items-center justify-between gap-6">
+              <span className="text-sm text-gray-500">
+                Bottle Size
+              </span>
 
-          <div className="flex justify-between">
-            <span className="text-gray-500">Bottle Size</span>
-            <span className="font-semibold text-[#2E473B]">
-  {PRODUCT.bottleSize}
-</span>
+              <span className="text-sm font-semibold text-[#2E473B]">
+                {PRODUCT.bottleSize}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between gap-6">
+              <span className="text-sm text-gray-500">
+                Formula
+              </span>
+
+              <span className="text-right text-sm font-semibold text-[#2E473B]">
+                {PRODUCT.formula}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between gap-6">
+              <span className="text-sm text-gray-500">
+                Suitable For
+              </span>
+
+              <span className="text-right text-sm font-semibold text-[#2E473B]">
+                {PRODUCT.suitableFor}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between gap-6">
+              <span className="text-sm text-gray-500">
+                Availability
+              </span>
+
+              <span className="text-sm font-semibold text-green-700">
+                {PRODUCT.stock}
+              </span>
+            </div>
           </div>
-
-          <div className="flex justify-between">
-            <span className="text-gray-500">Formula</span>
-            <span className="font-semibold text-[#2E473B]">
-              {PRODUCT.formula}
-            </span>
-          </div>
-
-          <div className="flex justify-between">
-            <span className="text-gray-500">Suitable For</span>
-            <span className="font-semibold text-[#2E473B]">
-              {PRODUCT.suitableFor}
-            </span>
-          </div>
-
-          <div className="flex justify-between">
-            <span className="text-gray-500">Availability</span>
-            <span className="font-semibold text-green-700">
-              {PRODUCT.stock}
-            </span>
-          </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }
