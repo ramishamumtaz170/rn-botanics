@@ -6,13 +6,14 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-[#F8F5EF] flex items-center pt-24 pb-12 sm:pt-28 lg:pt-20"
+      /* Added px-6 sm:px-10 lg:px-12 directly to the section to force clean margins from screen edges */
+      className="min-h-screen bg-[#F8F5EF] flex items-center pt-24 pb-12 sm:pt-28 lg:pt-20 px-6 sm:px-10 lg:px-12 w-full overflow-x-hidden"
     >
-      {/* Container with responsive side margins (px-5 sm:px-8 lg:px-10) */}
-      <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
+      {/* Grid Container */}
+      <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center">
         
         {/* Left Column: Text & CTA */}
-        <div className="max-w-xl text-center lg:text-left order-2 lg:order-1 mx-auto lg:mx-0">
+        <div className="w-full max-w-xl text-center lg:text-left order-2 lg:order-1 mx-auto lg:mx-0">
           <p className="uppercase tracking-[0.2em] text-[#7C9A7D] text-xs sm:text-sm font-semibold">
             Premium Botanical Care
           </p>
@@ -27,8 +28,8 @@ export default function Hero() {
             Handcrafted botanical hair care powered by nature&apos;s finest ingredients.
           </p>
 
-          {/* Buttons: Responsive height, padding, font size & spacing */}
-          <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto">
+          {/* Buttons Container */}
+          <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
             <Link
               href="/shop"
               className="w-full sm:w-auto h-11 sm:h-12 px-6 sm:px-8 bg-[#2E473B] text-white rounded-full text-xs sm:text-sm uppercase tracking-widest font-medium shadow-md hover:bg-[#23392F] transition flex items-center justify-center active:scale-95"
@@ -47,10 +48,6 @@ export default function Hero() {
 
         {/* Right Column: Image Frame */}
         <div className="flex justify-center order-1 lg:order-2 w-full">
-          {/* 
-            Frame sizing adjusted with responsive aspect ratio & max-width 
-            so it scales gracefully on smaller mobile screens 
-          */}
           <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[360px] lg:max-w-[430px] aspect-[4/5] sm:h-[420px] lg:h-[520px] rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] overflow-hidden bg-[#E7E2D8] shadow-xl">
             <Image
               src={PRODUCT.image}
