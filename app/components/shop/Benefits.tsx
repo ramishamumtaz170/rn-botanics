@@ -2,81 +2,58 @@ export default function Benefits() {
   const benefits = [
     {
       title: "Promotes Hair Growth",
-      description:
-        "A carefully selected blend of botanical oils and herbs helps nourish the scalp and support healthier hair growth.",
+      emoji: "🌱",
     },
     {
       title: "Reduces Hair Fall",
-      description:
-        "Strengthens the hair from the roots to help reduce breakage and minimize everyday hair fall with regular use.",
+      emoji: "🍃",
     },
     {
       title: "Adds Natural Shine",
-      description:
-        "Restores softness and enhances your hair's natural shine without leaving a greasy residue.",
+      emoji: "✨",
     },
     {
       title: "Strengthens Hair Roots",
-      description:
-        "Deeply nourishes the scalp and roots to improve overall hair strength and resilience.",
+      emoji: "🌿",
     },
   ];
 
   return (
-    <section className="py-12 bg-[#F8F5EF]">
+    <section className="bg-[#F8F5EF] py-8 sm:py-12 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="max-w-7xl mx-auto px-6 text-center">
-
-        {/* Heading */}
-        <div className="flex flex-col items-center text-center">
-
-          <p className="uppercase tracking-[0.35em] text-[#7C9A7D] text-sm font-medium">
+        {/* Section Heading */}
+        <div className="flex flex-col items-center text-center w-full px-4">
+          <p className="uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold">
             Why Choose Us
           </p>
 
-          <h2 className="mt-4 text-2xl font-bold text-[#2E473B]">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2E473B]">
             Botanical Benefits
           </h2>
-
-          <p className="mt-3 max-w-2xl text-lg text-gray-600 leading-8">
-            Every bottle is thoughtfully handcrafted using nature's finest
-            ingredients to support healthier, stronger, and shinier hair.
-          </p>
-
         </div>
 
-
-        {/* Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-
+        {/* Compact Benefits Row (Icon Left, Title Right) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mt-6 sm:mt-8 w-full">
           {benefits.map((benefit) => (
             <div
               key={benefit.title}
-              className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              className="group bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-[#E8E2D6] hover:border-[#7C9A7D] flex flex-row items-center gap-3.5 sm:gap-4 w-full max-w-[320px] xs:max-w-[360px] sm:max-w-none mx-auto"
             >
-
-              <div className="w-14 h-14 rounded-full bg-[#EDF4EE] flex items-center justify-center text-2xl mb-6">
-                {benefit.title === "Promotes Hair Growth" && "🌱"}
-                {benefit.title === "Reduces Hair Fall" && "🍃"}
-                {benefit.title === "Adds Natural Shine" && "✨"}
-                {benefit.title === "Strengthens Hair Roots" && "🌿"}
+              {/* Icon on Left */}
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#E8F3EA] flex items-center justify-center text-lg sm:text-xl shrink-0 group-hover:scale-105 transition-transform duration-300">
+                <span>{benefit.emoji}</span>
               </div>
 
-              <h3 className="text-2xl font-bold text-[#2E473B]">
+              {/* Title on Right */}
+              <h3 className="text-base sm:text-lg font-bold text-[#2E473B] text-left leading-snug">
                 {benefit.title}
               </h3>
-
-              <p className="mt-4 text-gray-600 leading-7">
-                {benefit.description}
-              </p>
-
             </div>
           ))}
-
         </div>
 
       </div>
-
     </section>
   );
 }
