@@ -66,14 +66,13 @@ export default function Ingredients() {
   carefully selected herbs inspired by traditional hair care rituals.
 </p>
         </div>
-
-       {/* Ingredient Cards Grid with side spacing (px-4 sm:px-0) & centered max-width */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10 sm:mt-16 px-4 sm:px-0">
+{/* Ingredient Cards Grid: Centered on mobile with justify-items-center & max-w-[320px] */}
+<div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10 sm:mt-16 w-full px-4 sm:px-0">
   {ingredients.map((ingredient) => (
     <div
       key={ingredient.name}
-      /* Added max-w-md mx-auto so cards never collide with screen edges on mobile */
-      className="group bg-[#F8F5EF] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-row items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg w-full max-w-md mx-auto"
+      /* Capped at max-w-[320px] on mobile with mx-auto to guarantee perfect horizontal centering */
+      className="group bg-[#F8F5EF] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-row items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg w-full max-w-[320px] sm:max-w-none mx-auto"
     >
       {/* Left Side: Image */}
       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0">
@@ -98,6 +97,7 @@ export default function Ingredients() {
     </div>
   ))}
 </div>
+
 {/* Additional Ingredients Box */}
 <div className="mt-16 sm:mt-24 mb-12 sm:mb-20 flex justify-center">
   <div className="w-full max-w-4xl bg-[#F8F5EF] rounded-[24px] sm:rounded-[30px] p-6 sm:p-10 text-center shadow-sm">
