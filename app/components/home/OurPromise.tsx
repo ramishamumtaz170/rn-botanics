@@ -11,11 +11,11 @@ export default function OurPhilosophy() {
             Our Philosophy
           </p>
 
-          <h2 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-[#F8F5EF] leading-tight">
+          <h3 className="mt-6 text-2xl md:text-5xl lg:text-6xl font-bold text-[#F8F5EF] leading-tight">
             Nature Deserves
             <br />
             To Be Trusted.
-          </h2>
+          </h3>
 
           <p className="mt-8 max-w-3xl text-center text-lg leading-9 text-[#E6DFD3]">
             At <span className="font-semibold text-[#F8F5EF]">R & N Botanics</span>, we
@@ -36,7 +36,7 @@ export default function OurPhilosophy() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-14 text-center">
 
           <div>
-            <h3 className="text-5xl font-bold text-[#F8F5EF]">
+            <h3 className="text-2xl font-bold text-[#F8F5EF]">
               12+
             </h3>
 
@@ -46,7 +46,7 @@ export default function OurPhilosophy() {
           </div>
 
           <div>
-            <h3 className="text-5xl font-bold text-[#F8F5EF]">
+            <h3 className="text-2xl font-bold text-[#F8F5EF]">
               100%
             </h3>
 
@@ -56,7 +56,7 @@ export default function OurPhilosophy() {
           </div>
 
           <div>
-            <h3 className="text-5xl font-bold text-[#F8F5EF]">
+            <h3 className="text-2xl font-bold text-[#F8F5EF]">
               Small
             </h3>
 
