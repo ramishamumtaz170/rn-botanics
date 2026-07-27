@@ -67,7 +67,7 @@ export default function Ingredients() {
           </p>
         </div>
 
-        {/* Ingredient Cards Grid (uses gap-4 sm:gap-6) */}
+        {/* Ingredient Cards Grid */}
         <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10 sm:mt-16 w-full px-4 sm:px-0">
           {ingredients.map((ingredient) => (
             <div
@@ -98,9 +98,9 @@ export default function Ingredients() {
           ))}
         </div>
 
-        {/* Additional Ingredients Box with exact gap (mt-4 sm:mt-6) */}
-        <div className="mt-4 sm:mt-6 flex justify-center w-full px-4 sm:px-0">
-          <div className="w-full max-w-[320px] xs:max-w-[360px] sm:max-w-4xl bg-[#F8F5EF] rounded-[24px] sm:rounded-[30px] p-6 sm:p-10 text-center shadow-sm mx-auto flex flex-col items-center justify-center">
+        {/* Additional Ingredients Box with mt-10 sm:mt-16 directly on the bg-[#F8F5EF] card */}
+        <div className="flex justify-center w-full px-4 sm:px-0">
+          <div className="mt-10 sm:mt-16 mb-6 sm:mb-10 w-full max-w-[320px] xs:max-w-[360px] sm:max-w-4xl bg-[#F8F5EF] rounded-[24px] sm:rounded-[30px] p-6 sm:p-10 text-center shadow-sm mx-auto flex flex-col items-center justify-center">
             <h3 className="text-xl sm:text-2xl font-semibold text-[#2E473B] text-center">
               Enriched With More Botanical Goodness
             </h3>
