@@ -3,121 +3,118 @@ import { Mail, MapPin, Globe, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full overflow-x-hidden bg-[#F8F5EF] px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
-     <div className="mx-auto w-full max-w-7xl rounded-[24px] bg-[#2E473B] px-8 py-10 text-[#F8F5EF] shadow-2xl sm:rounded-[36px] sm:px-10 sm:py-12 md:px-14 md:py-16 lg:px-16 lg:py-20">
-         <div className="grid w-full grid-cols-1 gap-10 pl-2 text-left sm:pl-0 md:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:gap-16">
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#C7A25A]" />
+    <footer className="w-full bg-[#F8F5EF] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+      
+      {/* Main Green Card Container with clean responsive padding */}
+      <div className="w-full max-w-7xl mx-auto rounded-[24px] sm:rounded-[36px] bg-[#2E473B] text-[#F8F5EF] p-6 sm:p-10 md:p-16 lg:p-20 shadow-2xl">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 text-left">
 
-              <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          {/* Column 1: Brand Info */}
+          <div className="flex flex-col text-left">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C7A25A] shrink-0"></span>
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
                 R & N Botanics
               </h3>
             </div>
 
-            <p className="mt-5 max-w-sm text-sm leading-7 text-[#D8D2C8] sm:text-base">
+            <p className="mt-4 text-sm sm:text-base text-[#D8D2C8] leading-relaxed max-w-sm">
               Thoughtfully handcrafted botanical hair care inspired by nature,
               tradition, and timeless self-care rituals.
             </p>
           </div>
 
-          <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#AFC0A8] sm:text-sm">
+          {/* Column 2: Navigation Links */}
+          <div className="text-left">
+            <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-[#AFC0A8] font-semibold">
               Navigation
             </p>
 
-            <div className="mt-5 flex flex-col gap-3 text-sm text-[#D8D2C8] sm:text-base">
+            <div className="mt-4 flex flex-col gap-2.5 text-sm sm:text-base text-[#D8D2C8]">
               <Link
                 href="/#home"
-                className="w-fit transition-all duration-300 hover:translate-x-1 hover:text-[#C7A25A]"
+                className="hover:text-[#C7A25A] hover:translate-x-1 transition-all duration-300 inline-flex items-center gap-1.5 w-fit"
               >
                 Home
               </Link>
 
               <Link
                 href="/#ingredients"
-                className="w-fit transition-all duration-300 hover:translate-x-1 hover:text-[#C7A25A]"
+                className="hover:text-[#C7A25A] hover:translate-x-1 transition-all duration-300 inline-flex items-center gap-1.5 w-fit"
               >
                 Ingredients
               </Link>
 
               <Link
                 href="/#story"
-                className="w-fit transition-all duration-300 hover:translate-x-1 hover:text-[#C7A25A]"
+                className="hover:text-[#C7A25A] hover:translate-x-1 transition-all duration-300 inline-flex items-center gap-1.5 w-fit"
               >
                 Our Story
               </Link>
 
               <Link
                 href="/#faq"
-                className="w-fit transition-all duration-300 hover:translate-x-1 hover:text-[#C7A25A]"
+                className="hover:text-[#C7A25A] hover:translate-x-1 transition-all duration-300 inline-flex items-center gap-1.5 w-fit"
               >
                 FAQ
               </Link>
             </div>
           </div>
 
-          <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#AFC0A8] sm:text-sm">
+          {/* Column 3: Contact Details */}
+          <div className="text-left">
+            <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-[#AFC0A8] font-semibold">
               Contact
             </p>
 
-            <div className="mt-5 space-y-4 text-sm text-[#D8D2C8] sm:text-base">
-              <div className="flex min-w-0 items-start gap-3">
-                <MapPin
-                  size={18}
-                  className="mt-0.5 shrink-0 text-[#C7A25A]"
-                />
-
+            <div className="mt-4 space-y-3 text-sm sm:text-base text-[#D8D2C8]">
+              <div className="flex items-center gap-3">
+                <MapPin size={18} className="text-[#C7A25A] shrink-0" />
                 <span>Pakistan</span>
               </div>
 
-              <div className="flex min-w-0 items-start gap-3">
-                <Mail
-                  size={18}
-                  className="mt-0.5 shrink-0 text-[#C7A25A]"
-                />
-
+              <div className="flex items-center gap-3">
+                <Mail size={18} className="text-[#C7A25A] shrink-0" />
                 <a
                   href="mailto:rnbotanics@gmail.com"
-                  className="min-w-0 break-all transition hover:text-[#C7A25A]"
+                  className="hover:text-[#C7A25A] transition"
                 >
                   rnbotanics@gmail.com
                 </a>
               </div>
 
-              <div className="flex min-w-0 items-start gap-3">
-                <Globe
-                  size={18}
-                  className="mt-0.5 shrink-0 text-[#C7A25A]"
-                />
-
+              <div className="flex items-center gap-3">
+                <Globe size={18} className="text-[#C7A25A] shrink-0" />
                 <a
                   href="https://rnbotanics.pk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex min-w-0 items-center gap-1 break-all transition hover:text-[#C7A25A]"
+                  className="hover:text-[#C7A25A] transition flex items-center gap-1"
                 >
-                  <span>rnbotanics.pk</span>
-
-                  <ArrowUpRight size={14} className="shrink-0" />
+                  rnbotanics.pk
+                  <ArrowUpRight size={14} />
                 </a>
               </div>
             </div>
           </div>
+
         </div>
 
-        <div className="my-8 border-t border-[#4E6558] sm:my-10" />
+        {/* Divider Line */}
+        <div className="border-t border-[#4E6558] my-8 sm:my-10"></div>
 
-        <div className="flex w-full flex-col gap-4 pl-2 text-left sm:flex-row sm:items-center sm:justify-between sm:pl-0">
-          <p className="text-xs leading-6 text-[#CFC8BC] sm:text-sm">
+        {/* Bottom Bar */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left">
+          <p className="text-xs sm:text-sm text-[#CFC8BC]">
             © {new Date().getFullYear()} R & N Botanics. All Rights Reserved.
           </p>
 
-          <p className="text-xs leading-6 tracking-[0.12em] text-[#AFC0A8] sm:text-right sm:text-sm">
+          <p className="uppercase tracking-[0.2em] text-xs sm:text-sm text-[#AFC0A8] font-medium">
             Crafted With Nature • Made With Care
           </p>
         </div>
+
       </div>
     </footer>
   );
