@@ -15,7 +15,7 @@ export default function Ingredients() {
   ];
 
   return (
-    <section className="py-32 bg-white">
+    <section className="py-12 bg-white">
 
       <div className="max-w-7xl mx-auto px-6">
 
@@ -29,11 +29,11 @@ export default function Ingredients() {
     Botanical Blend
   </p>
 
-  <h2 className="mt-5 text-2xl font-bold text-[#2E473B]">
+  <h2 className="mt-3 text-2xl font-bold text-[#2E473B]">
     Nature's Finest Ingredients
   </h2>
 
-  <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600">
+  <p className="mt-4 max-w-3xl text-lg leading-8 text-gray-600">
     Every bottle is infused with carefully selected botanical oils and herbs,
     traditionally known for nourishing the scalp and supporting healthy hair.
   </p>

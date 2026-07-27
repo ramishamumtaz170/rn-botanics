@@ -60,7 +60,7 @@ const handleBuyNow = () => {
   
 
   return (
-    <section className="grid lg:grid-cols-2 gap-20 items-start">
+    <section className="grid lg:grid-cols-2 gap-10 items-start">
 
       {/* LEFT SIDE */}
 
@@ -163,7 +163,7 @@ const handleBuyNow = () => {
 
 {/* Cap Selection */}
 
-<div className="mt-10">
+<div className="mt-6">
 
   <p className="font-semibold text-[#2E473B] mb-4">
     Choose Your Bottle Cap
@@ -174,7 +174,7 @@ const handleBuyNow = () => {
     <button
       type="button"
       onClick={() => setSelectedCap("Nozzle Applicator Cap")}
-      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+      className={`flex-1 py-2 px-4 rounded-2xl border-2 font-semibold transition ${
         selectedCap === "Nozzle Applicator Cap"
           ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
           : "border-[#E8E3DA] text-gray-600"
@@ -186,7 +186,7 @@ const handleBuyNow = () => {
     <button
       type="button"
       onClick={() => setSelectedCap("Flip Top Cap")}
-      className={`flex-1 py-4 px-6 rounded-2xl border-2 font-semibold transition ${
+      className={`flex-1 py-2 px-4 rounded-2xl border-2 font-semibold transition ${
         selectedCap === "Flip Top Cap"
           ? "border-[#2E473B] bg-[#F8F5EF] text-[#2E473B]"
           : "border-[#E8E3DA] text-gray-600"
@@ -240,13 +240,13 @@ const handleBuyNow = () => {
 
         {/* Buttons */}
 
-        <div className="mt-12 flex flex-col sm:flex-row gap-5">
+        <div className="mt-6 flex flex-col sm:flex-row gap-5">
 
           <button
   onClick={handleAddToCart}
   className="flex-1 border-2 border-[#2E473B]
              text-[#2E473B]
-             py-5 px-10
+             py-4 px-8
              rounded-full
              text-lg font-semibold
              flex items-center justify-center
@@ -262,7 +262,7 @@ const handleBuyNow = () => {
   onClick={handleBuyNow}
   className="flex-1 bg-[#2E473B]
              text-white
-             py-5 px-10
+             py-4 px-8
              rounded-full
              text-lg font-semibold
              flex items-center justify-center

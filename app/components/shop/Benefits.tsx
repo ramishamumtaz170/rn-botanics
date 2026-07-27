@@ -23,7 +23,7 @@ export default function Benefits() {
   ];
 
   return (
-    <section className="py-32 bg-[#F8F5EF]">
+    <section className="py-12 bg-[#F8F5EF]">
 
       <div className="max-w-7xl mx-auto px-6 text-center">
 
@@ -34,11 +34,11 @@ export default function Benefits() {
             Why Choose Us
           </p>
 
-          <h2 className="mt-5 text-2xl font-bold text-[#2E473B]">
+          <h2 className="mt-4 text-2xl font-bold text-[#2E473B]">
             Botanical Benefits
           </h2>
 
-          <p className="mt-6 max-w-2xl text-lg text-gray-600 leading-8">
+          <p className="mt-3 max-w-2xl text-lg text-gray-600 leading-8">
             Every bottle is thoughtfully handcrafted using nature's finest
             ingredients to support healthier, stronger, and shinier hair.
           </p>
@@ -47,7 +47,7 @@ export default function Benefits() {
 
 
         {/* Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
 
           {benefits.map((benefit) => (
             <div
