@@ -128,28 +128,37 @@ export default function CartDrawer({
 
                       <div className="flex items-center justify-between mt-5">
 
-                        <div className="flex items-center bg-[#F8F5EF] rounded-full border border-[#E8E3DA] overflow-hidden">
+  <div className="flex items-center bg-[#F8F5EF] rounded-full border border-[#E8E3DA] overflow-hidden">
 
-                          <button
-                            onClick={() => decreaseQuantity(item.id)}
-                            className="w-10 h-10 flex items-center justify-center hover:bg-[#ECE7DF] transition"
-                          >
-                            <Minus size={16} />
-                          </button>
+    <button
+      onClick={() => decreaseQuantity(item.id, item.cap)}
+      className="w-10 h-10 flex items-center justify-center hover:bg-[#ECE7DF] transition"
+    >
+      <Minus size={16} />
+    </button>
 
-                          <span className="w-10 text-center font-semibold text-[#2E473B]">
-                            {item.quantity}
-                          </span>
+    <span className="w-10 text-center font-semibold text-[#2E473B]">
+      {item.quantity}
+    </span>
 
-                          <button
-                            onClick={() => increaseQuantity(item.id)}
-                            className="w-10 h-10 flex items-center justify-center hover:bg-[#ECE7DF] transition"
-                          >
-                            <Plus size={16} />
-                          </button>
+    <button
+      onClick={() => increaseQuantity(item.id, item.cap)}
+      className="w-10 h-10 flex items-center justify-center hover:bg-[#ECE7DF] transition"
+    >
+      <Plus size={16} />
+    </button>
 
-                        </div>
+  </div>
 
+  <button
+    onClick={() => removeFromCart(item.id, item.cap)}
+    className="flex items-center gap-2 text-red-500 hover:text-red-600 transition"
+  >
+    <Trash2 size={16} />
+    Remove
+  </button>
+
+</div>
                         <button
                           onClick={() => removeFromCart(item.id)}
                           className="flex items-center gap-2 text-red-500 hover:text-red-600 transition"
