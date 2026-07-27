@@ -54,11 +54,11 @@ export default function Footer() {
               </Link>
 
               <Link
-                href="/#faq"
-                className="hover:text-[#C7A25A] hover:translate-x-1 transition-all duration-300 inline-flex items-center gap-1.5 w-fit"
-              >
-                FAQ
-              </Link>
+  href="/faq"
+  className="hover:text-[#C7A25A] hover:translate-x-1 transition-all duration-300 inline-flex items-center gap-1.5 w-fit"
+>
+  FAQ
+</Link>
             </div>
           </div>
 
