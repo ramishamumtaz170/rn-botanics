@@ -30,54 +30,55 @@ export default function BrandPromise() {
   ];
 
   return (
-    <section className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto">
 
-        <div className="text-center mb-16">
-
-          <p className="uppercase tracking-[0.3em] text-[#7C9A7D] text-sm">
+        {/* Section Header */}
+        <div className="text-center mb-10 sm:mb-16 px-4">
+          <p className="uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold">
             Our Promise
           </p>
 
-          <h4 className="mt-4 text-2xl font-bold text-[#2E473B]">
+          <h4 className="mt-3 sm:mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2E473B] leading-tight">
             Crafted With Nature,
             <br />
             Designed For You
           </h4>
-
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-
+        {/* Promises Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
           {promises.map((item, index) => {
             const Icon = item.icon;
 
             return (
               <div
                 key={index}
-                className="text-center p-8 rounded-3xl hover:shadow-xl transition duration-300"
+                className="flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-3xl hover:shadow-xl transition duration-300 bg-[#FAF8F5] md:bg-transparent"
               >
-                <div className="w-20 h-20 rounded-full bg-[#F8F5EF] mx-auto flex items-center justify-center">
-
+                {/* Centered Icon Container */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#F8F5EF] flex items-center justify-center shrink-0">
+                  <Icon
+                    size={28}
+                    className="text-[#2E473B] sm:hidden"
+                  />
                   <Icon
                     size={34}
-                    className="text-[#2E473B]"
+                    className="text-[#2E473B] hidden sm:block"
                   />
-
                 </div>
 
-                <h3 className="mt-8 text-2xl font-semibold text-[#2E473B]">
+                <h3 className="mt-5 sm:mt-6 text-xl sm:text-2xl font-semibold text-[#2E473B]">
                   {item.title}
                 </h3>
 
-                <p className="mt-4 text-gray-600 leading-7">
+                {/* Description with side margins (px-4 sm:px-0) & max-width */}
+                <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 leading-relaxed max-w-xs mx-auto px-4 sm:px-0">
                   {item.description}
                 </p>
-
               </div>
             );
           })}
-
         </div>
 
       </div>
