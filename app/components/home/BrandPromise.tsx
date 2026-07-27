@@ -30,12 +30,13 @@ export default function BrandPromise() {
   ];
 
   return (
-    <section className="bg-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+    /* Increased top & bottom spacing (my-6 sm:my-12 py-20 sm:py-28 lg:py-32) */
+    <section className="bg-white my-6 sm:my-12 py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
-        <div className="text-center mb-10 sm:mb-16 px-4">
-          <p className="uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold">
+        <div className="text-center mb-12 sm:mb-20 px-4">
+          <p className="mt-4 sm:mt-6 uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold">
             Our Promise
           </p>
 
@@ -56,15 +57,15 @@ export default function BrandPromise() {
                 key={index}
                 className="flex flex-col items-center justify-center text-center p-6 sm:p-8 rounded-3xl hover:shadow-xl transition duration-300 bg-[#FAF8F5] md:bg-transparent"
               >
-                {/* Centered Icon Container */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#F8F5EF] flex items-center justify-center shrink-0">
+                {/* Green Background & Skin/Cream Icon */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#2E473B] flex items-center justify-center shrink-0 shadow-md">
                   <Icon
                     size={28}
-                    className="text-[#2E473B] sm:hidden"
+                    className="text-[#F8F5EF] sm:hidden"
                   />
                   <Icon
                     size={34}
-                    className="text-[#2E473B] hidden sm:block"
+                    className="text-[#F8F5EF] hidden sm:block"
                   />
                 </div>
 
@@ -72,7 +73,6 @@ export default function BrandPromise() {
                   {item.title}
                 </h3>
 
-                {/* Description with side margins (px-4 sm:px-0) & max-width */}
                 <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-600 leading-relaxed max-w-xs mx-auto px-4 sm:px-0">
                   {item.description}
                 </p>
