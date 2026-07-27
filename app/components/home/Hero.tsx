@@ -37,11 +37,12 @@ export default function Hero() {
             Botanical Luxury
           </h1>
 
-          <p className="mt-3 sm:mt-6 text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed sm:leading-8 max-w-lg mx-auto lg:mx-0">
+          {/* Added px-4 sm:px-0 for clear side margins on mobile */}
+          <p className="mt-3 sm:mt-6 text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed sm:leading-8 max-w-lg mx-auto lg:mx-0 px-4 sm:px-0">
             Handcrafted botanical hair care powered by nature&apos;s finest ingredients.
           </p>
 
-          {/* Buttons: Controlled max-width on mobile (max-w-[240px]) */}
+          {/* Buttons */}
           <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
             <Link
               href="/shop"
