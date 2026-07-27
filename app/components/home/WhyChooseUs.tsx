@@ -48,61 +48,62 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="bg-[#F8F5EF] py-32">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-[#F8F5EF] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
 
-        {/* Heading */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-
-          <p className="uppercase tracking-[0.3em] text-[#7C9A7D] text-sm font-medium">
+        {/* Heading Section (Centered) */}
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto px-4">
+          <p className="uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold text-center">
             Why Choose Us
           </p>
 
-          <h3 className="mt-5 text-2xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
+          <h3 className="mt-3 sm:mt-5 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2E473B] leading-tight text-center">
             Crafted With Nature,
             <br />
             Made With Care
           </h3>
 
-          <p className="mt-6 text-lg text-gray-600 leading-8">
+          <p className="mt-3 sm:mt-6 text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed text-center max-w-xl mx-auto px-6 sm:px-0">
             Every bottle reflects our commitment to quality, craftsmanship,
             and carefully selected botanical ingredients.
           </p>
-
         </div>
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
-
+        {/* Feature Cards Grid */}
+        <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-16 w-full px-4 sm:px-0">
           {features.map((feature, index) => {
             const Icon = feature.icon;
 
             return (
               <div
                 key={index}
-                className="bg-white rounded-[32px] p-10 text-center shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                /* Enforced flex flex-col items-center text-center for 100% centering */
+                className="bg-white rounded-[24px] sm:rounded-[32px] p-6 sm:p-10 text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center w-full max-w-[320px] xs:max-w-[360px] sm:max-w-none mx-auto"
               >
-                <div className="w-20 h-20 mx-auto rounded-full bg-[#F8F5EF] flex items-center justify-center">
-
+                {/* Centered Icon Circle */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#F8F5EF] flex items-center justify-center shrink-0 mx-auto">
+                  <Icon
+                    size={28}
+                    className="text-[#2E473B] sm:hidden"
+                  />
                   <Icon
                     size={34}
-                    className="text-[#2E473B]"
+                    className="text-[#2E473B] hidden sm:block"
                   />
-
                 </div>
 
-                <h3 className="mt-8 text-2xl font-semibold text-[#2E473B]">
+                {/* Centered Title */}
+                <h3 className="mt-5 sm:mt-8 text-xl sm:text-2xl font-semibold text-[#2E473B] text-center">
                   {feature.title}
                 </h3>
 
-                <p className="mt-4 text-gray-600 leading-7">
+                {/* Centered Description with side padding for mobile */}
+                <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed text-center max-w-xs mx-auto px-2 sm:px-0">
                   {feature.description}
                 </p>
-
               </div>
             );
           })}
-
         </div>
 
       </div>
