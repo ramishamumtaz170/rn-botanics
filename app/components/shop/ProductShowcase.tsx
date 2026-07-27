@@ -86,12 +86,12 @@ width={420}
 
           {/* Title */}
 
-          <h2 className="mt-4 text-5xl font-bold leading-tight text-[#2E473B]">
+          <h2 className="mt-4 text-2xl font-bold leading-tight text-[#2E473B]">
   {PRODUCT.name}
 </h2>
           {/* Description */}
 
-          <p className="mt-8 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-lg leading-8 text-gray-600">
             {PRODUCT.description}
           </p>
 
@@ -118,7 +118,7 @@ width={420}
 </p>
 
 <div className="flex items-center gap-4 mt-3 flex-wrap">
-  <h3 className="text-5xl font-bold text-[#2E473B]">
+  <h3 className="text-3xl font-bold text-[#2E473B]">
     Rs. {PRODUCT.salePrice.toLocaleString()}
   </h3>
 
@@ -130,7 +130,7 @@ width={420}
 
           {/* Features */}
 
-          <div className="mt-10 space-y-4">
+          <div className="mt-10 space-y-2">
 
             <div className="flex items-center gap-3">
               <span className="text-[#7C9A7D] text-xl">✓</span>
@@ -165,13 +165,13 @@ width={420}
 
 {/* Cap Selection */}
 
-<div className="mt-10">
+<div className="mt-4">
 
-  <p className="font-semibold text-[#2E473B] mb-4">
+  <p className="font-semibold text-[#2E473B] mb-2">
     Choose Your Bottle Cap
   </p>
 
-  <div className="space-y-4">
+  <div className="space-y-2">
 
     {/* Flip Top Cap — Default */}
 
@@ -243,7 +243,7 @@ width={420}
   onClick={handleAddToCart}
   className="flex-1 border-2 border-[#2E473B]
              text-[#2E473B]
-             py-5 px-8
+             py-3 px-4
              rounded-full
              text-lg font-semibold
              hover:bg-[#F8F5EF]
@@ -258,7 +258,7 @@ width={420}
   className="flex-1 flex items-center justify-center
              bg-[#2E473B]
              text-white
-             py-5 px-8
+             py-3 px-4
              rounded-full
              text-lg font-semibold
              hover:bg-[#23392F]
@@ -282,29 +282,29 @@ width={420}
   <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
 
     <div>
-      <h4 className="text-3xl font-bold text-[#2E473B]">12+</h4>
+      <h2 className="text-2xl font-bold text-[#2E473B]">12+</h2>
       <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
         Botanical Herbs
       </p>
     </div>
 
     <div>
-      <h4 className="text-3xl font-bold text-[#2E473B]">100%</h4>
+      <h2 className="text-2xl font-bold text-[#2E473B]">100%</h2>
       <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
         Natural Formula
       </p>
     </div>
 
     <div>
-      <h4 className="text-3xl font-bold text-[#2E473B]">
+      <h2 className="text-2xl font-bold text-[#2E473B]">
   {PRODUCT.bottleSize}
-</h4>      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
+</h2>      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
         Bottle Size
       </p>
     </div>
 
     <div>
-  <h4 className="text-3xl font-bold text-[#2E473B]">Premium</h4>
+  <h2 className="text-2xl font-bold text-[#2E473B]">Premium</h2>
   <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
     Quality
   </p>

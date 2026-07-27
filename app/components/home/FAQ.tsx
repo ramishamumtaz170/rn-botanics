@@ -38,7 +38,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="bg-[#F8F5EF] py-32">
+    <section id="faq" className="bg-[#F8F5EF] py-6">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -65,7 +65,7 @@ export default function FAQ() {
 
         {/* FAQ List */}
 
-        <div className="mt-20 flex justify-center">
+        <div className="mt-12 flex justify-center">
 
           <div className="w-full max-w-3xl">
 
@@ -85,7 +85,7 @@ export default function FAQ() {
                     {faq.question}
                   </span>
 
-                  <span className="text-3xl text-[#2E473B] ml-8">
+                  <span className="text-2xl text-[#2E473B] ml-8">
                     {openIndex === index ? "−" : "+"}
                   </span>
 
