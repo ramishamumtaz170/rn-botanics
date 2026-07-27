@@ -13,8 +13,7 @@ export default function Navbar() {
   const { cartCount } = useCart();
 
   return (
-    <header className="sticky top-0 w-full bg-[#F8F5EF]/90 backdrop-blur-md border-b border-[#E8E3DA] z-50">
-
+    <header className="fixed top-0 left-0 right-0 w-full bg-[#F8F5EF]/90 backdrop-blur-md border-b border-[#E8E3DA] z-50">
       <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
 
         {/* Logo */}

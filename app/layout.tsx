@@ -37,10 +37,9 @@ export default function RootLayout({
           <CheckoutProvider>
             <Navbar />
 
-           <main className="min-h-screen">
+           <main className="pt-20 min-h-screen">
   {children}
 </main>
-
             <Toaster
               position="top-right"
               gutter={12}
