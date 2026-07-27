@@ -12,11 +12,10 @@ export default function Home() {
   return (
     <>
       {/* 
-        space-y-16 on mobile (64px)
-        space-y-24 on tablet (96px)
-        space-y-32 on desktop (128px)
+        Using 'flex flex-col gap-*' forces an exact physical gap 
+        between every section that CANNOT collapse.
       */}
-      <main className="space-y-16 sm:space-y-24 lg:space-y-32 overflow-x-hidden">
+      <main className="flex flex-col gap-16 sm:gap-24 lg:gap-32 overflow-x-hidden">
         <Hero />
         <BrandPromise />
         <FeaturedProducts />
@@ -27,7 +26,6 @@ export default function Home() {
         <OurProcess />
       </main>
 
-      {/* Footer placed outside main so it attaches naturally to the bottom */}
       <Footer />
     </>
   );
