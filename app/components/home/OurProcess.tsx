@@ -34,8 +34,8 @@ export default function OurProcess() {
   ];
 
   return (
-    <section className="bg-white py-32">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-white py-12">
+      <div className="max-w-7xl mx-auto px-4">
 
         {/* Heading */}
 
@@ -45,11 +45,11 @@ export default function OurProcess() {
             Our Process
           </p>
 
-          <h3 className="mt-5 text-2xl md:text-5xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
+          <h3 className="mt-2 text-2xl md:text-4xl lg:text-6xl font-bold text-[#2E473B] leading-tight">
             From Nature To Your Hair
           </h3>
 
-          <p className="mt-6 max-w-3xl text-lg text-gray-600 leading-8 text-center">
+          <p className="mt-4 max-w-3xl text-lg text-gray-600 leading-8 text-center">
             Every bottle follows a thoughtful journey—from carefully selected
             botanicals to a handcrafted blend made with love.
           </p>
@@ -58,7 +58,7 @@ export default function OurProcess() {
 
         {/* Timeline */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mt-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
 
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -77,7 +77,7 @@ export default function OurProcess() {
 
                 {/* Icon */}
 
-                <div className="relative z-10 w-20 h-20 rounded-full bg-[#F8F5EF] shadow-md flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105">
+                <div className="relative z-10 w-15 h-15 rounded-full bg-[#F8F5EF] shadow-md flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105">
 
                   <Icon
                     size={34}
@@ -88,19 +88,19 @@ export default function OurProcess() {
 
                 {/* Step Number */}
 
-                <div className="mt-6 w-10 h-10 rounded-full bg-[#2E473B] text-white flex items-center justify-center font-semibold shadow-md">
+                <div className="mt-6 w-6 h-6 rounded-full bg-[#2E473B] text-white flex items-center justify-center font-semibold shadow-md">
                   {index + 1}
                 </div>
 
                 {/* Title */}
 
-                <h3 className="mt-6 text-2xl font-semibold text-[#2E473B] leading-snug">
+                <h3 className="mt-4 text-2xl font-semibold text-[#2E473B] leading-snug">
                   {step.title}
                 </h3>
 
                 {/* Description */}
 
-                <p className="mt-4 text-gray-600 leading-7 max-w-xs">
+                <p className="mt-2 text-gray-600 leading-7 max-w-xs">
                   {step.description}
                 </p>
 

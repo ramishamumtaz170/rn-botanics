@@ -18,7 +18,7 @@ export default function ProductDetail() {
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
 
-  // Flip Top Cap is selected by default
+  // Flip Top Cap selected by default
   const [selectedCap, setSelectedCap] =
     useState<CapOption>("Flip Top Cap");
 
@@ -61,18 +61,18 @@ export default function ProductDetail() {
   };
 
   return (
-    <section className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
-      {/* LEFT SIDE — PRODUCT IMAGES */}
+    <section className="grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
+      {/* LEFT — PRODUCT IMAGES */}
 
       <div className="flex flex-col items-center">
-        {/* Main Product Image */}
+        {/* Main Image */}
 
-        <div className="relative flex w-full max-w-[520px] justify-center rounded-[36px] bg-white p-6 shadow-lg sm:p-8">
+        <div className="relative flex w-full max-w-[480px] justify-center rounded-[32px] bg-white p-5 shadow-lg sm:p-6">
           <Image
             src={selectedImage}
             alt={PRODUCT.name}
-            width={430}
-            height={430}
+            width={400}
+            height={400}
             className="object-contain"
             priority
           />
@@ -80,48 +80,46 @@ export default function ProductDetail() {
 
         {/* Thumbnails */}
 
-        <div className="mt-3 flex flex-wrap justify-center gap-3">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => setSelectedImage(image)}
-              className={`rounded-xl border-2 p-1.5 transition-all duration-300 ${
-                selectedImage === image
-                  ? "border-[#2E473B] shadow-sm"
-                  : "border-[#E8E3DA] hover:border-[#7C9A7D]"
-              }`}
-            >
-              <Image
-                src={image}
-                alt={`Product image ${index + 1}`}
-                width={70}
-                height={50}
-                className="object-contain"
-              />
-            </button>
-          ))}
-        </div>
-      </div>
+       <div className="mt-3 flex flex-wrap justify-center gap-2.5">
+  {images.map((image, index) => (
+    <button
+      key={index}
+      type="button"
+      onClick={() => setSelectedImage(image)}
+      className={`rounded-xl border-2 p-1 transition-all duration-300 ${
+        selectedImage === image
+          ? "border-[#2E473B]"
+          : "border-[#E8E3DA] hover:border-[#7C9A7D]"
+      }`}
+    >
+      <Image
+        src={image}
+        alt={`Product image ${index + 1}`}
+        width={65}
+        height={48}
+        className="object-contain"
+      />
+    </button>
+  ))}
+</div>
+      {/* RIGHT — PRODUCT INFORMATION */}
 
-      {/* RIGHT SIDE — PRODUCT INFORMATION */}
-
-      <div className="pt-1">
+      <div className="pt-0">
         {/* Collection */}
 
-        <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#7C9A7D]">
+        <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#7C9A7D]">
           Signature Collection
         </p>
 
         {/* Product Name */}
 
-        <h1 className="mt-2 text-3xl font-bold leading-tight text-[#2E473B] sm:text-4xl">
+        <h1 className="mt-1.5 text-3xl font-bold leading-tight text-[#2E473B] sm:text-4xl">
           {PRODUCT.name}
         </h1>
 
         {/* Rating */}
 
-        <div className="mt-3 flex flex-wrap items-center gap-1">
+        <div className="mt-2 flex flex-wrap items-center gap-2">
           <span className="text-lg tracking-wide text-[#C7A25A]">
             ★★★★★
           </span>
@@ -133,23 +131,23 @@ export default function ProductDetail() {
 
         {/* Description */}
 
-        <p className="mt-5 max-w-2xl text-base leading-7 text-gray-600">
+        <p className="mt-4 max-w-2xl text-base leading-7 text-gray-600">
           {PRODUCT.description}
         </p>
 
         {/* Price */}
 
-        <div className="mt-6">
+        <div className="mt-5">
           <p className="text-lg text-gray-400 line-through">
             Rs. {PRODUCT.originalPrice.toLocaleString()}
           </p>
 
-          <div className="mt-1.5 flex flex-wrap items-center gap-3">
+          <div className="mt-1 flex flex-wrap items-center gap-3">
             <h2 className="text-4xl font-bold text-[#2E473B] sm:text-5xl">
               Rs. {PRODUCT.salePrice.toLocaleString()}
             </h2>
 
-            <span className="rounded-full bg-[#E8F3EA] px-3.5 py-1.5 text-sm font-semibold text-[#2E473B]">
+            <span className="rounded-full bg-[#E8F3EA] px-3 py-1.5 text-sm font-semibold text-[#2E473B]">
               Save {PRODUCT.discount}%
             </span>
           </div>
@@ -158,15 +156,15 @@ export default function ProductDetail() {
         {/* CAP SELECTION */}
 
         <div className="mt-5">
-          <p className="mb-3 text-sm font-semibold text-[#2E473B]">
+          <p className="mb-2.5 text-sm font-semibold text-[#2E473B]">
             Choose Your Bottle Cap
           </p>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {/* Flip Top Cap */}
 
             <label
-              className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${
+              className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 transition-all duration-300 ${
                 selectedCap === "Flip Top Cap"
                   ? "border-[#2E473B] bg-[#F8F5EF]"
                   : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
@@ -178,7 +176,7 @@ export default function ProductDetail() {
                 value="Flip Top Cap"
                 checked={selectedCap === "Flip Top Cap"}
                 onChange={() => setSelectedCap("Flip Top Cap")}
-                className="h-2 w-2 accent-[#2E473B]"
+                className="h-3.5 w-3.5 accent-[#2E473B]"
               />
 
               <span
@@ -195,7 +193,7 @@ export default function ProductDetail() {
             {/* Nozzle Applicator Cap */}
 
             <label
-              className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${
+              className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2.5 transition-all duration-300 ${
                 selectedCap === "Nozzle Applicator Cap"
                   ? "border-[#2E473B] bg-[#F8F5EF]"
                   : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
@@ -209,7 +207,7 @@ export default function ProductDetail() {
                 onChange={() =>
                   setSelectedCap("Nozzle Applicator Cap")
                 }
-                className="h-2 w-2 accent-[#2E473B]"
+                className="h-3.5 w-3.5 accent-[#2E473B]"
               />
 
               <span
@@ -227,8 +225,8 @@ export default function ProductDetail() {
 
         {/* QUANTITY */}
 
-        <div className="mt-6">
-          <p className="mb-3 text-sm font-semibold text-[#2E473B]">
+        <div className="mt-5">
+          <p className="mb-2.5 text-sm font-semibold text-[#2E473B]">
             Quantity
           </p>
 
@@ -236,19 +234,19 @@ export default function ProductDetail() {
             <button
               type="button"
               onClick={decrease}
-              className="px-5 py-2.5 text-xl text-[#2E473B] transition hover:bg-[#F8F5EF]"
+              className="px-5 py-2 text-xl text-[#2E473B] transition hover:bg-[#F8F5EF]"
             >
               −
             </button>
 
-            <span className="min-w-[55px] text-center text-base font-semibold text-[#2E473B]">
+            <span className="min-w-[50px] text-center text-base font-semibold text-[#2E473B]">
               {quantity}
             </span>
 
             <button
               type="button"
               onClick={increase}
-              className="px-5 py-2.5 text-xl text-[#2E473B] transition hover:bg-[#F8F5EF]"
+              className="px-5 py-2 text-xl text-[#2E473B] transition hover:bg-[#F8F5EF]"
             >
               +
             </button>
@@ -257,11 +255,11 @@ export default function ProductDetail() {
 
         {/* ACTION BUTTONS */}
 
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
           <button
             type="button"
             onClick={handleAddToCart}
-            className="flex-1 rounded-full border-2 border-[#2E473B] px-7 py-3.5 text-base font-semibold text-[#2E473B] transition-all duration-300 hover:bg-[#F8F5EF]"
+            className="flex-1 rounded-full border-2 border-[#2E473B] px-6 py-3 text-base font-semibold text-[#2E473B] transition-all duration-300 hover:bg-[#F8F5EF]"
           >
             Add to Cart
           </button>
@@ -269,7 +267,7 @@ export default function ProductDetail() {
           <button
             type="button"
             onClick={handleBuyNow}
-            className="flex-1 rounded-full bg-[#2E473B] px-7 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-[#23392F]"
+            className="flex-1 rounded-full bg-[#2E473B] px-6 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-[#23392F]"
           >
             Buy Now
           </button>
@@ -277,9 +275,9 @@ export default function ProductDetail() {
 
         {/* PRODUCT HIGHLIGHTS */}
 
-        <div className="mt-8 border-t border-[#E5DED2] pt-6">
-          <div className="space-y-3.5">
-            <div className="flex items-center justify-between gap-6">
+        <div className="mt-6 border-t border-[#E5DED2] pt-5">
+          <div className="space-y-2.5">
+            <div className="flex items-center justify-between gap-5">
               <span className="text-sm text-gray-500">
                 Bottle Size
               </span>
@@ -289,7 +287,7 @@ export default function ProductDetail() {
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-6">
+            <div className="flex items-center justify-between gap-5">
               <span className="text-sm text-gray-500">
                 Formula
               </span>
@@ -299,7 +297,7 @@ export default function ProductDetail() {
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-6">
+            <div className="flex items-center justify-between gap-5">
               <span className="text-sm text-gray-500">
                 Suitable For
               </span>
@@ -309,7 +307,7 @@ export default function ProductDetail() {
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-6">
+            <div className="flex items-center justify-between gap-5">
               <span className="text-sm text-gray-500">
                 Availability
               </span>
