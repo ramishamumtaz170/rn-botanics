@@ -21,7 +21,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   };
 
      return (
-    <section className="space-y-8">
+    <section className="space-y-2">
 
       {/* Customer Information */}
 
@@ -35,7 +35,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
           Please enter your personal details.
         </p>
 
-        <div className="mt-8 space-y-6">
+        <div className="mt-4 space-y-4">
 
           <div>
             <label className="block mb-2 font-medium text-[#2E473B]">
@@ -48,7 +48,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.fullName}
   onChange={handleChange}
   placeholder="Enter your name here"
-  className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+  className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 />
           </div>
 
@@ -63,7 +63,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.email}
   onChange={handleChange}
   placeholder="example@email.com"
-  className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+  className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 />
           </div>
 
@@ -78,7 +78,7 @@ import { useCheckout } from "@/app/context/CheckoutContext";
   value={checkoutData.phone}
   onChange={handleChange}
   placeholder="03XXXXXXXXX"
-className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 
 />
           </div>
@@ -99,7 +99,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
           Where should we deliver your order?
         </p>
 
-        <div className="mt-8 space-y-6">
+        <div className="mt-4 space-y-2">
 
           <div>
             <label className="block mb-2 font-medium text-[#2E473B]">
@@ -112,7 +112,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
   value={checkoutData.address}
   onChange={handleChange}
   placeholder="House No, Street, Area"
-className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 
 />
           </div>
@@ -130,7 +130,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
   value={checkoutData.city}
   onChange={handleChange}
   placeholder="Enter city"
-  className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+  className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 />
             </div>
 
@@ -148,7 +148,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
       province: e.target.value,
     }))
   }
- className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 >
   <option>Punjab</option>
   <option>Sindh</option>
@@ -161,7 +161,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
 
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
 
             <div>
               <label className="block mb-2 font-medium text-[#2E473B]">
@@ -174,7 +174,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
   value={checkoutData.postalCode}
   onChange={handleChange}
   placeholder="Enter Postal Code here"
-className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16px] outline-none transition-all duration-300 focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
 
 />
             </div>
@@ -188,7 +188,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
                 type="text"
                 value="Pakistan"
                 disabled
-             className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 bg-[#F8F5EF] text-gray-500"
+             className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 bg-[#F8F5EF] text-gray-500"
               />
             </div>
 
@@ -206,7 +206,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
           Delivery Method
         </h2>
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-6 space-y-2">
 
           <label className="flex items-center justify-between border border-[#E8E3DA] rounded-2xl p-5 cursor-pointer hover:border-[#2E473B]">
 
@@ -274,7 +274,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
           Payment Method
         </h2>
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-6 space-y-2">
 
           <label className="flex items-center gap-4 border border-[#E8E3DA] rounded-2xl p-5 cursor-pointer">
 
@@ -334,7 +334,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
   value={checkoutData.notes}
   onChange={handleChange}
   placeholder="Special delivery instructions (Optional)"
-  className="mt-8 w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 resize-none outline-none focus:border-[#2E473B]"
+  className="mt-4 w-full rounded-2xl border border-[#E8E3DA] px-5 py-4 resize-none outline-none focus:border-[#2E473B]"
 />
       </div>
 
@@ -342,7 +342,7 @@ className="w-full h-14 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
 
       <div className="bg-white rounded-[40px] p-8 shadow-sm">
 
-        <label className="flex items-start gap-4 cursor-pointer">
+        <label className="flex items-start gap-2 cursor-pointer">
 
           <input
   type="checkbox"
