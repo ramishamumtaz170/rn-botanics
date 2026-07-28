@@ -14,7 +14,7 @@ export default function CheckoutPage() {
     You're just one step away from experiencing botanical hair care.
   </p>
 </div>
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-2">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-2 min-w-0">
 
           <CheckoutForm />
 

@@ -124,8 +124,7 @@ export default function OrderSummary() {
   };
 
   return (
-    <aside className="bg-white rounded-[40px] p-10 shadow-sm h-fit sticky top-28">
-
+    <aside className="w-full min-w-0 bg-white rounded-[40px] p-6 sm:p-8 lg:p-10 shadow-sm h-fit sticky top-28">
       <h2 className="text-3xl font-bold text-[#2E473B]">
         Order Summary
       </h2>
