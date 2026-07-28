@@ -80,32 +80,34 @@ export default function ProductDetail() {
 
         {/* Thumbnails */}
 
-       <div className="mt-3 flex flex-wrap justify-center gap-2.5">
-  {images.map((image, index) => (
-    <button
-      key={index}
-      type="button"
-      onClick={() => setSelectedImage(image)}
-      className={`rounded-xl border-2 p-1 transition-all duration-300 ${
-        selectedImage === image
-          ? "border-[#2E473B]"
-          : "border-[#E8E3DA] hover:border-[#7C9A7D]"
-      }`}
-    >
-      <Image
-        src={image}
-        alt={`Product image ${index + 1}`}
-        width={65}
-        height={48}
-        className="object-contain"
-      />
-    </button>
-  ))}
-</div>
+               <div className="mt-3 flex flex-wrap justify-center gap-2.5">
+          {images.map((image, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setSelectedImage(image)}
+              className={`rounded-xl border-2 p-1 transition-all duration-300 ${
+                selectedImage === image
+                  ? "border-[#2E473B]"
+                  : "border-[#E8E3DA] hover:border-[#7C9A7D]"
+              }`}
+            >
+              <Image
+                src={image}
+                alt={`Product image ${index + 1}`}
+                width={65}
+                height={48}
+                className="object-contain"
+              />
+            </button>
+          ))}
+        </div>
+      </div> {/* ← THIS WAS MISSING */}
+
       {/* RIGHT — PRODUCT INFORMATION */}
 
       <div className="pt-0">
-        {/* Collection */}
+         {/* Collection */}
 
         <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#7C9A7D]">
           Signature Collection
