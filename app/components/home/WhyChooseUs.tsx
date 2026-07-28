@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="bg-[#F8F5EF] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+    <section className="bg-[#F8F5EF] py-10 sm:py-24 lg:py-22 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
 
         {/* Heading Section (Centered) */}
@@ -57,7 +57,7 @@ export default function WhyChooseUs() {
             Why Choose Us
           </p>
 
-          <h3 className="mt-3 sm:mt-5 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2E473B] leading-tight text-center">
+          <h3 className="mt-3 sm:mt-5 text-2xl sm:text-4xl lg:text-2xl font-bold text-[#2E473B] leading-tight text-center">
             Crafted With Nature,
             <br />
             Made With Care

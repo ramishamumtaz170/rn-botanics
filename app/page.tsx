@@ -4,7 +4,6 @@ import FeaturedProducts from "./components/home/FeaturedProducts";
 import Ingredients from "./components/home/Ingredients";
 import WhyChooseUs from "./components/home/WhyChooseUs";
 import OurStory from "./components/home/OurStory";
-import OurPromise from "./components/home/OurPromise";
 import OurProcess from "./components/home/OurProcess";
 import Footer from "./components/home/Footer";
 
@@ -18,7 +17,6 @@ export default function Home() {
         <Ingredients />
         <WhyChooseUs />
         <OurStory />
-        <OurPromise />
         <OurProcess />
       </main>
 
