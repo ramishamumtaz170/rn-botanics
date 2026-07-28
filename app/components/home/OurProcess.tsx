@@ -58,7 +58,7 @@ export default function OurProcess() {
 
         {/* Timeline */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
 
           {steps.map((step, index) => {
             const Icon = step.icon;
@@ -80,7 +80,7 @@ export default function OurProcess() {
                 <div className="relative z-10 w-15 h-15 rounded-full bg-[#F8F5EF] shadow-md flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105">
 
                   <Icon
-                    size={34}
+                    size={24}
                     className="text-[#2E473B]"
                   />
 
