@@ -25,9 +25,9 @@ discount: 20,
   image: "/images/product.jpg",
 
   images: [
-    "/images/product.jpg",
-    "/images/product.jpg",
-    "/images/product.jpg",
-    "/images/product.jpg",
+    "/images/product1.jpg",
+    "/images/product2.jpg",
+    "/images/product3.jpg",
+    "/images/product4.jpg",
   ],
 };

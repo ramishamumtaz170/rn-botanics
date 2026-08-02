@@ -4,7 +4,7 @@ import { PRODUCT } from "@/app/constants/product";
 
 export default function FeaturedProducts() {
   return (
-    <section className="bg-[#F8F5EF] pt-10 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden flex flex-col items-center justify-center text-center">
+    <section className="bg-[#F8F5EF] pt-10 sm:pt-16 lg:pt-6 pb-12 sm:pb-24 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden flex flex-col items-center justify-center text-center">
       <div className="max-w-7xl w-full mx-auto flex flex-col items-center justify-center text-center">
 
         {/* Heading Section */}
@@ -24,7 +24,7 @@ export default function FeaturedProducts() {
 
         {/* Product Card Wrapper */}
         <div className="mt-8 sm:mt-12 flex justify-center w-full">
-          <div className="bg-white rounded-[28px] sm:rounded-[36px] shadow-xl overflow-hidden max-w-md w-full hover:-translate-y-1 transition duration-500 mx-auto flex flex-col items-center text-center">
+          <div className="bg-white rounded-[28px] sm:rounded-[36px] overflow-hidden max-w-md w-full hover:-translate-y-1 transition duration-500 mx-auto flex flex-col items-center text-center">
 
             {/* Product Image Container */}
             <div className="relative bg-[#F8F5EF] flex justify-center items-center w-full p-6 sm:p-10">

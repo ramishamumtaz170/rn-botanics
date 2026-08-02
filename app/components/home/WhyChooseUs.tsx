@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="bg-[#F8F5EF] py-10 sm:py-24 lg:py-22 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+    <section className="bg-[#F8F5EF] py-10 sm:py-24 lg:py-12 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
 
         {/* Heading Section (Centered) */}

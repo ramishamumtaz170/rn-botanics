@@ -56,45 +56,51 @@ export default function ProductDetail() {
     <section className="grid items-start gap-4 pb-24 lg:grid-cols-2 lg:gap-10 lg:pb-0">
       {/* Product Images */}
       <div className="flex flex-col items-center">
-        <div className="relative flex h-[190px] w-full max-w-[480px] justify-center rounded-[24px] bg-white p-2 shadow-md sm:h-auto sm:rounded-[32px] sm:p-6">
-          <Image
-            src={selectedImage}
-            alt={PRODUCT.name}
-            width={400}
-            height={400}
-            priority
-            className="h-full w-auto object-contain sm:h-auto"
-          />
-        </div>
+       <div className="relative flex w-full max-w-[560px] justify-center rounded-[32px] bg-white p-8 border border-[#E8E3DA]">
+  <Image
+    src={selectedImage}
+    alt={PRODUCT.name}
+    width={480}
+    height={480}
+    priority
+    className="object-contain transition-all duration-300"
+  />
+</div>
+        <div className="mt-5 flex justify-center gap-3">
+  {images.map((image, index) => {
+    const selected = selectedImage === image;
 
-        <div className="mt-2 flex flex-wrap justify-center gap-1.5 sm:mt-3 sm:gap-2.5">
-          {images.map((image, index) => {
-            const isSelected = selectedImage === image;
-
-            return (
-              <button
-                key={image}
-                type="button"
-                onClick={() => setSelectedImage(image)}
-                aria-label={`View product image ${index + 1}`}
-                aria-pressed={isSelected}
-                className={`rounded-lg border p-0.5 transition sm:rounded-xl sm:border-2 sm:p-1 ${
-                  isSelected
-                    ? "border-[#2E473B]"
-                    : "border-[#E8E3DA] hover:border-[#7C9A7D]"
-                }`}
-              >
-                <Image
-                  src={image}
-                  alt={`${PRODUCT.name} image ${index + 1}`}
-                  width={65}
-                  height={48}
-                  className="h-[34px] w-[48px] object-contain sm:h-[48px] sm:w-[65px]"
-                />
-              </button>
-            );
-          })}
-        </div>
+    return (
+      <button
+        key={index}
+        type="button"
+        onClick={() => setSelectedImage(image)}
+        className={`
+          overflow-hidden
+          rounded-2xl
+          border-2
+          bg-white
+          p-1
+          transition-all
+          duration-300
+          ${
+            selected
+              ? "border-[#2E473B] scale-105"
+              : "border-[#E8E3DA] hover:border-[#7C9A7D] hover:scale-105"
+          }
+        `}
+      >
+        <Image
+          src={image}
+          alt={`Product ${index + 1}`}
+          width={70}
+height={70}
+className="h-[65px] w-[65px] sm:h-[82px] sm:w-[82px] object-cover rounded-xl"
+        />
+      </button>
+    );
+  })}
+</div>
       </div>
 
       {/* Product Information */}
