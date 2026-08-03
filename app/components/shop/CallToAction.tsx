@@ -5,10 +5,14 @@ import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { PRODUCT } from "@/app/constants/product";
+import { useState } from "react";
 
 export default function CallToAction() {
   const router = useRouter();
   const { addToCart } = useCart();
+  const [selectedCap, setSelectedCap] = useState<
+  "Flip Top Cap" | "Nozzle Applicator Cap"
+>("Flip Top Cap");
 
  const addProductToCart = () => {
   addToCart({
@@ -17,7 +21,7 @@ export default function CallToAction() {
     price: PRODUCT.salePrice,
     image: PRODUCT.image,
     quantity: 1,
-    cap: "Flip Top Cap", // or whatever default you want
+    cap: selectedCap,
   });
 };
 
@@ -77,6 +81,69 @@ const handleBuyNow = () => {
               </span>
             </div>
           </div>
+
+<div className="mt-8">
+  <p className="text-white font-semibold mb-3">
+    Choose Your Bottle Cap
+  </p>
+
+  <div className="space-y-3">
+
+    {/* Flip Top */}
+    <label
+      className={`flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition ${
+        selectedCap === "Flip Top Cap"
+          ? "border-[#C7A25A] bg-[#446557]"
+          : "border-[#4E6B5C]"
+      }`}
+    >
+      <input
+        type="radio"
+        name="cap"
+        checked={selectedCap === "Flip Top Cap"}
+        onChange={() => setSelectedCap("Flip Top Cap")}
+        className="accent-[#C7A25A]"
+      />
+
+      <div className="text-left">
+        <p className="text-white font-semibold">
+          Flip Top Cap
+        </p>
+        <p className="text-sm text-[#D8D4CC]">
+          Easy for everyday use.
+        </p>
+      </div>
+    </label>
+
+    {/* Nozzle */}
+    <label
+      className={`flex items-center gap-4 p-4 rounded-2xl border-2 cursor-pointer transition ${
+        selectedCap === "Nozzle Applicator Cap"
+          ? "border-[#C7A25A] bg-[#446557]"
+          : "border-[#4E6B5C]"
+      }`}
+    >
+      <input
+        type="radio"
+        name="cap"
+        checked={selectedCap === "Nozzle Applicator Cap"}
+        onChange={() => setSelectedCap("Nozzle Applicator Cap")}
+        className="accent-[#C7A25A]"
+      />
+
+      <div className="text-left">
+        <p className="text-white font-semibold">
+          Nozzle Applicator Cap
+        </p>
+        <p className="text-sm text-[#D8D4CC]">
+          Precise application directly to the scalp.
+        </p>
+      </div>
+    </label>
+
+  </div>
+</div>
+
 
           {/* Buttons: Sleek & Proportional */}
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 w-full">
