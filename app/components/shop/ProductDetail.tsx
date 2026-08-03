@@ -15,6 +15,10 @@ export default function ProductDetail() {
 
   const images = PRODUCT.images;
 
+  console.log(PRODUCT);
+console.log(images);
+console.log(images.length);
+
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
   const [selectedCap, setSelectedCap] =
@@ -69,6 +73,7 @@ export default function ProductDetail() {
         <div className="mt-5 flex justify-center gap-3">
   {images.map((image, index) => {
     const selected = selectedImage === image;
+
 
     return (
       <button

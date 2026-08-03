@@ -16,6 +16,10 @@ export default function ProductShowcase() {
   "Nozzle Applicator Cap" | "Flip Top Cap"
 >("Flip Top Cap");
 
+const images = PRODUCT.images;
+
+const [selectedImage, setSelectedImage] = useState(images[0]);
+
   const handleBuyNow = () => {
     addToCart({
       id: PRODUCT.id,
@@ -48,29 +52,47 @@ export default function ProductShowcase() {
 
        {/* LEFT SIDE */}
 
-<div className="flex justify-center">
+<div className="flex flex-col items-center">
 
   <div className="relative">
 
     {/* Soft Cream Circle */}
 
-    <div className="absolute inset-0 flex items-center justify-center">
+   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 
-      <div className="w-[480px] h-[480px] rounded-full bg-[#F8F5EF]"></div>
+  <div className="w-[480px] h-[480px] rounded-full bg-[#F8F5EF]"></div>
 
-    </div>
-
+</div>
 
     {/* Product Image */}
 
     <Image
-      src={PRODUCT.image}
-alt={PRODUCT.name}
-width={420}
-      height={420}
-      className="relative z-10 object-contain drop-shadow-2xl hover:scale-105 transition duration-500"
-    />
-
+  src={selectedImage}
+  alt={PRODUCT.name}
+  width={420}
+  height={420}
+  className="relative z-10 object-contain drop-shadow-2xl transition duration-500"
+/>
+<div className="mt-6 flex w-full justify-center gap-3 z-20 relative">  {images.map((image, index) => (
+    <button
+      key={index}
+      onClick={() => setSelectedImage(image)}
+      className={`rounded-2xl border-2 p-1 transition ${
+        selectedImage === image
+          ? "border-[#2E473B]"
+          : "border-[#E8E3DA] hover:border-[#7C9A7D]"
+      }`}
+    >
+      <Image
+        src={image}
+        alt={`Thumbnail ${index + 1}`}
+        width={80}
+        height={80}
+        className="rounded-xl object-cover"
+      />
+    </button>
+  ))}
+</div>
   </div>
 
 </div>
