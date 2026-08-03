@@ -4,16 +4,19 @@ import Image from "next/image";
 import { useState } from "react";
 import { Plus, Minus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+      
 
 import { useCart } from "@/app/context/CartContext";
 import { useCheckout } from "@/app/context/CheckoutContext";
 
 import { db } from "@/lib/firebase";
 import {
-  collection,
-  addDoc,
+  doc,
+  setDoc,
+  runTransaction,
   serverTimestamp,
 } from "firebase/firestore";
+
 
 export default function OrderSummary() {
   const {
@@ -43,6 +46,36 @@ export default function OrderSummary() {
     delivery === "standard" ? 250 : 500;
 
   const total = subtotal + shipping;
+
+
+const generateOrderNumber = async () => {
+  const counterRef = doc(db, "counters", "orders");
+
+  const orderNumber = await runTransaction(
+    db,
+    async (transaction) => {
+      const counterDoc = await transaction.get(counterRef);
+
+      if (!counterDoc.exists()) {
+        throw new Error("Counter document not found.");
+      }
+
+      const current =
+        counterDoc.data().lastOrderNumber || 0;
+
+      const next = current + 1;
+
+      transaction.update(counterRef, {
+        lastOrderNumber: next,
+      });
+
+      return `RNB-${String(next).padStart(4, "0")}`;
+    }
+  );
+
+  return orderNumber;
+};
+
 
   const handlePlaceOrder = async () => {
     if (cart.length === 0) {
@@ -77,12 +110,10 @@ export default function OrderSummary() {
 
     setLoading(true);
 
-    const orderNumber =
-      "RNB-" + Date.now().toString().slice(-6);
-
-    try {
-      await addDoc(collection(db, "orders"), {
-        orderNumber,
+try {
+  const orderNumber = await generateOrderNumber();
+      await setDoc(doc(db, "orders", orderNumber), {
+      orderNumber,
         customer: checkoutData,
         items: cart,
         subtotal,
@@ -91,26 +122,32 @@ export default function OrderSummary() {
         paymentMethod: "Cash on Delivery",
         delivery,
         orderStatus: "Pending",
-        createdAt: serverTimestamp(),
+paymentStatus: "Unpaid",
+trackingNumber: "",
+notes: "",
+createdAt: serverTimestamp(),
       });
 
       // Send order email
-      await fetch("/api/send-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          orderNumber,
-          customer: checkoutData,
-          items: cart,
-          subtotal,
-          shipping,
-          total,
-          delivery,
-        }),
-      });
+     const response = await fetch("/api/send-order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    orderNumber,
+    customer: checkoutData,
+    items: cart,
+    subtotal,
+    shipping,
+    total,
+    delivery,
+  }),
+});
 
+if (!response.ok) {
+  console.error("Failed to send order email.");
+}
       clearCart();
       resetCheckout();
 
