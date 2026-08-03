@@ -10,31 +10,29 @@ export default function CallToAction() {
   const router = useRouter();
   const { addToCart } = useCart();
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: PRODUCT.id,
-      name: PRODUCT.name,
-      price: PRODUCT.salePrice,
-      image: PRODUCT.image,
-      quantity: 1,
-      cap: "Nozzle Applicator Cap",
-    });
+ const addProductToCart = () => {
+  addToCart({
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
+    quantity: 1,
+    cap: "Flip Top Cap", // or whatever default you want
+  });
+};
 
-    toast.success(`${PRODUCT.name} added to your cart.`);
-  };
+const handleAddToCart = () => {
+  addProductToCart();
 
-  const handleBuyNow = () => {
-    addToCart({
-      id: PRODUCT.id,
-      name: PRODUCT.name,
-      price: PRODUCT.salePrice,
-      image: PRODUCT.image,
-      quantity: 1,
-      cap: "Nozzle Applicator Cap",
-    });
+  toast.success(`${PRODUCT.name} added to your cart.`);
+};
 
-    router.push("/checkout");
-  };
+const handleBuyNow = () => {
+  addProductToCart();
+
+  router.push("/checkout");
+};
+
 
   return (
     /* Reduced section padding (py-12 sm:py-16 lg:py-20) and added side margins */

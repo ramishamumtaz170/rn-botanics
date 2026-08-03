@@ -56,14 +56,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
   <div className="relative">
 
-    {/* Soft Cream Circle */}
-
-   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-
-  <div className="w-[480px] h-[480px] rounded-full bg-[#F8F5EF]"></div>
-
-</div>
-
+    
     {/* Product Image */}
 
     <Image
