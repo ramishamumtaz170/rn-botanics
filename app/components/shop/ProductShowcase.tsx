@@ -198,14 +198,15 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
       }`}
     >
       <input
-        type="radio"
-        name="cap"
-        value="Flip Top Cap"
-        checked={selectedCap === "Flip Top Cap"}
-        onChange={() => setSelectedCap("Flip Top Cap")}
-        className="w-5 h-5 accent-[#2E473B]"
-      />
-
+  type="radio"
+  checked={selectedCap === "Flip Top Cap"}
+  onChange={() => setSelectedCap("Flip Top Cap")}
+  style={{
+    accentColor: "#2E473B",
+    width: 22,
+    height: 22,
+  }}
+/>
       <div>
         <p className="font-semibold text-[#2E473B]">
           Flip Top Cap
@@ -225,16 +226,19 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
           : "border-[#E8E3DA] bg-white"
       }`}
     >
-      <input
-        type="radio"
-        name="cap"
-        value="Nozzle Applicator Cap"
-        checked={selectedCap === "Nozzle Applicator Cap"}
-        onChange={() => setSelectedCap("Nozzle Applicator Cap")}
-        className="w-5 h-5 accent-[#2E473B]"
-      />
+<input
+  type="radio"
+  checked={selectedCap === "Nozzle Applicator Cap"}
+  onChange={() => setSelectedCap("Nozzle Applicator Cap")}
+  style={{
+    accentColor: "#2E473B",
+    width: 22,
+    height: 22,
+  }}
+/>
 
-      <div>
+   
+  <div>
         <p className="font-semibold text-[#2E473B]">
           Nozzle Applicator Cap
         </p>

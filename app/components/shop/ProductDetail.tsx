@@ -15,9 +15,7 @@ export default function ProductDetail() {
 
   const images = PRODUCT.images;
 
-  console.log(PRODUCT);
-console.log(images);
-console.log(images.length);
+
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
