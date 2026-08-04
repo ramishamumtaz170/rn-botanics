@@ -151,7 +151,7 @@ if (!response.ok) {
       clearCart();
       resetCheckout();
 
-      router.push("/order-success");
+     router.push(`/order-success?order=${orderNumber}`);
     } catch (error) {
       console.error(error);
       alert("Failed to place order.");
