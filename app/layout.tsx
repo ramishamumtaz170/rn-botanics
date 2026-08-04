@@ -21,6 +21,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "R & N Botanics",
   description: "Everyday Botanical Luxury",
+  verification: {
+    google: "iXS-m4ujuixXrq6hN3qPHoS_gdLEDfwOkkOPjahWEsQ",
+  },
 };
 
 export default function RootLayout({
@@ -37,9 +40,10 @@ export default function RootLayout({
           <CheckoutProvider>
             <Navbar />
 
-           <main className="pt-20 min-h-screen">
-  {children}
-</main>
+            <main className="pt-20 min-h-screen">
+              {children}
+            </main>
+
             <Toaster
               position="top-right"
               gutter={12}
