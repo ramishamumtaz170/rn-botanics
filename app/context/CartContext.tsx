@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 
 type CartItem = {
   id: number;
@@ -23,25 +29,63 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
+const CART_STORAGE_KEY = "rn-botanics-cart";
+
 export function CartProvider({
   children,
 }: {
   children: ReactNode;
 }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
+  // Load cart from localStorage when the app starts
+  useEffect(() => {
+    try {
+      const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+
+      if (savedCart) {
+        const parsedCart: CartItem[] = JSON.parse(savedCart);
+        setCart(parsedCart);
+      }
+    } catch (error) {
+      console.error("Failed to load cart:", error);
+    } finally {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  // Save cart whenever it changes
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    try {
+      localStorage.setItem(
+        CART_STORAGE_KEY,
+        JSON.stringify(cart)
+      );
+    } catch (error) {
+      console.error("Failed to save cart:", error);
+    }
+  }, [cart, isLoaded]);
+
+  // Add product to cart
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
       const existing = prev.find(
-        (i) => i.id === item.id && i.cap === item.cap
+        (i) =>
+          i.id === item.id &&
+          i.cap === item.cap
       );
 
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id && i.cap === item.cap
+          i.id === item.id &&
+          i.cap === item.cap
             ? {
                 ...i,
-                quantity: i.quantity + item.quantity,
+                quantity:
+                  i.quantity + item.quantity,
               }
             : i
         );
@@ -51,24 +95,31 @@ export function CartProvider({
     });
   };
 
+  // Remove product
   const removeFromCart = (
     id: number,
     cap: CartItem["cap"]
   ) => {
     setCart((prev) =>
       prev.filter(
-        (item) => !(item.id === id && item.cap === cap)
+        (item) =>
+          !(
+            item.id === id &&
+            item.cap === cap
+          )
       )
     );
   };
 
+  // Increase quantity
   const increaseQuantity = (
     id: number,
     cap: CartItem["cap"]
   ) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id && item.cap === cap
+        item.id === id &&
+        item.cap === cap
           ? {
               ...item,
               quantity: item.quantity + 1,
@@ -78,6 +129,7 @@ export function CartProvider({
     );
   };
 
+  // Decrease quantity
   const decreaseQuantity = (
     id: number,
     cap: CartItem["cap"]
@@ -85,23 +137,29 @@ export function CartProvider({
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id && item.cap === cap
+          item.id === id &&
+          item.cap === cap
             ? {
                 ...item,
                 quantity: item.quantity - 1,
               }
             : item
         )
-        .filter((item) => item.quantity > 0)
+        .filter(
+          (item) => item.quantity > 0
+        )
     );
   };
 
+  // Clear cart after successful order
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem(CART_STORAGE_KEY);
   };
 
   const cartCount = cart.reduce(
-    (total, item) => total + item.quantity,
+    (total, item) =>
+      total + item.quantity,
     0
   );
 
