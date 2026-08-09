@@ -15,8 +15,6 @@ export default function ProductDetail() {
 
   const images = PRODUCT.images;
 
-
-
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
   const [selectedCap, setSelectedCap] =
@@ -55,225 +53,223 @@ export default function ProductDetail() {
   };
 
   return (
-    <section className="grid items-start gap-4 pb-24 lg:grid-cols-2 lg:gap-10 lg:pb-0">
-      {/* Product Images */}
-      <div className="flex flex-col items-center">
-       <div className="relative flex w-full max-w-[560px] justify-center rounded-[32px] bg-white p-8 border border-[#E8E3DA]">
-  <Image
-    src={selectedImage}
-    alt={PRODUCT.name}
-    width={480}
-    height={480}
-    priority
-    className="object-contain transition-all duration-300"
-  />
-</div>
-        <div className="mt-5 flex justify-center gap-3">
-  {images.map((image, index) => {
-    const selected = selectedImage === image;
-
-
-    return (
-      <button
-        key={index}
-        type="button"
-        onClick={() => setSelectedImage(image)}
-        className={`
-          overflow-hidden
-          rounded-2xl
-          border-2
-          bg-white
-          p-1
-          transition-all
-          duration-300
-          ${
-            selected
-              ? "border-[#2E473B] scale-105"
-              : "border-[#E8E3DA] hover:border-[#7C9A7D] hover:scale-105"
-          }
-        `}
-      >
-        <Image
-          src={image}
-          alt={`Product ${index + 1}`}
-          width={70}
-height={70}
-className="h-[65px] w-[65px] sm:h-[82px] sm:w-[82px] object-cover rounded-xl"
-        />
-      </button>
-    );
-  })}
-</div>
-      </div>
-
-      {/* Product Information */}
-      <div className="min-w-0">
-        <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#7C9A7D] sm:text-xs">
-          Signature Collection
-        </p>
-
-        <h1 className="mt-1 text-2xl font-bold leading-tight text-[#2E473B] sm:text-4xl">
-          {PRODUCT.name}
-        </h1>
-
-        <div className="mt-1 flex items-center gap-1.5 sm:mt-2">
-          <span
-            className="text-sm tracking-wide text-[#C7A25A] sm:text-lg"
-            aria-label="5 out of 5 stars"
-          >
-            ★★★★★
-          </span>
-
-          <span className="truncate text-[11px] text-gray-500 sm:text-sm">
-            {PRODUCT.tagline}
-          </span>
+    <section className="grid items-center gap-6 pb-24 md:gap-8 lg:grid-cols-2 lg:gap-12 lg:pb-0 lg:min-h-[calc(100vh-100px)]">
+      {/* Product Images (Left Column) */}
+      <div className="flex flex-col items-center w-full max-w-[480px] mx-auto lg:mx-0">
+        <div className="relative flex aspect-square w-full justify-center rounded-[24px] bg-white p-5 border border-[#E8E3DA] items-center transition-shadow duration-300 hover:shadow-sm">
+          <Image
+            src={selectedImage}
+            alt={PRODUCT.name}
+            width={360}
+            height={360}
+            priority
+            className="h-auto max-h-[260px] w-auto sm:max-h-[340px] object-contain transition-all duration-300"
+          />
         </div>
 
-        <p className="mt-2 line-clamp-2 text-xs leading-5 text-gray-600 sm:mt-4 sm:line-clamp-none sm:text-base sm:leading-7">
-          {PRODUCT.description}
-        </p>
+        {/* Thumbnail Selector */}
+        <div className="mt-3.5 flex justify-center gap-2">
+          {images.map((image, index) => {
+            const selected = selectedImage === image;
 
-        {/* Price */}
-        <div className="mt-2 sm:mt-3">
-          <p className="text-xs text-gray-400 line-through sm:text-lg">
-            Rs. {PRODUCT.originalPrice.toLocaleString()}
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={() => setSelectedImage(image)}
+                className={`
+                  overflow-hidden
+                  rounded-xl
+                  border-2
+                  bg-white
+                  p-0.5
+                  transition-all
+                  duration-300
+                  ${
+                    selected
+                      ? "border-[#2E473B] scale-105"
+                      : "border-[#E8E3DA] hover:border-[#7C9A7D] hover:scale-105"
+                  }
+                `}
+              >
+                <Image
+                  src={image}
+                  alt={`Product ${index + 1}`}
+                  width={60}
+                  height={60}
+                  className="h-[46px] w-[46px] sm:h-[58px] sm:w-[58px] object-cover rounded-lg"
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Product Information (Right Column) */}
+      <div className="min-w-0 flex flex-col justify-between">
+        <div>
+          <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#7C9A7D] sm:text-xs">
+            Signature Collection
           </p>
 
-          <div className="mt-0.5 flex items-center gap-2 sm:mt-1 sm:gap-3">
-            <h2 className="text-2xl font-bold text-[#2E473B] sm:text-5xl">
+          <h1 className="mt-1 text-xl font-bold leading-tight text-[#2E473B] sm:text-3xl">
+            {PRODUCT.name}
+          </h1>
+
+          {/* Rating and Tagline */}
+          <div className="mt-1 flex items-center gap-1.5 sm:mt-1.5">
+            <span
+              className="text-xs tracking-wide text-[#C7A25A] sm:text-base"
+              aria-label="5 out of 5 stars"
+            >
+              ★★★★★
+            </span>
+            <span className="truncate text-[10px] text-gray-500 sm:text-xs">
+              {PRODUCT.tagline}
+            </span>
+          </div>
+
+          {/* Description */}
+          <p className="mt-2 text-xs leading-relaxed text-gray-600 sm:mt-3 sm:text-sm sm:leading-relaxed line-clamp-3 sm:line-clamp-4">
+            {PRODUCT.description}
+          </p>
+
+          {/* Combined Price Line */}
+          <div className="mt-2.5 sm:mt-3.5 flex items-baseline gap-2.5 flex-wrap">
+            <h2 className="text-2xl font-bold text-[#2E473B] sm:text-3xl">
               Rs. {PRODUCT.salePrice.toLocaleString()}
             </h2>
-
-            <span className="rounded-full bg-[#E8F3EA] px-2 py-1 text-[10px] font-semibold text-[#2E473B] sm:px-3 sm:py-1.5 sm:text-sm">
+            <span className="text-xs text-gray-400 line-through sm:text-sm">
+              Rs. {PRODUCT.originalPrice.toLocaleString()}
+            </span>
+            <span className="rounded-full bg-[#E8F3EA] px-2.5 py-0.5 text-[10px] font-semibold text-[#2E473B] sm:text-xs">
               Save {PRODUCT.discount}%
             </span>
           </div>
-        </div>
 
-        {/* Cap Selection */}
-        <div className="mt-2 sm:mt-5">
-          <p className="mb-1 text-xs font-semibold text-[#2E473B] sm:mb-2.5 sm:text-sm">
-            Choose Your Bottle Cap
-          </p>
+          {/* Cap Selection */}
+          <div className="mt-3 sm:mt-4">
+            <p className="mb-1 text-xs font-semibold text-[#2E473B] sm:mb-1.5 sm:text-sm">
+              Choose Your Bottle Cap
+            </p>
 
-          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
-            {(
-              ["Flip Top Cap", "Nozzle Applicator Cap"] as CapOption[]
-            ).map((cap) => {
-              const isSelected = selectedCap === cap;
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+              {(
+                ["Flip Top Cap", "Nozzle Applicator Cap"] as CapOption[]
+              ).map((cap) => {
+                const isSelected = selectedCap === cap;
 
-              return (
-                <label
-                  key={cap}
-                  className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:gap-3 sm:rounded-xl sm:px-4 sm:py-2.5 ${
-                    isSelected
-                      ? "border-[#2E473B] bg-[#F8F5EF]"
-                      : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="cap"
-                    value={cap}
-                    checked={isSelected}
-                    onChange={() => setSelectedCap(cap)}
-                    className="h-3 w-3 accent-[#2E473B]"
-                  />
-
-                  <span className="text-[10px] font-medium text-[#2E473B] sm:text-sm">
-                    {cap}
-                  </span>
-                </label>
-              );
-            })}
+                return (
+                  <label
+                    key={cap}
+                    className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1.5 transition sm:gap-2.5 sm:rounded-xl sm:px-3.5 sm:py-2 ${
+                      isSelected
+                        ? "border-[#2E473B] bg-[#F8F5EF]"
+                        : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="cap"
+                      value={cap}
+                      checked={isSelected}
+                      onChange={() => setSelectedCap(cap)}
+                      className="h-3 w-3 accent-[#2E473B]"
+                    />
+                    <span className="text-[10px] font-medium text-[#2E473B] sm:text-xs md:text-sm">
+                      {cap}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Quantity */}
-        <div className="mt-2 flex items-center gap-3 sm:mt-5">
-          <p className="text-xs font-semibold text-[#2E473B] sm:text-sm">
-            Quantity
-          </p>
-
-          <div className="flex items-center overflow-hidden rounded-full border border-[#D8D2C7] bg-white">
-            <button
-              type="button"
-              onClick={decrease}
-              aria-label="Decrease quantity"
-              className="flex h-8 w-8 items-center justify-center text-lg text-[#2E473B] hover:bg-[#F8F5EF] sm:h-10 sm:w-10"
-            >
-              −
-            </button>
-
-            <span className="flex h-8 min-w-8 items-center justify-center text-sm font-semibold text-[#2E473B] sm:h-10 sm:min-w-10">
-              {quantity}
+        {/* Quantity & Actions Row */}
+        <div className="mt-3.5 sm:mt-5 flex flex-wrap items-center gap-3.5">
+          {/* Quantity Selector */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-[#2E473B] sm:text-sm">
+              Qty
             </span>
+            <div className="flex items-center overflow-hidden rounded-full border border-[#D8D2C7] bg-white">
+              <button
+                type="button"
+                onClick={decrease}
+                aria-label="Decrease quantity"
+                className="flex h-7 w-7 items-center justify-center text-base text-[#2E473B] hover:bg-[#F8F5EF] sm:h-9 sm:w-9"
+              >
+                −
+              </button>
+              <span className="flex h-7 min-w-7 items-center justify-center text-xs font-semibold text-[#2E473B] sm:h-9 sm:min-w-9 sm:text-sm">
+                {quantity}
+              </span>
+              <button
+                type="button"
+                onClick={increase}
+                aria-label="Increase quantity"
+                className="flex h-7 w-7 items-center justify-center text-base text-[#2E473B] hover:bg-[#F8F5EF] sm:h-9 sm:w-9"
+              >
+                +
+              </button>
+            </div>
+          </div>
 
+          {/* Desktop Actions */}
+          <div className="hidden flex-1 items-center gap-2.5 sm:flex">
             <button
               type="button"
-              onClick={increase}
-              aria-label="Increase quantity"
-              className="flex h-8 w-8 items-center justify-center text-lg text-[#2E473B] hover:bg-[#F8F5EF] sm:h-10 sm:w-10"
+              onClick={handleAddToCart}
+              className="flex-1 rounded-full border-2 border-[#2E473B] py-2 px-4 text-sm font-semibold text-[#2E473B] transition hover:bg-[#F8F5EF] text-center whitespace-nowrap"
             >
-              +
+              Add to Cart
+            </button>
+            <button
+              type="button"
+              onClick={handleBuyNow}
+              className="flex-1 rounded-full bg-[#2E473B] py-2 px-4 text-sm font-semibold text-white transition hover:bg-[#23392F] text-center whitespace-nowrap"
+            >
+              Buy Now
             </button>
           </div>
         </div>
 
-        {/* Desktop Buttons */}
-        <div className="mt-3 hidden gap-2.5 sm:flex sm:mt-5">
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="flex-1 rounded-full border-2 border-[#2E473B] px-6 py-3 text-base font-semibold text-[#2E473B] transition hover:bg-[#F8F5EF]"
-          >
-            Add to Cart
-          </button>
-
-          <button
-            type="button"
-            onClick={handleBuyNow}
-            className="flex-1 rounded-full bg-[#2E473B] px-6 py-3 text-base font-semibold text-white transition hover:bg-[#23392F]"
-          >
-            Buy Now
-          </button>
-        </div>
-
-        {/* Product Highlights */}
-        <div className="mt-3 border-t border-[#E5DED2] pt-3 sm:mt-6 sm:pt-5">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 sm:block sm:space-y-2.5">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] text-gray-500 sm:text-sm">
-                Bottle Size
+        {/* Product Highlights (2x2 Grid) */}
+        <div className="mt-4 border-t border-[#E5DED2] pt-3.5 sm:mt-5">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+            <div className="flex items-center justify-between gap-2 border-b border-[#F2EDE4] pb-1">
+              <span className="text-[10px] text-gray-500 sm:text-xs">
+                Size
               </span>
-              <span className="text-right text-[10px] font-semibold text-[#2E473B] sm:text-sm">
+              <span className="text-right text-[10px] font-semibold text-[#2E473B] sm:text-xs">
                 {PRODUCT.bottleSize}
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] text-gray-500 sm:text-sm">
+            <div className="flex items-center justify-between gap-2 border-b border-[#F2EDE4] pb-1">
+              <span className="text-[10px] text-gray-500 sm:text-xs">
                 Formula
               </span>
-              <span className="text-right text-[10px] font-semibold text-[#2E473B] sm:text-sm">
+              <span className="text-right text-[10px] font-semibold text-[#2E473B] sm:text-xs">
                 {PRODUCT.formula}
               </span>
             </div>
 
             <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] text-gray-500 sm:text-sm">
+              <span className="text-[10px] text-gray-500 sm:text-xs">
                 Suitable For
               </span>
-              <span className="text-right text-[10px] font-semibold text-[#2E473B] sm:text-sm">
+              <span className="text-right text-[10px] font-semibold text-[#2E473B] sm:text-xs truncate max-w-[120px]" title={PRODUCT.suitableFor}>
                 {PRODUCT.suitableFor}
               </span>
             </div>
 
             <div className="flex items-center justify-between gap-2">
-              <span className="text-[10px] text-gray-500 sm:text-sm">
-                Availability
+              <span className="text-[10px] text-gray-500 sm:text-xs">
+                Stock
               </span>
-              <span className="text-[10px] font-semibold text-green-700 sm:text-sm">
+              <span className="text-[10px] font-semibold text-green-700 sm:text-xs">
                 {PRODUCT.stock}
               </span>
             </div>
@@ -286,15 +282,14 @@ className="h-[65px] w-[65px] sm:h-[82px] sm:w-[82px] object-cover rounded-xl"
         <button
           type="button"
           onClick={handleAddToCart}
-          className="flex-1 rounded-full border-2 border-[#2E473B] px-3 py-3 text-sm font-semibold text-[#2E473B]"
+          className="flex-1 rounded-full border-2 border-[#2E473B] px-3 py-2.5 text-sm font-semibold text-[#2E473B]"
         >
           Add to Cart
         </button>
-
         <button
           type="button"
           onClick={handleBuyNow}
-          className="flex-1 rounded-full bg-[#2E473B] px-3 py-3 text-sm font-semibold text-white"
+          className="flex-1 rounded-full bg-[#2E473B] px-3 py-2.5 text-sm font-semibold text-white"
         >
           Buy Now
         </button>
