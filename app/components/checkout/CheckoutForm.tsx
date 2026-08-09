@@ -198,74 +198,53 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
 
       </div>
 
-      {/* Delivery Method */}
+{/* Delivery Method */}
 
-      <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
+<div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">
 
-        <h2 className="text-3xl font-bold text-[#2E473B]">
-          Delivery Method
-        </h2>
+  <h2 className="text-3xl font-bold text-[#2E473B]">
+    Delivery Method
+  </h2>
 
-        <div className="mt-6 space-y-2">
+  <div className="mt-6">
 
-          <label className="flex items-center justify-between border border-[#E8E3DA] rounded-2xl p-5 cursor-pointer hover:border-[#2E473B]">
+    <label className="flex items-center justify-between border-2 border-[#2E473B] bg-[#F8F5EF] rounded-2xl p-5 cursor-pointer">
 
-            <div className="flex items-center gap-4">
-             <input
-  type="radio"
-  name="shipping"
-  checked={delivery === "standard"}
-  onChange={() => setDelivery("standard")}
-/>
-              <div>
-                <p className="font-semibold text-[#2E473B]">
-                  Standard Delivery
-                </p>
+      <div className="flex items-center gap-4">
 
-                <p className="text-gray-500 text-sm">
-                  Delivery in 2–4 business days
-                </p>
-              </div>
+        <input
+          type="radio"
+          name="shipping"
+          checked={delivery === "standard"}
+          onChange={() => setDelivery("standard")}
+          className="appearance-auto accent-[#2E473B]"
+        />
 
-            </div>
+        <div>
+          <p className="font-semibold text-[#2E473B]">
+            Free Standard Delivery
+          </p>
 
-            <span className="font-semibold">
-              Rs. 250
-            </span>
+          <p className="text-gray-500 text-sm mt-1">
+            Delivery in 4–6 business days
+          </p>
 
-          </label>
-
-          <label className="flex items-center justify-between border border-[#E8E3DA] rounded-2xl p-5 cursor-pointer hover:border-[#2E473B]">
-
-            <div className="flex items-center gap-4">
-             <input
-  type="radio"
-  name="shipping"
-  checked={delivery === "express"}
-  onChange={() => setDelivery("express")}
-/>
-              <div>
-                <p className="font-semibold text-[#2E473B]">
-                  Express Delivery
-                </p>
-
-                <p className="text-gray-500 text-sm">
-                  Delivery in 1–2 business days
-                </p>
-              </div>
-
-            </div>
-
-            <span className="font-semibold">
-              Rs. 500
-            </span>
-
-          </label>
-
+          <p className="text-[#7C9A7D] text-sm font-medium mt-1">
+            Available all over Pakistan
+          </p>
         </div>
 
       </div>
 
+      <span className="font-bold text-[#2E473B]">
+        FREE
+      </span>
+
+    </label>
+
+  </div>
+
+</div>
       {/* Payment */}
 
       <div className="bg-white rounded-[28px] p-6 sm:p-8 lg:p-10 shadow-sm">

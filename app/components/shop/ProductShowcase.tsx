@@ -66,7 +66,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
   height={420}
   className="relative z-10 object-contain drop-shadow-2xl transition duration-500"
 />
-<div className="mt-6 flex w-full justify-center gap-3 z-20 relative">  {images.map((image, index) => (
+<div className="mt-2 flex w-full justify-center gap-3 z-20 relative">  {images.map((image, index) => (
     <button
       key={index}
       onClick={() => setSelectedImage(image)}
@@ -101,18 +101,18 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
           {/* Title */}
 
-          <h2 className="mt-4 text-2xl font-bold leading-tight text-[#2E473B]">
+          <h2 className="mt-2 text-2xl font-bold leading-tight text-[#2E473B]">
   {PRODUCT.name}
 </h2>
           {/* Description */}
 
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-2 text-lg leading-6 text-gray-600">
             {PRODUCT.description}
           </p>
 
           {/* Rating */}
 
-          <div className="mt-8 flex items-center gap-3">
+          <div className="mt-4 flex items-center gap-3">
 
             <span className="text-[#C7A25A] text-xl">
               ★★★★★
@@ -126,13 +126,13 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
           {/* Price */}
 
-          <div className="mt-10">
+          <div className="mt-4">
 
             <p className="text-xl text-gray-400 line-through">
   Rs. {PRODUCT.originalPrice.toLocaleString()}
 </p>
 
-<div className="flex items-center gap-4 mt-3 flex-wrap">
+<div className="flex items-center gap-2 mt-3 flex-wrap">
   <h3 className="text-3xl font-bold text-[#2E473B]">
     Rs. {PRODUCT.salePrice.toLocaleString()}
   </h3>
@@ -143,9 +143,25 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 </div>
           </div>
 
+{/* Free Delivery Announcement */}
+<div className="mt-2 rounded-lg border border-[#D8E8D9] bg-[#EEF6EF] px-3 py-1.5 sm:mt-3 sm:px-4 sm:py-2">
+  <div className="flex items-center gap-2">
+    <span className="text-sm sm:text-base">🚚</span>
+
+    <div className="flex items-center gap-1.5 flex-wrap">
+      <span className="text-[11px] font-bold text-[#2E473B] sm:text-sm">
+        FREE DELIVERY
+      </span>
+
+      <span className="text-[10px] text-gray-600 sm:text-xs">
+        All Over Pakistan
+      </span>
+    </div>
+  </div>
+</div>
           {/* Features */}
 
-          <div className="mt-10 space-y-2">
+          <div className="mt-6 space-y-2">
 
             <div className="flex items-center gap-3">
               <span className="text-[#7C9A7D] text-xl">✓</span>
@@ -180,7 +196,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
 {/* Cap Selection */}
 
-<div className="mt-4">
+<div className="mt-2">
 
   <p className="font-semibold text-[#2E473B] mb-2">
     Choose Your Bottle Cap
@@ -191,7 +207,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
     {/* Flip Top Cap — Default */}
 
     <label
-      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all ${
+      className={`flex items-center gap-4 p-3 rounded-2xl border-2 cursor-pointer transition-all ${
         selectedCap === "Flip Top Cap"
           ? "border-[#2E473B] bg-[#F8F5EF]"
           : "border-[#E8E3DA] bg-white"
@@ -220,7 +236,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
     {/* Nozzle Applicator Cap */}
 
     <label
-      className={`flex items-center gap-4 p-5 rounded-2xl border-2 cursor-pointer transition-all ${
+      className={`flex items-center gap-4 p-3 rounded-2xl border-2 cursor-pointer transition-all ${
         selectedCap === "Nozzle Applicator Cap"
           ? "border-[#2E473B] bg-[#F8F5EF]"
           : "border-[#E8E3DA] bg-white"
@@ -254,7 +270,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
           {/* Buttons */}
 
-          <div className="mt-12 flex flex-col sm:flex-row gap-5">
+          <div className="mt-8 flex flex-col sm:flex-row gap-5">
 
             {/* Add to Cart */}
 
@@ -262,7 +278,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
   onClick={handleAddToCart}
   className="flex-1 border-2 border-[#2E473B]
              text-[#2E473B]
-             py-3 px-4
+             py-2 px-2
              rounded-full
              text-lg font-semibold
              hover:bg-[#F8F5EF]
@@ -277,7 +293,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
   className="flex-1 flex items-center justify-center
              bg-[#2E473B]
              text-white
-             py-3 px-4
+             py-2 px-2
              rounded-full
              text-lg font-semibold
              hover:bg-[#23392F]
@@ -289,16 +305,16 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
           {/* Trust Indicators */}
 
-          <p className="mt-8 text-center sm:text-left text-sm text-gray-500 leading-7">
+          <p className="mt-6 text-center sm:text-left text-sm text-gray-500 leading-7">
             ✓ Secure Checkout &nbsp;&nbsp;•&nbsp;&nbsp;
             ✓ Cash on Delivery Available &nbsp;&nbsp;•&nbsp;&nbsp;
             ✓ ✓ {PRODUCT.tagline}
           </p>
           {/* Product Highlights */}
 
-<div className="mt-16 border-t border-[#ECE6DA] pt-10">
+<div className="mt-6 border-t border-[#ECE6DA] pt-10">
 
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
     <div>
       <h2 className="text-2xl font-bold text-[#2E473B]">12+</h2>

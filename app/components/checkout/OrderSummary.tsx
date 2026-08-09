@@ -42,9 +42,7 @@ export default function OrderSummary() {
   );
 
   // Shipping based on selected delivery method
-  const shipping =
-    delivery === "standard" ? 250 : 500;
-
+  const shipping = 0;
   const total = subtotal + shipping;
 
 
@@ -288,8 +286,9 @@ if (!response.ok) {
           </span>
 
           <span className="font-semibold text-[#2E473B]">
-            Rs. {shipping.toLocaleString()}
-          </span>
+  Free
+</span>
+
         </div>
 
         <hr className="border-[#E8E3DA]" />
