@@ -6,10 +6,10 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="bg-[#F8F5EF] pt-16 sm:pt-24 lg:pt-28 pb-12 lg:pb-20 px-5 sm:px-8 lg:px-12 w-full overflow-x-hidden"
+      className="bg-[#F8F5EF] pt-10 sm:pt-14 lg:pt-14 pb-12 lg:pb-10 px-5 sm:px-8 lg:px-12 w-full overflow-x-hidden"
     >
       {/* Grid Container */}
-      <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-24 items-center">
+      <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-4 sm:gap-10 lg:gap-24 items-center">
         
         {/* Right Column: Image Frame */}
         <div className="flex justify-center order-1 lg:order-2 w-full">
@@ -31,7 +31,7 @@ export default function Hero() {
             Premium Botanical Care
           </p>
 
-          <h1 className="mt-2 sm:mt-4 text-3xl sm:text-5xl lg:text-7xl font-bold text-[#2E473B] leading-tight sm:leading-tight">
+          <h1 className="mt-2 sm:mt-4 text-2xl sm:text-5xl lg:text-7xl font-bold text-[#2E473B] leading-tight sm:leading-tight">
             Everyday
             <br />
             Botanical Luxury
