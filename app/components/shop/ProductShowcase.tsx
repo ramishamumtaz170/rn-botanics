@@ -48,7 +48,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 
   return (    <section className="w-full bg-white rounded-[40px] shadow-lg overflow-hidden">
 
-      <div className="grid lg:grid-cols-2 gap-16 items-center p-10 md:p-16">
+      <div className="grid lg:grid-cols-2 gap-8 items-center p-10 md:p-16">
 
        {/* LEFT SIDE */}
 
@@ -59,12 +59,12 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
     
     {/* Product Image */}
 
-    <Image
+   <Image
   src={selectedImage}
   alt={PRODUCT.name}
-  width={420}
-  height={420}
-  className="relative z-10 object-contain drop-shadow-2xl transition duration-500"
+  width={360}
+  height={360}
+  className="relative z-10 w-[300px] h-[300px] sm:w-[340px] sm:h-[340px] object-contain drop-shadow-2xl transition duration-500"
 />
 <div className="mt-2 flex w-full justify-center gap-3 z-20 relative">  {images.map((image, index) => (
     <button
