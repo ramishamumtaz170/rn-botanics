@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="bg-[#F8F5EF] pt-10 sm:pt-14 lg:pt-14 pb-12 lg:pb-10 px-5 sm:px-8 lg:px-12 w-full overflow-x-hidden"
+      className="bg-[#F8F5EF] pt-8 sm:pt-12 lg:pt-6 pb-12 lg:pb-10 px-5 sm:px-8 lg:px-12 w-full overflow-x-hidden"
     >
       {/* Grid Container */}
       <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-4 sm:gap-10 lg:gap-24 items-center">

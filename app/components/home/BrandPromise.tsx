@@ -31,7 +31,7 @@ export default function BrandPromise() {
 
   return (
     /* Increased top & bottom spacing (my-6 sm:my-12 py-20 sm:py-28 lg:py-32) */
-    <section className="bg-white my-4 sm:my-8 py-16 sm:py-28 lg:py-10 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
+    <section className="bg-white my-4 sm:my-8 py-16 sm:py-28 lg:py-6 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
