@@ -91,7 +91,7 @@ export default function FeedbackSection() {
   };
 
   return (
-    <section className="py-10 sm:py-10 bg-white">
+    <section className="py-8 sm:py-6 bg-white">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -101,11 +101,11 @@ export default function FeedbackSection() {
             Customer Feedback
           </p>
 
-          <h2 className="mt-3 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2E473B]">
+          <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2E473B]">
             What Our Customers Say
           </h2>
 
-          <p className="mt-4 text-gray-500 leading-7">
+          <p className="mt-2 text-gray-500 leading-7">
             Real experiences from customers who chose R & N Botanics.
           </p>
 
@@ -113,7 +113,7 @@ export default function FeedbackSection() {
 
         {/* Reviews */}
         {reviews.length > 0 && (
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {reviews.map((item) => (
               <div

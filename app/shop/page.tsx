@@ -4,10 +4,11 @@ import Ingredients from "../components/shop/Ingredients";
 import HowToUse from "../components/shop/HowToUse";
 import CallToAction from "../components/shop/CallToAction";
 import FeedbackSection from "../components/shop/FeedbackSection";
+import ReviewPopup from "../components/shop/ReviewPopup";
 
 export default function Shop() {
   return (
-    <main className="bg-[#F8F5EF]">
+    <main>
 
       {/* Product Showcase */}
       <section className="pb-20">
@@ -24,6 +25,9 @@ export default function Shop() {
       <Ingredients />
       <HowToUse />
       <CallToAction />
+
+      {/* Customer Review Popup */}
+      <ReviewPopup />
 
     </main>
   );
