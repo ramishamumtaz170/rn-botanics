@@ -303,52 +303,7 @@ const [selectedImage, setSelectedImage] = useState(images[0]);
 </button>
           </div>
 
-          {/* Trust Indicators */}
-
-          <p className="mt-6 text-center sm:text-left text-sm text-gray-500 leading-7">
-            ✓ Secure Checkout &nbsp;&nbsp;•&nbsp;&nbsp;
-            ✓ Cash on Delivery Available &nbsp;&nbsp;•&nbsp;&nbsp;
-            ✓ ✓ {PRODUCT.tagline}
-          </p>
-          {/* Product Highlights */}
-
-<div className="mt-6 border-t border-[#ECE6DA] pt-10">
-
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-
-    <div>
-      <h2 className="text-2xl font-bold text-[#2E473B]">12+</h2>
-      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
-        Botanical Herbs
-      </p>
-    </div>
-
-    <div>
-      <h2 className="text-2xl font-bold text-[#2E473B]">100%</h2>
-      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
-        Natural Formula
-      </p>
-    </div>
-
-    <div>
-      <h2 className="text-2xl font-bold text-[#2E473B]">
-  {PRODUCT.bottleSize}
-</h2>      <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
-        Bottle Size
-      </p>
-    </div>
-
-    <div>
-  <h2 className="text-2xl font-bold text-[#2E473B]">Premium</h2>
-  <p className="mt-2 text-sm text-gray-500 uppercase tracking-wider">
-    Quality
-  </p>
-</div>
-
-  </div>
-
-</div>
-
+         
         </div>
 
       </div>

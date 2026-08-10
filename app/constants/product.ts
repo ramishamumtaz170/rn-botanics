@@ -8,7 +8,7 @@ export const PRODUCT = {
   shortDescription: "Signature Botanical Hair Oil",
 
   description:
-    "A luxurious botanical hair oil handcrafted with carefully selected herbs and premium oils to nourish the scalp, strengthen roots, reduce hair fall and restore naturally healthy, shiny hair.",
+    "Botanical hair oil to nourish your scalp, reduce hair fall, and reveal healthy, shiny hair.",
 
   originalPrice: 1500,
 salePrice: 1200,
