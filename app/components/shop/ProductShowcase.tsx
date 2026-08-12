@@ -51,8 +51,8 @@ export default function ProductShowcase() {
             <Image
               src={selectedImage}
               alt={PRODUCT.name}
-              width={360}
-              height={360}
+              width={320}
+              height={320}
               className="object-contain drop-shadow-2xl transition duration-500"
             />
           </div>
@@ -77,8 +77,8 @@ export default function ProductShowcase() {
                   <Image
                     src={image}
                     alt={`${PRODUCT.name} ${index + 1}`}
-                    width={55}
-                    height={55}
+                    width={45}
+                    height={45}
                     className="h-10 w-10 object-cover rounded-md"
                   />
                 </button>
