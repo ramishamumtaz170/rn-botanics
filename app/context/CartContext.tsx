@@ -14,15 +14,14 @@ type CartItem = {
   price: number;
   image: string;
   quantity: number;
-  cap: "Nozzle Applicator Cap" | "Flip Top Cap";
 };
 
 type CartContextType = {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: number, cap: CartItem["cap"]) => void;
-  increaseQuantity: (id: number, cap: CartItem["cap"]) => void;
-  decreaseQuantity: (id: number, cap: CartItem["cap"]) => void;
+  removeFromCart: (id: number) => void;
+  increaseQuantity: (id: number) => void;
+  decreaseQuantity: (id: number) => void;
   clearCart: () => void;
   cartCount: number;
 };
@@ -39,14 +38,24 @@ export function CartProvider({
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load cart from localStorage when the app starts
+  // Load cart from localStorage
   useEffect(() => {
     try {
       const savedCart = localStorage.getItem(CART_STORAGE_KEY);
 
       if (savedCart) {
         const parsedCart: CartItem[] = JSON.parse(savedCart);
-        setCart(parsedCart);
+
+        // Remove old cap data if an old cart still exists
+        const cleanedCart: CartItem[] = parsedCart.map((item) => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          quantity: item.quantity,
+        }));
+
+        setCart(cleanedCart);
       }
     } catch (error) {
       console.error("Failed to load cart:", error);
@@ -55,7 +64,7 @@ export function CartProvider({
     }
   }, []);
 
-  // Save cart whenever it changes
+  // Save cart to localStorage
   useEffect(() => {
     if (!isLoaded) return;
 
@@ -73,19 +82,15 @@ export function CartProvider({
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
       const existing = prev.find(
-        (i) =>
-          i.id === item.id &&
-          i.cap === item.cap
+        (i) => i.id === item.id
       );
 
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id &&
-          i.cap === item.cap
+          i.id === item.id
             ? {
                 ...i,
-                quantity:
-                  i.quantity + item.quantity,
+                quantity: i.quantity + item.quantity,
               }
             : i
         );
@@ -96,30 +101,17 @@ export function CartProvider({
   };
 
   // Remove product
-  const removeFromCart = (
-    id: number,
-    cap: CartItem["cap"]
-  ) => {
+  const removeFromCart = (id: number) => {
     setCart((prev) =>
-      prev.filter(
-        (item) =>
-          !(
-            item.id === id &&
-            item.cap === cap
-          )
-      )
+      prev.filter((item) => item.id !== id)
     );
   };
 
   // Increase quantity
-  const increaseQuantity = (
-    id: number,
-    cap: CartItem["cap"]
-  ) => {
+  const increaseQuantity = (id: number) => {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === id &&
-        item.cap === cap
+        item.id === id
           ? {
               ...item,
               quantity: item.quantity + 1,
@@ -130,36 +122,35 @@ export function CartProvider({
   };
 
   // Decrease quantity
-  const decreaseQuantity = (
-    id: number,
-    cap: CartItem["cap"]
-  ) => {
+  const decreaseQuantity = (id: number) => {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id &&
-          item.cap === cap
+          item.id === id
             ? {
                 ...item,
                 quantity: item.quantity - 1,
               }
             : item
         )
-        .filter(
-          (item) => item.quantity > 0
-        )
+        .filter((item) => item.quantity > 0)
     );
   };
 
   // Clear cart after successful order
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem(CART_STORAGE_KEY);
+
+    try {
+      localStorage.removeItem(CART_STORAGE_KEY);
+    } catch (error) {
+      console.error("Failed to clear cart:", error);
+    }
   };
 
+  // Total cart quantity
   const cartCount = cart.reduce(
-    (total, item) =>
-      total + item.quantity,
+    (total, item) => total + item.quantity,
     0
   );
 

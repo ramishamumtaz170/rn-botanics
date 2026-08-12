@@ -150,43 +150,7 @@ export default function ProductDetail() {
     </div>
   </div>
 </div>
-
-
-          {/* Cap Selection */}
-          <div className="mt-2.5 sm:mt-3">
-            <p className="mb-1 text-xs font-semibold text-[#2E473B] sm:text-sm">
-              Choose Your Bottle Cap
-            </p>
-            <div className="grid grid-cols-2 gap-1.5">
-              {(["Flip Top Cap", "Nozzle Applicator Cap"] as CapOption[]).map((cap) => {
-                const isSelected = selectedCap === cap;
-                return (
-                  <label
-                    key={cap}
-                    className={`flex cursor-pointer items-center gap-1.5 rounded-lg border px-2 py-1 transition sm:px-3 sm:py-1.5 ${
-                      isSelected
-                        ? "border-[#2E473B] bg-[#F8F5EF]"
-                        : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D]"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="cap"
-                      value={cap}
-                      checked={isSelected}
-                      onChange={() => setSelectedCap(cap)}
-                      className="h-3 w-3 accent-[#2E473B]"
-                    />
-                    <span className="text-[10px] font-medium text-[#2E473B] sm:text-xs">
-                      {cap}
-                    </span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Product Highlights */}
+    {/* Product Highlights */}
           <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-1 border-t border-[#E5DED2] pt-2 sm:mt-3">
             <div className="flex items-center justify-between gap-2 border-b border-[#F2EDE4] pb-0.5">
               <span className="text-[10px] text-gray-500">Size</span>

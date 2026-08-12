@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { Plus, Minus, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-      
 
 import { useCart } from "@/app/context/CartContext";
 import { useCheckout } from "@/app/context/CheckoutContext";
@@ -17,7 +16,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-
 export default function OrderSummary() {
   const {
     cart,
@@ -28,7 +26,6 @@ export default function OrderSummary() {
   } = useCart();
 
   const {
-    delivery,
     checkoutData,
     resetCheckout,
   } = useCheckout();
@@ -36,45 +33,48 @@ export default function OrderSummary() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  // Calculate subtotal
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  // Shipping based on selected delivery method
+  // Free shipping
   const shipping = 0;
+
+  // Final total
   const total = subtotal + shipping;
 
+  // Generate unique order number
+  const generateOrderNumber = async () => {
+    const counterRef = doc(db, "counters", "orders");
 
-const generateOrderNumber = async () => {
-  const counterRef = doc(db, "counters", "orders");
+    const orderNumber = await runTransaction(
+      db,
+      async (transaction) => {
+        const counterDoc = await transaction.get(counterRef);
 
-  const orderNumber = await runTransaction(
-    db,
-    async (transaction) => {
-      const counterDoc = await transaction.get(counterRef);
+        if (!counterDoc.exists()) {
+          throw new Error("Counter document not found.");
+        }
 
-      if (!counterDoc.exists()) {
-        throw new Error("Counter document not found.");
+        const current =
+          counterDoc.data().lastOrderNumber || 0;
+
+        const next = current + 1;
+
+        transaction.update(counterRef, {
+          lastOrderNumber: next,
+        });
+
+        return `RNB-${String(next).padStart(4, "0")}`;
       }
+    );
 
-      const current =
-        counterDoc.data().lastOrderNumber || 0;
+    return orderNumber;
+  };
 
-      const next = current + 1;
-
-      transaction.update(counterRef, {
-        lastOrderNumber: next,
-      });
-
-      return `RNB-${String(next).padStart(4, "0")}`;
-    }
-  );
-
-  return orderNumber;
-};
-
-
+  // Place order
   const handlePlaceOrder = async () => {
     if (cart.length === 0) {
       alert("Your cart is empty.");
@@ -108,48 +108,51 @@ const generateOrderNumber = async () => {
 
     setLoading(true);
 
-try {
-  const orderNumber = await generateOrderNumber();
+    try {
+      const orderNumber = await generateOrderNumber();
+
+      // Save order to Firebase
       await setDoc(doc(db, "orders", orderNumber), {
-      orderNumber,
+        orderNumber,
         customer: checkoutData,
         items: cart,
         subtotal,
         shipping,
         total,
         paymentMethod: "Cash on Delivery",
-        delivery,
         orderStatus: "Pending",
-paymentStatus: "Unpaid",
-trackingNumber: "",
-notes: "",
-createdAt: serverTimestamp(),
+        paymentStatus: "Unpaid",
+        trackingNumber: "",
+        notes: "",
+        createdAt: serverTimestamp(),
       });
 
       // Send order email
-     const response = await fetch("/api/send-order", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    orderNumber,
-    customer: checkoutData,
-    items: cart,
-    subtotal,
-    shipping,
-    total,
-    delivery,
-  }),
-});
+      const response = await fetch("/api/send-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderNumber,
+          customer: checkoutData,
+          items: cart,
+          subtotal,
+          shipping,
+          total,
+        }),
+      });
 
-if (!response.ok) {
-  console.error("Failed to send order email.");
-}
+      if (!response.ok) {
+        console.error("Failed to send order email.");
+      }
+
+      // Clear cart and checkout data
       clearCart();
       resetCheckout();
 
-     router.push(`/order-success?order=${orderNumber}`);
+      // Go to success page
+      router.push(`/order-success?order=${orderNumber}`);
     } catch (error) {
       console.error(error);
       alert("Failed to place order.");
@@ -159,10 +162,15 @@ if (!response.ok) {
   };
 
   return (
-    <aside className="w-full min-w-0 bg-white rounded-[40px] p-6 sm:p-8 lg:p-10 shadow-sm h-fit sticky top-28">
+    <aside>
+
+      {/* Heading */}
+
       <h2 className="text-3xl font-bold text-[#2E473B]">
         Order Summary
       </h2>
+
+      {/* Products */}
 
       <div className="mt-8 space-y-6">
 
@@ -173,7 +181,7 @@ if (!response.ok) {
         ) : (
           cart.map((item) => (
             <div
-              key={`${item.id}-${item.cap}`}
+              key={item.id}
               className="flex gap-4 pb-6 border-b border-[#E8E3DA]"
             >
 
@@ -197,15 +205,6 @@ if (!response.ok) {
                   {item.name}
                 </h3>
 
-                {/* Selected Cap */}
-
-                <p className="mt-1 text-sm text-gray-500">
-                  Cap:{" "}
-                  <span className="font-medium text-[#2E473B]">
-                    {item.cap}
-                  </span>
-                </p>
-
                 <p className="mt-2 font-semibold text-[#2E473B]">
                   Rs. {item.price.toLocaleString()}
                 </p>
@@ -217,8 +216,9 @@ if (!response.ok) {
                   <div className="flex items-center bg-[#F8F5EF] rounded-full border border-[#E8E3DA] overflow-hidden">
 
                     <button
+                      type="button"
                       onClick={() =>
-                        decreaseQuantity(item.id, item.cap)
+                        decreaseQuantity(item.id)
                       }
                       className="w-9 h-9 flex items-center justify-center hover:bg-[#ECE7DF] transition"
                     >
@@ -230,8 +230,9 @@ if (!response.ok) {
                     </span>
 
                     <button
+                      type="button"
                       onClick={() =>
-                        increaseQuantity(item.id, item.cap)
+                        increaseQuantity(item.id)
                       }
                       className="w-9 h-9 flex items-center justify-center hover:bg-[#ECE7DF] transition"
                     >
@@ -240,9 +241,12 @@ if (!response.ok) {
 
                   </div>
 
+                  {/* Remove */}
+
                   <button
+                    type="button"
                     onClick={() =>
-                      removeFromCart(item.id, item.cap)
+                      removeFromCart(item.id)
                     }
                     className="text-red-500 hover:text-red-600 transition"
                   >
@@ -270,6 +274,8 @@ if (!response.ok) {
 
       <div className="mt-10 space-y-5">
 
+        {/* Subtotal */}
+
         <div className="flex justify-between">
           <span className="text-gray-500">
             Subtotal
@@ -280,18 +286,21 @@ if (!response.ok) {
           </span>
         </div>
 
+        {/* Shipping */}
+
         <div className="flex justify-between">
           <span className="text-gray-500">
             Shipping
           </span>
 
           <span className="font-semibold text-[#2E473B]">
-  Free
-</span>
-
+            FREE
+          </span>
         </div>
 
         <hr className="border-[#E8E3DA]" />
+
+        {/* Total */}
 
         <div className="flex justify-between items-center">
 
@@ -307,12 +316,25 @@ if (!response.ok) {
 
       </div>
 
+      {/* Free Delivery Message */}
+
+      <div className="mt-6 rounded-2xl bg-[#F8F5EF] p-4 text-center">
+        <p className="font-bold text-[#2E473B]">
+          🌿 FREE DELIVERY
+        </p>
+
+        <p className="mt-1 text-sm text-gray-500">
+          Delivery available all over Pakistan
+        </p>
+      </div>
+
       {/* Place Order */}
 
       <button
+        type="button"
         onClick={handlePlaceOrder}
         disabled={loading || cart.length === 0}
-        className={`mt-10 w-full py-5 rounded-full text-lg font-semibold transition-all duration-300 ${
+        className={`mt-6 w-full py-5 rounded-full text-lg font-semibold transition-all duration-300 ${
           loading || cart.length === 0
             ? "bg-gray-400 text-white cursor-not-allowed"
             : "bg-[#2E473B] text-white hover:bg-[#23392F]"
