@@ -41,7 +41,7 @@ export default function ProductShowcase() {
 };
   return (
     <section>
-      <div className="grid lg:grid-cols-2 gap-4 items-center p-8 md:p-10">
+      <div className="grid lg:grid-cols-2 gap-4 items-center p-6 md:p-6">
 
         {/* LEFT SIDE - Product Image */}
 
@@ -79,7 +79,7 @@ export default function ProductShowcase() {
                     alt={`${PRODUCT.name} ${index + 1}`}
                     width={55}
                     height={55}
-                    className="h-12 w-12 object-cover rounded-md"
+                    className="h-10 w-10 object-cover rounded-md"
                   />
                 </button>
               );
