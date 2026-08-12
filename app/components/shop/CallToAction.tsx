@@ -10,10 +10,7 @@ import { useState } from "react";
 export default function CallToAction() {
   const router = useRouter();
   const { addToCart } = useCart();
-  const [selectedCap, setSelectedCap] = useState<
-  "Flip Top Cap" | "Nozzle Applicator Cap"
->("Flip Top Cap");
-
+  
  const addProductToCart = () => {
   addToCart({
     id: PRODUCT.id,
@@ -21,7 +18,7 @@ export default function CallToAction() {
     price: PRODUCT.salePrice,
     image: PRODUCT.image,
     quantity: 1,
-    cap: selectedCap,
+    
   });
 };
 
