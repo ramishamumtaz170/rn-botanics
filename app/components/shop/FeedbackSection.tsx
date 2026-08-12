@@ -105,10 +105,7 @@ export default function FeedbackSection() {
             What Our Customers Say
           </h2>
 
-          <p className="mt-2 text-gray-500 leading-7">
-            Real experiences from customers who chose R & N Botanics.
-          </p>
-
+         
         </div>
 
         {/* Reviews */}

@@ -41,7 +41,7 @@ export default function ProductShowcase() {
 };
   return (
     <section>
-      <div className="grid lg:grid-cols-2 gap-8 items-center p-10 md:p-16">
+      <div className="grid lg:grid-cols-2 gap-4 items-center p-8 md:p-10">
 
         {/* LEFT SIDE - Product Image */}
 
@@ -51,8 +51,8 @@ export default function ProductShowcase() {
             <Image
               src={selectedImage}
               alt={PRODUCT.name}
-              width={420}
-              height={420}
+              width={360}
+              height={360}
               className="object-contain drop-shadow-2xl transition duration-500"
             />
           </div>
@@ -155,7 +155,7 @@ export default function ProductShowcase() {
 
           {/* Buttons */}
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-5">
+          <div className="mt-4 flex flex-col sm:flex-row gap-5">
 
             {/* Add to Cart */}
 
