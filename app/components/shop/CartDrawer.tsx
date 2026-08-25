@@ -5,6 +5,12 @@ import Link from "next/link";
 import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/app/context/CartContext";
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 type CartDrawerProps = {
   open: boolean;
   onClose: () => void;
@@ -243,13 +249,25 @@ export default function CartDrawer({
                   Continue Shopping
                 </button>
 
-                <Link
-                  href="/checkout"
-                  onClick={onClose}
-                  className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#2E473B] px-5 text-sm font-semibold text-white transition hover:bg-[#23392F]"
-                >
-                  Proceed to Checkout
-                </Link>
+               <Link
+  href="/checkout"
+  onClick={() => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "InitiateCheckout", {
+        content_ids: cart.map((item) => item.id),
+        content_type: "product",
+        value: total,
+        currency: "PKR",
+        num_items: totalItems,
+      });
+    }
+
+    onClose();
+  }}
+  className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#2E473B] px-5 text-sm font-semibold text-white transition hover:bg-[#23392F]"
+>
+  Proceed to Checkout
+</Link>
 
               </div>
             </div>

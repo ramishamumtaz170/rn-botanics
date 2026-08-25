@@ -16,6 +16,14 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
+
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 export default function OrderSummary() {
   const {
     cart,
@@ -126,6 +134,20 @@ export default function OrderSummary() {
         notes: "",
         createdAt: serverTimestamp(),
       });
+
+
+      if (typeof window !== "undefined" && window.fbq) {
+  window.fbq("track", "Purchase", {
+    content_ids: cart.map((item) => item.id),
+    content_type: "product",
+    value: total,
+    currency: "PKR",
+    num_items: cart.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    ),
+  });
+}
 
       // Send order email
       const response = await fetch("/api/send-order", {
