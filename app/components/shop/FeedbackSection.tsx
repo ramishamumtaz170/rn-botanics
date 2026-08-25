@@ -104,8 +104,6 @@ export default function FeedbackSection() {
           <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2E473B]">
             What Our Customers Say
           </h2>
-
-         
         </div>
 
         {/* Reviews */}
