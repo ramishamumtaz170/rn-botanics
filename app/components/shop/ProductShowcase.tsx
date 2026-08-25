@@ -6,6 +6,15 @@ import { useCart } from "@/app/context/CartContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { PRODUCT } from "@/app/constants/product";
+import { useEffect } from "react";
+
+
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 
 export default function ProductShowcase() {
   const router = useRouter();
@@ -15,31 +24,65 @@ export default function ProductShowcase() {
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
-  const handleBuyNow = () => {
-    addToCart({
-      id: PRODUCT.id,
-      name: PRODUCT.name,
-      price: PRODUCT.salePrice,
-      image: PRODUCT.image,
-      quantity: 1,
+  useEffect(() => {
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "ViewContent", {
+      content_ids: [PRODUCT.id],
+      content_name: PRODUCT.name,
+      content_type: "product",
+      value: PRODUCT.salePrice,
+      currency: "PKR",
     });
+  }
+}, []);
 
-    router.push("/checkout");
-  };
+ const handleBuyNow = () => {
+  addToCart({
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
+    quantity: 1,
+  });
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: PRODUCT.id,
-      name: PRODUCT.name,
-      price: PRODUCT.salePrice,
-      image: PRODUCT.image,
-      quantity: 1,
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "AddToCart", {
+      content_ids: [PRODUCT.id],
+      content_name: PRODUCT.name,
+      content_type: "product",
+      value: PRODUCT.salePrice,
+      currency: "PKR",
     });
-   toast.success(`${PRODUCT.name} added to your cart.`, {
+  }
+
+  router.push("/checkout");
+};
+
+const handleAddToCart = () => {
+  addToCart({
+    id: PRODUCT.id,
+    name: PRODUCT.name,
+    price: PRODUCT.salePrice,
+    image: PRODUCT.image,
+    quantity: 1,
+  });
+
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "AddToCart", {
+      content_ids: [PRODUCT.id],
+      content_name: PRODUCT.name,
+      content_type: "product",
+      value: PRODUCT.salePrice,
+      currency: "PKR",
+    });
+  }
+
+  toast.success(`${PRODUCT.name} added to your cart.`, {
     duration: 1200,
   });
 };
-  return (
+
+return (
     <section>
       <div className="grid lg:grid-cols-2 gap-4 items-center p-6 md:p-6">
 
