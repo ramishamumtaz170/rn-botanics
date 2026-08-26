@@ -30,10 +30,10 @@ export default function ProductShowcase() {
 
   const singlePrice = PRODUCT.salePrice;
 
-  // Duo = Rs. 2,800
+  // Duo Bundle = Rs. 2,800
   const duoPrice = 2800;
 
-  // Duo saves Rs. 400
+  // Duo Bundle saves Rs. 400
   const duoBundleDiscount = 400;
 
   const selectedPrice =
@@ -41,17 +41,16 @@ export default function ProductShowcase() {
       ? duoPrice
       : singlePrice;
 
-  // IMPORTANT:
   // Duo Bundle is ONE cart item containing 2 bottles.
-  // Quantity remains 1.
   const selectedQuantity = 1;
 
-  // Separate IDs prevent Single and Duo
-  // from being merged in the cart.
+  // IMPORTANT:
+  // CartContext expects id to be a NUMBER.
+  // Use a separate numeric ID for the Duo Bundle.
   const selectedCartId =
     selectedBundle === 2
-      ? `${PRODUCT.id}-duo`
-      : `${PRODUCT.id}`;
+      ? PRODUCT.id + 1000
+      : PRODUCT.id;
 
   const selectedProductName =
     selectedBundle === 2
@@ -123,8 +122,7 @@ export default function ProductShowcase() {
       });
     }
 
-    // Open the existing CartDrawer
-    // instead of navigating to CartDrawer.tsx
+    // Open CartDrawer
     window.dispatchEvent(new Event("open-cart"));
   };
 
@@ -301,21 +299,15 @@ export default function ProductShowcase() {
 
                 <div className="mt-1 flex flex-wrap items-center gap-2">
 
-                  {/* Original Duo Price */}
-
                   <span className="text-sm text-gray-400 line-through">
                     Rs. 3,200
                   </span>
-
-                  {/* Duo Price */}
 
                   <span className="text-xl font-bold text-[#2E473B]">
                     Rs. {duoPrice.toLocaleString()}
                   </span>
 
                 </div>
-
-                {/* SAVINGS */}
 
                 <span className="mt-1 inline-block text-xs font-bold text-[#7C9A7D]">
                   Save Rs. {duoBundleDiscount.toLocaleString()}
