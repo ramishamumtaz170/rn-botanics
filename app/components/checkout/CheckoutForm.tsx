@@ -269,7 +269,7 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
 
           </label>
 
-          <label className="flex items-center gap-4 border border-[#E8E3DA] rounded-2xl p-5 opacity-50">
+          {/* <label className="flex items-center gap-4 border border-[#E8E3DA] rounded-2xl p-5 opacity-50">
 
             <input
               type="radio"
@@ -293,7 +293,7 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
               EasyPaisa (Coming Soon)
             </span>
 
-          </label>
+          </label> */}
 
         </div>
 

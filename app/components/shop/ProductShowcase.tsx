@@ -322,7 +322,7 @@ export default function ProductShowcase() {
               SELECTED PRICE
           ========================================= */}
 
-          <div className="mt-5">
+          {/* <div className="mt-5">
 
             <p className="text-3xl font-bold text-[#2E473B]">
               Rs. {selectedPrice.toLocaleString()}
@@ -341,7 +341,7 @@ export default function ProductShowcase() {
               </p>
             )}
 
-          </div>
+          </div> */}
 
           {/* =========================================
               FREE DELIVERY
