@@ -63,19 +63,19 @@ const handleBuyNow = () => {
           </p>
 
           {/* Price Section */}
-          <div className="mt-6 sm:mt-8">
-            <p className="text-[#BDB4A5] line-through text-base sm:text-lg">
+          <div className="mt-4 sm:mt-8">
+            {/* <p className="text-[#BDB4A5] line-through text-base sm:text-lg">
               Rs. {PRODUCT.originalPrice.toLocaleString()}
-            </p>
+            </p> */}
 
             <div className="mt-2 flex justify-center items-center gap-3 sm:gap-4 flex-wrap">
               <h3 className="text-3xl sm:text-5xl font-bold text-white">
                 Rs. {PRODUCT.salePrice.toLocaleString()}
               </h3>
 
-              <span className="bg-[#C7A25A] text-[#2E473B] px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold">
+              {/* <span className="bg-[#C7A25A] text-[#2E473B] px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold">
                 Save {PRODUCT.discount}%
-              </span>
+              </span> */}
             </div>
           </div>
    

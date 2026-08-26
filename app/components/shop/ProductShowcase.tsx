@@ -1,20 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { PRODUCT } from "@/app/constants/product";
-import { useEffect } from "react";
-
 
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void;
   }
 }
-
 
 export default function ProductShowcase() {
   const router = useRouter();
@@ -24,69 +20,121 @@ export default function ProductShowcase() {
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
+  // 1 = Single Bottle
+  // 2 = Duo Bundle
+  const [selectedBundle, setSelectedBundle] = useState<1 | 2>(1);
+
+  // --------------------------------
+  // PRICING
+  // --------------------------------
+
+  const singlePrice = PRODUCT.salePrice;
+
+  // Duo = Rs. 2,800
+  const duoPrice = 2800;
+
+  // Duo saves Rs. 400
+  const duoBundleDiscount = 400;
+
+  const selectedPrice =
+    selectedBundle === 2
+      ? duoPrice
+      : singlePrice;
+
+  // IMPORTANT:
+  // Duo Bundle is ONE cart item containing 2 bottles.
+  // Quantity remains 1.
+  const selectedQuantity = 1;
+
+  // Separate IDs prevent Single and Duo
+  // from being merged in the cart.
+  const selectedCartId =
+    selectedBundle === 2
+      ? `${PRODUCT.id}-duo`
+      : `${PRODUCT.id}`;
+
+  const selectedProductName =
+    selectedBundle === 2
+      ? `${PRODUCT.name} - Duo Bundle (2 Bottles)`
+      : PRODUCT.name;
+
+  // --------------------------------
+  // META PIXEL - VIEW CONTENT
+  // --------------------------------
+
   useEffect(() => {
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "ViewContent", {
-      content_ids: [PRODUCT.id],
-      content_name: PRODUCT.name,
-      content_type: "product",
-      value: PRODUCT.salePrice,
-      currency: "PKR",
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "ViewContent", {
+        content_ids: [PRODUCT.id],
+        content_name: PRODUCT.name,
+        content_type: "product",
+        value: PRODUCT.salePrice,
+        currency: "PKR",
+      });
+    }
+  }, []);
+
+  // --------------------------------
+  // BUY NOW
+  // --------------------------------
+
+  const handleBuyNow = () => {
+    addToCart({
+      id: selectedCartId,
+      name: selectedProductName,
+      price: selectedPrice,
+      image: PRODUCT.image,
+      quantity: selectedQuantity,
     });
-  }
-}, []);
 
- const handleBuyNow = () => {
-  addToCart({
-    id: PRODUCT.id,
-    name: PRODUCT.name,
-    price: PRODUCT.salePrice,
-    image: PRODUCT.image,
-    quantity: 1,
-  });
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "AddToCart", {
+        content_ids: [selectedCartId],
+        content_name: selectedProductName,
+        content_type: "product",
+        value: selectedPrice,
+        currency: "PKR",
+      });
+    }
 
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "AddToCart", {
-      content_ids: [PRODUCT.id],
-      content_name: PRODUCT.name,
-      content_type: "product",
-      value: PRODUCT.salePrice,
-      currency: "PKR",
+    router.push("/checkout");
+  };
+
+  // --------------------------------
+  // ADD TO CART
+  // --------------------------------
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: selectedCartId,
+      name: selectedProductName,
+      price: selectedPrice,
+      image: PRODUCT.image,
+      quantity: selectedQuantity,
     });
-  }
 
-  router.push("/checkout");
-};
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "AddToCart", {
+        content_ids: [selectedCartId],
+        content_name: selectedProductName,
+        content_type: "product",
+        value: selectedPrice,
+        currency: "PKR",
+      });
+    }
 
-const handleAddToCart = () => {
-  addToCart({
-    id: PRODUCT.id,
-    name: PRODUCT.name,
-    price: PRODUCT.salePrice,
-    image: PRODUCT.image,
-    quantity: 1,
-  });
+    // Open the existing CartDrawer
+    // instead of navigating to CartDrawer.tsx
+    window.dispatchEvent(new Event("open-cart"));
+  };
 
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "AddToCart", {
-      content_ids: [PRODUCT.id],
-      content_name: PRODUCT.name,
-      content_type: "product",
-      value: PRODUCT.salePrice,
-      currency: "PKR",
-    });
-  }
-
-  toast.success(`${PRODUCT.name} added to your cart.`, {
-    duration: 1200,
-  });
-};
-
-return (
+  return (
     <section>
       <div className="grid lg:grid-cols-2 gap-4 items-center p-6 md:p-6">
 
-        {/* LEFT SIDE - Product Image */}
+        {/* =========================================
+            LEFT SIDE - PRODUCT IMAGE
+        ========================================= */}
 
         <div className="flex flex-col items-center">
 
@@ -100,7 +148,7 @@ return (
             />
           </div>
 
-          {/* Image Thumbnails */}
+          {/* IMAGE THUMBNAILS */}
 
           <div className="mt-4 flex justify-center gap-2">
             {images.map((image, index) => {
@@ -131,29 +179,31 @@ return (
 
         </div>
 
-        {/* RIGHT SIDE - Product Information */}
+        {/* =========================================
+            RIGHT SIDE - PRODUCT INFORMATION
+        ========================================= */}
 
         <div>
 
-          {/* Collection */}
+          {/* COLLECTION */}
 
           <p className="uppercase tracking-[0.3em] text-sm text-[#7C9A7D] font-medium">
             Signature Collection
           </p>
 
-          {/* Title */}
+          {/* TITLE */}
 
           <h2 className="mt-2 text-2xl font-bold leading-tight text-[#2E473B]">
             {PRODUCT.name}
           </h2>
 
-          {/* Description */}
+          {/* DESCRIPTION */}
 
           <p className="mt-2 text-lg leading-6 text-gray-600">
             {PRODUCT.description}
           </p>
 
-          {/* Rating */}
+          {/* RATING */}
 
           <div className="mt-4 flex items-center gap-3">
             <span className="text-[#C7A25A] text-xl">
@@ -165,42 +215,173 @@ return (
             </span>
           </div>
 
-          {/* Price */}
+          {/* =========================================
+              BUNDLE OPTIONS
+          ========================================= */}
 
-          <div className="mt-4">
+          <div className="mt-5">
 
-            <p className="text-xl text-gray-400 line-through">
-              Rs. {PRODUCT.originalPrice.toLocaleString()}
+            <p className="text-sm font-semibold text-[#2E473B] mb-3">
+              Choose your bundle:
             </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+              {/* =====================================
+                  1 BOTTLE
+              ===================================== */}
+
+              <button
+                type="button"
+                onClick={() => setSelectedBundle(1)}
+                className={`relative rounded-2xl border-2 p-4 text-left transition-all duration-300 ${
+                  selectedBundle === 1
+                    ? "border-[#2E473B] bg-[#F8F5EF]"
+                    : "border-[#E8E3DA] hover:border-[#7C9A7D]"
+                }`}
+              >
+
+                {selectedBundle === 1 && (
+                  <span className="absolute top-2 right-3 text-[#2E473B]">
+                    ✓
+                  </span>
+                )}
+
+                <p className="font-semibold text-[#2E473B]">
+                  1 Bottle
+                </p>
+
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+
+                  <span className="text-sm text-gray-400 line-through">
+                    Rs. {PRODUCT.originalPrice.toLocaleString()}
+                  </span>
+
+                  <span className="text-xl font-bold text-[#2E473B]">
+                    Rs. {singlePrice.toLocaleString()}
+                  </span>
+
+                </div>
+
+                <span className="mt-1 inline-block text-xs font-bold text-[#7C9A7D]">
+                  {PRODUCT.discount}% OFF
+                </span>
+
+              </button>
+
+              {/* =====================================
+                  2 BOTTLES - DUO
+              ===================================== */}
+
+              <button
+                type="button"
+                onClick={() => setSelectedBundle(2)}
+                className={`relative rounded-2xl border-2 p-4 text-left transition-all duration-300 ${
+                  selectedBundle === 2
+                    ? "border-[#2E473B] bg-[#F8F5EF]"
+                    : "border-[#E8E3DA] hover:border-[#7C9A7D]"
+                }`}
+              >
+
+                {/* BEST VALUE */}
+
+                <span className="absolute -top-3 left-4 rounded-full bg-[#C7A25A] px-3 py-1 text-xs font-bold text-white">
+                  BEST VALUE
+                </span>
+
+                {selectedBundle === 2 && (
+                  <span className="absolute top-2 right-3 text-[#2E473B]">
+                    ✓
+                  </span>
+                )}
+
+                <p className="font-semibold text-[#2E473B]">
+                  2 Bottles
+                </p>
+
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+
+                  {/* Original Duo Price */}
+
+                  <span className="text-sm text-gray-400 line-through">
+                    Rs. 3,200
+                  </span>
+
+                  {/* Duo Price */}
+
+                  <span className="text-xl font-bold text-[#2E473B]">
+                    Rs. {duoPrice.toLocaleString()}
+                  </span>
+
+                </div>
+
+                {/* SAVINGS */}
+
+                <span className="mt-1 inline-block text-xs font-bold text-[#7C9A7D]">
+                  Save Rs. {duoBundleDiscount.toLocaleString()}
+                </span>
+
+              </button>
+
+            </div>
+          </div>
+
+          {/* =========================================
+              SELECTED PRICE
+          ========================================= */}
+
+          <div className="mt-5">
 
             <p className="text-3xl font-bold text-[#2E473B]">
-              Rs. {PRODUCT.salePrice.toLocaleString()}
+              Rs. {selectedPrice.toLocaleString()}
             </p>
+
+            {selectedBundle === 1 && (
+              <p className="mt-1 text-sm text-[#7C9A7D] font-medium">
+                100 ml • {PRODUCT.discount}% OFF
+              </p>
+            )}
+
+            {selectedBundle === 2 && (
+              <p className="mt-1 text-sm text-[#7C9A7D] font-medium">
+                2 × 100 ml bottles • Save Rs.{" "}
+                {duoBundleDiscount.toLocaleString()}
+              </p>
+            )}
 
           </div>
 
-         {/* Free Delivery Announcement */}
-<div className="mt-4 inline-flex items-center gap-3 rounded-2xl border border-[#C7A25A]/40 bg-[#FFF9EC] px-4 py-3 shadow-sm">
-  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2E473B] text-white text-lg">
-    🚚
-  </div>
+          {/* =========================================
+              FREE DELIVERY
+          ========================================= */}
 
-  <div>
-    <p className="text-sm sm:text-base font-bold tracking-wide text-[#2E473B]">
-      FREE DELIVERY
-    </p>
+          <div className="mt-4 inline-flex items-center gap-3 rounded-2xl border border-[#C7A25A]/40 bg-[#FFF9EC] px-4 py-3 shadow-sm">
 
-    <p className="text-[10px] sm:text-xs text-gray-600">
-      Across Pakistan • No extra shipping charges
-    </p>
-  </div>
-</div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#2E473B] text-white text-lg">
+              🚚
+            </div>
 
-          {/* Buttons */}
+            <div>
+
+              <p className="text-sm sm:text-base font-bold tracking-wide text-[#2E473B]">
+                FREE DELIVERY
+              </p>
+
+              <p className="text-[10px] sm:text-xs text-gray-600">
+                Across Pakistan • No extra shipping charges
+              </p>
+
+            </div>
+
+          </div>
+
+          {/* =========================================
+              BUTTONS
+          ========================================= */}
 
           <div className="mt-4 flex flex-col sm:flex-row gap-5">
 
-            {/* Add to Cart */}
+            {/* ADD TO CART */}
 
             <button
               type="button"
@@ -210,7 +391,7 @@ return (
               Add to Cart
             </button>
 
-            {/* Buy Now */}
+            {/* BUY NOW */}
 
             <button
               type="button"
