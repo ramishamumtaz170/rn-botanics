@@ -1,8 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { ChevronDown } from "lucide-react";
 
 type Review = {
   id: string;
@@ -14,13 +22,21 @@ type Review = {
 
 export default function FeedbackSection() {
   const [reviews, setReviews] = useState<Review[]>([]);
+
   const [name, setName] = useState("");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [submitting, setSubmitting] = useState(false);
 
-  // Load approved reviews
+  // Dropdown states
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showWriteReview, setShowWriteReview] = useState(false);
+
+  // =========================================
+  // LOAD APPROVED REVIEWS
+  // =========================================
+
   useEffect(() => {
     const reviewsQuery = query(
       collection(db, "reviews"),
@@ -31,10 +47,13 @@ export default function FeedbackSection() {
       reviewsQuery,
       (snapshot) => {
         const loadedReviews: Review[] = snapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          } as Review))
+          .map(
+            (doc) =>
+              ({
+                id: doc.id,
+                ...doc.data(),
+              } as Review)
+          )
           .filter((review) => review.approved === true);
 
         setReviews(loadedReviews);
@@ -46,6 +65,10 @@ export default function FeedbackSection() {
 
     return () => unsubscribe();
   }, []);
+
+  // =========================================
+  // SUBMIT REVIEW
+  // =========================================
 
   const handleSubmit = async () => {
     if (!name.trim()) {
@@ -78,6 +101,7 @@ export default function FeedbackSection() {
       setName("");
       setReview("");
       setRating(0);
+      setHoverRating(0);
 
       alert(
         "Thank you for your feedback! Your review will appear after approval."
@@ -91,10 +115,13 @@ export default function FeedbackSection() {
   };
 
   return (
-    <section className="py-8 sm:py-6 bg-white">
+    <section className="py-8 sm:py-10 bg-white">
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* Heading */}
+        {/* =========================================
+            HEADER
+        ========================================= */}
+
         <div className="text-center max-w-2xl mx-auto">
 
           <p className="uppercase tracking-[0.3em] text-xs sm:text-sm font-semibold text-[#7C9A7D]">
@@ -104,145 +131,305 @@ export default function FeedbackSection() {
           <h2 className="mt-2 text-2xl sm:text-4xl lg:text-5xl font-bold text-[#2E473B]">
             What Our Customers Say
           </h2>
+
         </div>
 
-        {/* Reviews */}
-        {reviews.length > 0 && (
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* =========================================
+            CUSTOMER REVIEWS DROPDOWN
+        ========================================= */}
 
-            {reviews.map((item) => (
-              <div
-                key={item.id}
-                className="bg-[#F8F5EF] rounded-[28px] p-6 sm:p-7"
-              >
+        <div className="mt-7 max-w-5xl mx-auto">
 
-                {/* Stars */}
-                <div className="flex gap-1 text-[#C7A25A] text-lg">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span key={star}>
-                      {star <= item.rating ? "★" : "☆"}
-                    </span>
-                  ))}
-                </div>
+          <button
+            type="button"
+            onClick={() => setShowFeedback(!showFeedback)}
+            aria-expanded={showFeedback}
+            className={`w-full flex items-center justify-between rounded-2xl border-2 px-5 py-4 sm:px-6 sm:py-5 text-left transition-all duration-300 ${
+              showFeedback
+                ? "border-[#2E473B] bg-[#F8F5EF]"
+                : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D] hover:bg-[#FBFAF8]"
+            }`}
+          >
 
-                {/* Review */}
-                <p className="mt-4 text-gray-600 leading-7">
-                  “{item.review}”
-                </p>
+            <div>
 
-                {/* Customer */}
-                <p className="mt-5 font-semibold text-[#2E473B]">
-                  — {item.name}
-                </p>
+              <p className="font-semibold text-[#2E473B] text-base sm:text-lg">
+                Customer Reviews
+              </p>
 
-              </div>
-            ))}
-
-          </div>
-        )}
-
-        {/* Write Review */}
-        <div className="mt-6 max-w-2xl mx-auto">
-
-          <div className="bg-[#F8F5EF] rounded-[32px] p-6 sm:p-8 lg:p-10">
-
-            <h3 className="text-2xl sm:text-3xl font-bold text-[#2E473B]">
-              Share Your Experience
-            </h3>
-
-            <p className="mt-2 text-gray-500">
-              We would love to hear what you think about your R & N Botanics
-              experience.
-            </p>
-
-            {/* Name */}
-            <div className="mt-4">
-
-              <label className="block mb-2 font-medium text-[#2E473B]">
-                Your Name
-              </label>
-
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your name"
-                className="w-full h-12 rounded-2xl border border-[#E8E3DA] bg-white px-5 text-gray-700 outline-none focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
-              />
+              <p className="mt-1 text-xs sm:text-sm text-gray-500">
+                {reviews.length > 0
+                  ? `${reviews.length} ${
+                      reviews.length === 1
+                        ? "customer review"
+                        : "customer reviews"
+                    }`
+                  : "No reviews yet"}
+              </p>
 
             </div>
 
-            {/* Rating */}
-            <div className="mt-4">
-
-              <label className="block mb-2 font-medium text-[#2E473B]">
-                Your Rating
-              </label>
-
-              <div className="flex gap-2">
-
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    type="button"
-                    onClick={() => setRating(star)}
-                    onMouseEnter={() => setHoverRating(star)}
-                    onMouseLeave={() => setHoverRating(0)}
-                    className="text-3xl transition-transform hover:scale-110"
-                    aria-label={`Rate ${star} star${
-                      star > 1 ? "s" : ""
-                    }`}
-                  >
-                    <span
-                      className={
-                        star <= (hoverRating || rating)
-                          ? "text-[#C7A25A]"
-                          : "text-[#D8D4CC]"
-                      }
-                    >
-                      ★
-                    </span>
-                  </button>
-                ))}
-
-              </div>
-
-            </div>
-
-            {/* Review */}
-            <div className="mt-4">
-
-              <label className="block mb-2 font-medium text-[#2E473B]">
-                Your Review
-              </label>
-
-              <textarea
-                rows={5}
-                value={review}
-                onChange={(e) => setReview(e.target.value)}
-                placeholder="Share your experience with us..."
-                className="w-full rounded-2xl border border-[#E8E3DA] bg-white px-5 py-4 text-gray-700 resize-none outline-none focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
-              />
-
-            </div>
-
-            {/* Submit */}
-            <button
-              type="button"
-              onClick={handleSubmit}
-              disabled={submitting}
-              className={`mt-6 w-full py-4 rounded-full font-semibold transition-all ${
-                submitting
-                  ? "bg-gray-400 text-white cursor-not-allowed"
-                  : "bg-[#2E473B] text-white hover:bg-[#23392F]"
+            <div
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2E473B] text-white transition-transform duration-300 ${
+                showFeedback ? "rotate-180" : "rotate-0"
               }`}
             >
-              {submitting ? "Submitting..." : "Submit Review"}
-            </button>
+              <ChevronDown size={20} strokeWidth={2} />
+            </div>
 
-            <p className="mt-4 text-xs text-gray-500 text-center">
-              Reviews are checked before appearing publicly.
-            </p>
+          </button>
+
+          {/* =========================================
+              REVIEWS CONTENT
+          ========================================= */}
+
+          <div
+            className={`grid transition-all duration-500 ease-in-out ${
+              showFeedback
+                ? "grid-rows-[1fr] opacity-100 mt-5"
+                : "grid-rows-[0fr] opacity-0 mt-0"
+            }`}
+          >
+
+            <div className="overflow-hidden">
+
+              {reviews.length > 0 ? (
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                  {reviews.map((item) => (
+
+                    <div
+                      key={item.id}
+                      className="bg-[#F8F5EF] rounded-[24px] p-5 sm:p-6 border border-[#E8E3DA]"
+                    >
+
+                      {/* Stars */}
+
+                      <div className="flex gap-1 text-[#C7A25A] text-lg">
+
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <span key={star}>
+                            {star <= item.rating ? "★" : "☆"}
+                          </span>
+                        ))}
+
+                      </div>
+
+                      {/* Review */}
+
+                      <p className="mt-4 text-sm sm:text-base text-gray-600 leading-7">
+                        “{item.review}”
+                      </p>
+
+                      {/* Customer */}
+
+                      <p className="mt-5 font-semibold text-[#2E473B]">
+                        — {item.name}
+                      </p>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+              ) : (
+
+                <div className="rounded-[24px] border border-[#E8E3DA] bg-[#F8F5EF] px-6 py-10 text-center">
+
+                  <p className="text-[#2E473B] font-semibold">
+                    No customer reviews yet.
+                  </p>
+
+                  <p className="mt-2 text-sm text-gray-500">
+                    Be the first to share your experience with R & N Botanics.
+                  </p>
+
+                </div>
+
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* =========================================
+            WRITE REVIEW DROPDOWN
+        ========================================= */}
+
+        <div className="mt-5 max-w-5xl mx-auto">
+
+          {/* Dropdown Button */}
+
+          <button
+            type="button"
+            onClick={() => setShowWriteReview(!showWriteReview)}
+            aria-expanded={showWriteReview}
+            className={`w-full flex items-center justify-between rounded-2xl border-2 px-5 py-4 sm:px-6 sm:py-5 text-left transition-all duration-300 ${
+              showWriteReview
+                ? "border-[#2E473B] bg-[#F8F5EF]"
+                : "border-[#E8E3DA] bg-white hover:border-[#7C9A7D] hover:bg-[#FBFAF8]"
+            }`}
+          >
+
+            <div>
+
+              <p className="font-semibold text-[#2E473B] text-base sm:text-lg">
+                Share Your Experience
+              </p>
+
+              <p className="mt-1 text-xs sm:text-sm text-gray-500">
+                Have you tried our Signature Hair Oil? Leave a review.
+              </p>
+
+            </div>
+
+            <div
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2E473B] text-white transition-transform duration-300 ${
+                showWriteReview ? "rotate-180" : "rotate-0"
+              }`}
+            >
+              <ChevronDown size={20} strokeWidth={2} />
+            </div>
+
+          </button>
+
+          {/* =========================================
+              WRITE REVIEW CONTENT
+          ========================================= */}
+
+          <div
+            className={`grid transition-all duration-500 ease-in-out ${
+              showWriteReview
+                ? "grid-rows-[1fr] opacity-100 mt-5"
+                : "grid-rows-[0fr] opacity-0 mt-0"
+            }`}
+          >
+
+            <div className="overflow-hidden">
+
+              <div className="max-w-2xl mx-auto bg-[#F8F5EF] rounded-[32px] p-6 sm:p-8 lg:p-10 border border-[#E8E3DA]">
+
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#2E473B]">
+                  Share Your Experience
+                </h3>
+
+                <p className="mt-2 text-gray-500">
+                  We would love to hear what you think about your R & N
+                  Botanics experience.
+                </p>
+
+                {/* =====================================
+                    NAME
+                ===================================== */}
+
+                <div className="mt-5">
+
+                  <label className="block mb-2 font-medium text-[#2E473B]">
+                    Your Name
+                  </label>
+
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full h-12 rounded-2xl border border-[#E8E3DA] bg-white px-5 text-gray-700 outline-none focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+                  />
+
+                </div>
+
+                {/* =====================================
+                    RATING
+                ===================================== */}
+
+                <div className="mt-5">
+
+                  <label className="block mb-2 font-medium text-[#2E473B]">
+                    Your Rating
+                  </label>
+
+                  <div className="flex gap-2">
+
+                    {[1, 2, 3, 4, 5].map((star) => (
+
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setRating(star)}
+                        onMouseEnter={() => setHoverRating(star)}
+                        onMouseLeave={() => setHoverRating(0)}
+                        className="text-3xl transition-transform hover:scale-110"
+                        aria-label={`Rate ${star} star${
+                          star > 1 ? "s" : ""
+                        }`}
+                      >
+
+                        <span
+                          className={
+                            star <= (hoverRating || rating)
+                              ? "text-[#C7A25A]"
+                              : "text-[#D8D4CC]"
+                          }
+                        >
+                          ★
+                        </span>
+
+                      </button>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+                {/* =====================================
+                    REVIEW
+                ===================================== */}
+
+                <div className="mt-5">
+
+                  <label className="block mb-2 font-medium text-[#2E473B]">
+                    Your Review
+                  </label>
+
+                  <textarea
+                    rows={5}
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                    placeholder="Share your experience with us..."
+                    className="w-full rounded-2xl border border-[#E8E3DA] bg-white px-5 py-4 text-gray-700 resize-none outline-none focus:border-[#2E473B] focus:ring-2 focus:ring-[#2E473B]/10"
+                  />
+
+                </div>
+
+                {/* =====================================
+                    SUBMIT
+                ===================================== */}
+
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={submitting}
+                  className={`mt-6 w-full py-4 rounded-full font-semibold transition-all ${
+                    submitting
+                      ? "bg-gray-400 text-white cursor-not-allowed"
+                      : "bg-[#2E473B] text-white hover:bg-[#23392F]"
+                  }`}
+                >
+                  {submitting ? "Submitting..." : "Submit Review"}
+                </button>
+
+                <p className="mt-4 text-xs text-gray-500 text-center">
+                  Reviews are checked before appearing publicly.
+                </p>
+
+              </div>
+
+            </div>
 
           </div>
 
