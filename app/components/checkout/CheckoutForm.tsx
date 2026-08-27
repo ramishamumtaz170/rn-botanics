@@ -317,7 +317,7 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
 />
       </div>
 
-      {/* Terms */}
+      {/* Terms
 
       <div className="bg-white rounded-[40px] p-8 shadow-sm">
 
@@ -344,7 +344,7 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
 
         </label>
 
-      </div>
+      </div> */}
 
     </section>
   );
