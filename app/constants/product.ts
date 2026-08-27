@@ -22,7 +22,7 @@ discount: 10,
 
   stock: "In Stock",
 
-  image: "/images/product.jpg",
+  image: "/images/product1.jpg",
 
   images: [
     "/images/product1.jpg",
