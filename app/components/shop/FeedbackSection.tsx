@@ -290,27 +290,27 @@ export default function FeedbackSection() {
                   {/* PREVIOUS BUTTON */}
 
                   {reviews.length > 1 && (
-                    <button
-                      type="button"
-                      onClick={previousReview}
-                      aria-label="Previous review"
-                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
-                    >
-                      <ChevronLeft size={21} />
-                    </button>
+                   <button
+  type="button"
+  onClick={previousReview}
+  aria-label="Previous review"
+  className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105 z-10"
+>
+  <ChevronLeft size={21} />
+</button>
                   )}
 
                   {/* NEXT BUTTON */}
 
                   {reviews.length > 1 && (
                     <button
-                      type="button"
-                      onClick={nextReview}
-                      aria-label="Next review"
-                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
-                    >
-                      <ChevronRight size={21} />
-                    </button>
+  type="button"
+  onClick={nextReview}
+  aria-label="Next review"
+  className="absolute right-2 sm:right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105 z-10"
+>
+  <ChevronRight size={21} />
+</button>
                   )}
 
                   {/* DOTS */}
