@@ -109,11 +109,7 @@ export default function OrderSummary() {
       return;
     }
 
-    if (!checkoutData.termsAccepted) {
-      alert("Please accept the Terms & Conditions.");
-      return;
-    }
-
+   
     setLoading(true);
 
     try {
