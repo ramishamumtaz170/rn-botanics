@@ -31,9 +31,9 @@ import { useCheckout } from "@/app/context/CheckoutContext";
           Customer Information
         </h2>
 
-        <p className="mt-2 text-gray-500">
+        {/* <p className="mt-2 text-gray-500">
           Please enter your personal details.
-        </p>
+        </p> */}
 
         <div className="mt-4 space-y-4">
 
@@ -95,9 +95,9 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
           Shipping Address
         </h2>
 
-        <p className="mt-2 text-gray-500">
+        {/* <p className="mt-2 text-gray-500">
           Where should we deliver your order?
-        </p>
+        </p> */}
 
         <div className="mt-4 space-y-2">
 
@@ -229,9 +229,9 @@ className="w-full h-10 sm:h-12 rounded-2xl border border-[#E8E3DA] px-5 text-[16
             Delivery in 4–6 business days
           </p>
 
-          <p className="text-[#7C9A7D] text-sm font-medium mt-1">
+          {/* <p className="text-[#7C9A7D] text-sm font-medium mt-1">
             Available all over Pakistan
-          </p>
+          </p> */}
         </div>
 
       </div>
