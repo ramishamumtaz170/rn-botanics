@@ -223,9 +223,11 @@ export default function FeedbackSection() {
 
               {reviews.length > 0 ? (
 
-                <div className="relative">
+                <div>
 
-                  {/* REVIEW CARDS */}
+                  {/* =========================================
+                      REVIEW CARDS
+                  ========================================= */}
 
                   <div className="overflow-hidden">
 
@@ -287,52 +289,46 @@ export default function FeedbackSection() {
 
                   </div>
 
-                  {/* PREVIOUS BUTTON */}
+                  {/* =========================================
+                      CAROUSEL CONTROLS
+                  ========================================= */}
 
                   {reviews.length > 1 && (
-                   <button
-  type="button"
-  onClick={previousReview}
-  aria-label="Previous review"
-  className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105 z-10"
->
-  <ChevronLeft size={21} />
-</button>
-                  )}
+                    <div className="mt-5 flex items-center justify-center gap-4">
 
-                  {/* NEXT BUTTON */}
+                      {/* PREVIOUS */}
 
-                  {reviews.length > 1 && (
-                    <button
-  type="button"
-  onClick={nextReview}
-  aria-label="Next review"
-  className="absolute right-2 sm:right-2 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105 z-10"
->
-  <ChevronRight size={21} />
-</button>
-                  )}
-
-                  {/* DOTS */}
-
-                  {reviews.length > 1 && (
-                    <div className="mt-5 flex justify-center gap-2">
-
-                      {reviews.map((item, index) => (
-
-                        <button
-                          key={item.id}
-                          type="button"
-                          onClick={() => setCurrentIndex(index)}
-                          aria-label={`Go to review ${index + 1}`}
-                          className={`h-2 rounded-full transition-all duration-300 ${
-                            currentIndex === index
-                              ? "w-6 bg-[#2E473B]"
-                              : "w-2 bg-[#D8D4CC]"
-                          }`}
+                      <button
+                        type="button"
+                        onClick={previousReview}
+                        aria-label="Previous review"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
+                      >
+                        <ChevronLeft
+                          size={20}
+                          strokeWidth={2}
                         />
+                      </button>
 
-                      ))}
+                      {/* REVIEW NUMBER */}
+
+                      <span className="min-w-[60px] text-center text-sm font-semibold text-[#2E473B]">
+                        {currentIndex + 1} / {reviews.length}
+                      </span>
+
+                      {/* NEXT */}
+
+                      <button
+                        type="button"
+                        onClick={nextReview}
+                        aria-label="Next review"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
+                      >
+                        <ChevronRight
+                          size={20}
+                          strokeWidth={2}
+                        />
+                      </button>
 
                     </div>
                   )}
