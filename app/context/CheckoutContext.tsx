@@ -18,8 +18,7 @@ type CheckoutData = {
   province: string;
   postalCode: string;
   notes: string;
-  termsAccepted: boolean;
-};
+  };
 
 type CheckoutContextType = {
   delivery: DeliveryMethod;
@@ -56,7 +55,7 @@ export function CheckoutProvider({
       province: "Punjab",
       postalCode: "",
       notes: "",
-      termsAccepted: false,
+     
     });
 
   // NEW FUNCTION
@@ -70,7 +69,7 @@ export function CheckoutProvider({
       province: "Punjab",
       postalCode: "",
       notes: "",
-      termsAccepted: false,
+      
     });
 
     setDelivery("standard");
