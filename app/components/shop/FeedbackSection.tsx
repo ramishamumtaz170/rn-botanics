@@ -10,7 +10,11 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { ChevronDown } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 type Review = {
   id: string;
@@ -32,6 +36,9 @@ export default function FeedbackSection() {
   // Dropdown states
   const [showFeedback, setShowFeedback] = useState(false);
   const [showWriteReview, setShowWriteReview] = useState(false);
+
+  // Carousel
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // =========================================
   // LOAD APPROVED REVIEWS
@@ -57,6 +64,7 @@ export default function FeedbackSection() {
           .filter((review) => review.approved === true);
 
         setReviews(loadedReviews);
+        setCurrentIndex(0);
       },
       (error) => {
         console.error("Failed to load reviews:", error);
@@ -65,6 +73,26 @@ export default function FeedbackSection() {
 
     return () => unsubscribe();
   }, []);
+
+  // =========================================
+  // CAROUSEL CONTROLS
+  // =========================================
+
+  const nextReview = () => {
+    if (reviews.length === 0) return;
+
+    setCurrentIndex((previous) =>
+      previous >= reviews.length - 1 ? 0 : previous + 1
+    );
+  };
+
+  const previousReview = () => {
+    if (reviews.length === 0) return;
+
+    setCurrentIndex((previous) =>
+      previous === 0 ? reviews.length - 1 : previous - 1
+    );
+  };
 
   // =========================================
   // SUBMIT REVIEW
@@ -180,7 +208,7 @@ export default function FeedbackSection() {
           </button>
 
           {/* =========================================
-              REVIEWS CONTENT
+              REVIEWS CAROUSEL
           ========================================= */}
 
           <div
@@ -195,42 +223,119 @@ export default function FeedbackSection() {
 
               {reviews.length > 0 ? (
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="relative">
 
-                  {reviews.map((item) => (
+                  {/* REVIEW CARDS */}
+
+                  <div className="overflow-hidden">
 
                     <div
-                      key={item.id}
-                      className="bg-[#F8F5EF] rounded-[24px] p-5 sm:p-6 border border-[#E8E3DA]"
+                      className="flex transition-transform duration-500 ease-in-out"
+                      style={{
+                        transform: `translateX(-${
+                          currentIndex * 100
+                        }%)`,
+                      }}
                     >
 
-                      {/* Stars */}
+                      {reviews.map((item) => (
 
-                      <div className="flex gap-1 text-[#C7A25A] text-lg">
+                        <div
+                          key={item.id}
+                          className="w-full shrink-0 px-1"
+                        >
 
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <span key={star}>
-                            {star <= item.rating ? "★" : "☆"}
-                          </span>
-                        ))}
+                          <div className="bg-[#F8F5EF] rounded-[24px] p-6 sm:p-8 border border-[#E8E3DA] min-h-[210px] flex flex-col justify-between">
 
-                      </div>
+                            {/* Stars */}
 
-                      {/* Review */}
+                            <div>
 
-                      <p className="mt-4 text-sm sm:text-base text-gray-600 leading-7">
-                        “{item.review}”
-                      </p>
+                              <div className="flex gap-1 text-[#C7A25A] text-lg">
 
-                      {/* Customer */}
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <span key={star}>
+                                    {star <= item.rating
+                                      ? "★"
+                                      : "☆"}
+                                  </span>
+                                ))}
 
-                      <p className="mt-5 font-semibold text-[#2E473B]">
-                        — {item.name}
-                      </p>
+                              </div>
+
+                              {/* Review */}
+
+                              <p className="mt-4 text-sm sm:text-base text-gray-600 leading-7">
+                                “{item.review}”
+                              </p>
+
+                            </div>
+
+                            {/* Customer */}
+
+                            <p className="mt-5 font-semibold text-[#2E473B]">
+                              — {item.name}
+                            </p>
+
+                          </div>
+
+                        </div>
+
+                      ))}
 
                     </div>
 
-                  ))}
+                  </div>
+
+                  {/* PREVIOUS BUTTON */}
+
+                  {reviews.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={previousReview}
+                      aria-label="Previous review"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
+                    >
+                      <ChevronLeft size={21} />
+                    </button>
+                  )}
+
+                  {/* NEXT BUTTON */}
+
+                  {reviews.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={nextReview}
+                      aria-label="Next review"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
+                    >
+                      <ChevronRight size={21} />
+                    </button>
+                  )}
+
+                  {/* DOTS */}
+
+                  {reviews.length > 1 && (
+                    <div className="mt-5 flex justify-center gap-2">
+
+                      {reviews.map((item, index) => (
+
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => setCurrentIndex(index)}
+                          aria-label={`Go to review ${index + 1}`}
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            currentIndex === index
+                              ? "w-6 bg-[#2E473B]"
+                              : "w-2 bg-[#D8D4CC]"
+                          }`}
+                        />
+
+                      ))}
+
+                    </div>
+                  )}
 
                 </div>
 
@@ -261,8 +366,6 @@ export default function FeedbackSection() {
         ========================================= */}
 
         <div className="mt-5 max-w-5xl mx-auto">
-
-          {/* Dropdown Button */}
 
           <button
             type="button"
@@ -322,9 +425,7 @@ export default function FeedbackSection() {
                   Botanics experience.
                 </p>
 
-                {/* =====================================
-                    NAME
-                ===================================== */}
+                {/* NAME */}
 
                 <div className="mt-5">
 
@@ -342,9 +443,7 @@ export default function FeedbackSection() {
 
                 </div>
 
-                {/* =====================================
-                    RATING
-                ===================================== */}
+                {/* RATING */}
 
                 <div className="mt-5">
 
@@ -386,9 +485,7 @@ export default function FeedbackSection() {
 
                 </div>
 
-                {/* =====================================
-                    REVIEW
-                ===================================== */}
+                {/* REVIEW */}
 
                 <div className="mt-5">
 
@@ -406,9 +503,7 @@ export default function FeedbackSection() {
 
                 </div>
 
-                {/* =====================================
-                    SUBMIT
-                ===================================== */}
+                {/* SUBMIT */}
 
                 <button
                   type="button"

@@ -8,7 +8,7 @@ import Ingredients from "../components/shop/Ingredients";
 import HowToUse from "../components/shop/HowToUse";
 import CallToAction from "../components/shop/CallToAction";
 import FeedbackSection from "../components/shop/FeedbackSection";
-import ReviewPopup from "../components/shop/ReviewPopup";
+// import ReviewPopup from "../components/shop/ReviewPopup";
 import CartDrawer from "../components/shop/CartDrawer";
 
 export default function ShopContent() {
@@ -47,7 +47,7 @@ export default function ShopContent() {
         <CallToAction />
 
         {/* Customer Review Popup */}
-        <ReviewPopup />
+        {/* <ReviewPopup /> */}
 
       </main>
 
