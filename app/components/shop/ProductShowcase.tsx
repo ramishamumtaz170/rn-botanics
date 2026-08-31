@@ -199,11 +199,7 @@ export default function ProductShowcase() {
 
          <div className="mt-3 space-y-2">
   <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
-    🌿 <span>Nourishes the scalp</span>
-  </p>
-
-  <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
-    ✨ <span>Helps reduce hair fall</span>
+    🌿 <span>Helps reduce hair fall</span>
   </p>
 
   <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
@@ -218,12 +214,12 @@ export default function ProductShowcase() {
 
           <div className="mt-4 flex items-center gap-3">
             <span className="text-[#C7A25A] text-xl">
-              ★★★★★
+              ★★★★
             </span>
 
             <span className="text-gray-500">
-              {PRODUCT.tagline}
-            </span>
+  Loved by 100+ Customers
+</span>
           </div>
 
           {/* =========================================
