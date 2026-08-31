@@ -191,13 +191,13 @@ export default function ProductShowcase() {
 
           {/* TITLE */}
 
-          <h2 className="mt-2 text-2xl font-bold leading-tight text-[#2E473B]">
+          <h2 className="mt-0 text-2xl font-bold leading-tight text-[#2E473B]">
             {PRODUCT.name}
           </h2>
 
           {/* DESCRIPTION */}
 
-         <div className="mt-3 space-y-2">
+         <div className="mt-2 space-y-1">
   <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
     🌿 <span>Helps reduce hair fall</span>
   </p>
@@ -212,7 +212,7 @@ export default function ProductShowcase() {
 </div>
           {/* RATING */}
 
-          <div className="mt-4 flex items-center gap-3">
+          <div className="mt-2 flex items-center gap-3">
             <span className="text-[#C7A25A] text-xl">
               ★★★★★
             </span>
@@ -226,9 +226,9 @@ export default function ProductShowcase() {
               BUNDLE OPTIONS
           ========================================= */}
 
-          <div className="mt-5">
+          <div className="mt-2">
 
-            <p className="text-sm font-semibold text-[#2E473B] mb-3">
+            <p className="text-sm font-semibold text-[#2E473B] mb-2">
               Choose your bundle:
             </p>
 
