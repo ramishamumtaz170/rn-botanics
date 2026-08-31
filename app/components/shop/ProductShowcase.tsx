@@ -140,8 +140,8 @@ export default function ProductShowcase() {
             <Image
               src={selectedImage}
               alt={PRODUCT.name}
-              width={320}
-              height={320}
+              width={280}
+              height={280}
               className="object-contain drop-shadow-2xl transition duration-500"
             />
           </div>
@@ -214,7 +214,7 @@ export default function ProductShowcase() {
 
           <div className="mt-4 flex items-center gap-3">
             <span className="text-[#C7A25A] text-xl">
-              ★★★★
+              ★★★★★
             </span>
 
             <span className="text-gray-500">
