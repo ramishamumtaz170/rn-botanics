@@ -16,8 +16,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 
-
-
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void;
@@ -41,49 +39,51 @@ export default function OrderSummary() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  // Calculate subtotal
+  // =========================================
+  // CALCULATE TOTALS
+  // =========================================
+
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  // Free shipping
   const shipping = 0;
-
-  // Final total
   const total = subtotal + shipping;
 
-  // Generate unique order number
+  // =========================================
+  // GENERATE UNIQUE ORDER NUMBER
+  // =========================================
+
   const generateOrderNumber = async () => {
     const counterRef = doc(db, "counters", "orders");
 
-    const orderNumber = await runTransaction(
-      db,
-      async (transaction) => {
-        const counterDoc = await transaction.get(counterRef);
+    return await runTransaction(db, async (transaction) => {
+      const counterDoc = await transaction.get(counterRef);
 
-        if (!counterDoc.exists()) {
-          throw new Error("Counter document not found.");
-        }
-
-        const current =
-          counterDoc.data().lastOrderNumber || 0;
-
-        const next = current + 1;
-
-        transaction.update(counterRef, {
-          lastOrderNumber: next,
-        });
-
-        return `RNB-${String(next).padStart(4, "0")}`;
+      if (!counterDoc.exists()) {
+        throw new Error("Counter document not found.");
       }
-    );
 
-    return orderNumber;
+      const current = counterDoc.data().lastOrderNumber || 0;
+      const next = current + 1;
+
+      transaction.update(counterRef, {
+        lastOrderNumber: next,
+      });
+
+      return `RNB-${String(next).padStart(4, "0")}`;
+    });
   };
 
-  // Place order
+  // =========================================
+  // PLACE ORDER
+  // =========================================
+
   const handlePlaceOrder = async () => {
+    if (loading) return;
+
+    // Validation
     if (cart.length === 0) {
       alert("Your cart is empty.");
       return;
@@ -109,13 +109,19 @@ export default function OrderSummary() {
       return;
     }
 
-   
     setLoading(true);
 
     try {
+      // =========================================
+      // 1. GENERATE ORDER NUMBER
+      // =========================================
+
       const orderNumber = await generateOrderNumber();
 
-      // Save order to Firebase
+      // =========================================
+      // 2. SAVE ORDER TO FIREBASE
+      // =========================================
+
       await setDoc(doc(db, "orders", orderNumber), {
         orderNumber,
         customer: checkoutData,
@@ -131,22 +137,28 @@ export default function OrderSummary() {
         createdAt: serverTimestamp(),
       });
 
+      // =========================================
+      // 3. META PURCHASE EVENT
+      // =========================================
 
       if (typeof window !== "undefined" && window.fbq) {
-  window.fbq("track", "Purchase", {
-    content_ids: cart.map((item) => item.id),
-    content_type: "product",
-    value: total,
-    currency: "PKR",
-    num_items: cart.reduce(
-      (sum, item) => sum + item.quantity,
-      0
-    ),
-  });
-}
+        window.fbq("track", "Purchase", {
+          content_ids: cart.map((item) => item.id),
+          content_type: "product",
+          value: total,
+          currency: "PKR",
+          num_items: cart.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+          ),
+        });
+      }
 
-      // Send order email
-      const response = await fetch("/api/send-order", {
+      // =========================================
+      // 4. SEND EMAIL WITHOUT BLOCKING CHECKOUT
+      // =========================================
+
+      fetch("/api/send-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -159,22 +171,26 @@ export default function OrderSummary() {
           shipping,
           total,
         }),
+      }).catch((error) => {
+        console.error("Order email failed:", error);
       });
 
-      if (!response.ok) {
-        console.error("Failed to send order email.");
-      }
+      // =========================================
+      // 5. CLEAR CART
+      // =========================================
 
-      // Clear cart and checkout data
       clearCart();
       resetCheckout();
 
-      // Go to success page
+      // =========================================
+      // 6. GO TO SUCCESS PAGE IMMEDIATELY
+      // =========================================
+
       router.push(`/order-success?order=${orderNumber}`);
+
     } catch (error) {
-      console.error(error);
-      alert("Failed to place order.");
-    } finally {
+      console.error("Failed to place order:", error);
+      alert("Failed to place order. Please try again.");
       setLoading(false);
     }
   };
@@ -358,9 +374,7 @@ export default function OrderSummary() {
             : "bg-[#2E473B] text-white hover:bg-[#23392F]"
         }`}
       >
-        {loading
-          ? "Placing Order..."
-          : "Place Order"}
+        {loading ? "Placing Order..." : "Place Order"}
       </button>
 
     </aside>
