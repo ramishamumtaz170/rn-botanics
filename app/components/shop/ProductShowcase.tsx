@@ -185,9 +185,9 @@ export default function ProductShowcase() {
 
           {/* COLLECTION */}
 
-          <p className="uppercase tracking-[0.3em] text-sm text-[#7C9A7D] font-medium">
+          {/* <p className="uppercase tracking-[0.3em] text-sm text-[#7C9A7D] font-medium">
             Signature Collection
-          </p>
+          </p> */}
 
           {/* TITLE */}
 
@@ -197,10 +197,23 @@ export default function ProductShowcase() {
 
           {/* DESCRIPTION */}
 
-          <p className="mt-2 text-lg leading-6 text-gray-600">
-            {PRODUCT.description}
-          </p>
+         <div className="mt-3 space-y-2">
+  <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
+    🌿 <span>Nourishes the scalp</span>
+  </p>
 
+  <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
+    ✨ <span>Helps reduce hair fall</span>
+  </p>
+
+  <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
+    🤍 <span>Promotes healthier-looking hair</span>
+  </p>
+
+  <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
+    ✨ <span>Leaves hair soft & shiny just after 1st wash</span>
+  </p>
+</div>
           {/* RATING */}
 
           <div className="mt-4 flex items-center gap-3">
