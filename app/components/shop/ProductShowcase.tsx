@@ -195,7 +195,7 @@ export default function ProductShowcase() {
             {PRODUCT.name}
           </h2>
 
-          {/* DESCRIPTION */}
+          {/* DESCRIPTION
 
          <div className="mt-2 space-y-1">
   <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
@@ -209,7 +209,7 @@ export default function ProductShowcase() {
   <p className="flex items-center gap-2 text-base sm:text-lg font-medium text-gray-700">
     ✨ <span>Leaves hair soft & shiny just after 1st wash</span>
   </p>
-</div>
+</div> */}
           {/* RATING */}
 
           <div className="mt-2 flex items-center gap-3">
