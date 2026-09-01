@@ -207,155 +207,151 @@ export default function FeedbackSection() {
 
           </button>
 
-          {/* =========================================
-              REVIEWS CAROUSEL
-          ========================================= */}
+         {/* =========================================
+    REVIEWS CAROUSEL
+========================================= */}
 
+<div
+  className={`grid transition-all duration-500 ease-in-out ${
+    showFeedback
+      ? "grid-rows-[1fr] opacity-100 mt-5"
+      : "grid-rows-[0fr] opacity-0 mt-0"
+  }`}
+>
+  <div className="overflow-hidden">
+
+    {reviews.length > 0 ? (
+
+      <div className="max-w-2xl mx-auto">
+
+        {/* CAROUSEL VIEWPORT */}
+        <div className="overflow-hidden rounded-[24px]">
+
+          {/* SLIDING TRACK */}
           <div
-            className={`grid transition-all duration-500 ease-in-out ${
-              showFeedback
-                ? "grid-rows-[1fr] opacity-100 mt-5"
-                : "grid-rows-[0fr] opacity-0 mt-0"
-            }`}
+            className="flex transition-transform duration-500 ease-out"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+            }}
           >
 
-            <div className="overflow-hidden">
+            {reviews.map((item) => (
 
-              {reviews.length > 0 ? (
+              <div
+                key={item.id}
+                className="w-full min-w-full shrink-0"
+              >
 
-                <div>
+                {/* REVIEW CARD */}
+                <div className="bg-[#F8F5EF] rounded-[24px] p-6 sm:p-8 border border-[#E8E3DA] min-h-[210px]">
 
-                  {/* =========================================
-                      REVIEW CARDS
-                  ========================================= */}
-
-                  <div className="overflow-hidden">
-
-                    <div
-                      className="flex transition-transform duration-500 ease-in-out"
-                      style={{
-                        transform: `translateX(-${
-                          currentIndex * 100
-                        }%)`,
-                      }}
-                    >
-
-                      {reviews.map((item) => (
-
-                        <div
-                          key={item.id}
-                          className="w-full shrink-0 px-1"
-                        >
-
-                          <div className="bg-[#F8F5EF] rounded-[24px] p-6 sm:p-8 border border-[#E8E3DA] min-h-[210px] flex flex-col justify-between">
-
-                            {/* Stars */}
-
-                            <div>
-
-                              <div className="flex gap-1 text-[#C7A25A] text-lg">
-
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                  <span key={star}>
-                                    {star <= item.rating
-                                      ? "★"
-                                      : "☆"}
-                                  </span>
-                                ))}
-
-                              </div>
-
-                              {/* Review */}
-
-                              <p className="mt-4 text-sm sm:text-base text-gray-600 leading-7">
-                                “{item.review}”
-                              </p>
-
-                            </div>
-
-                            {/* Customer */}
-
-                            <p className="mt-5 font-semibold text-[#2E473B]">
-                              — {item.name}
-                            </p>
-
-                          </div>
-
-                        </div>
-
-                      ))}
-
-                    </div>
-
+                  {/* STARS */}
+                  <div className="flex gap-1 text-[#C7A25A] text-lg">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span key={star}>
+                        {star <= item.rating ? "★" : "☆"}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* =========================================
-                      CAROUSEL CONTROLS
-                  ========================================= */}
-
-                  {reviews.length > 1 && (
-                    <div className="mt-5 flex items-center justify-center gap-4">
-
-                      {/* PREVIOUS */}
-
-                      <button
-                        type="button"
-                        onClick={previousReview}
-                        aria-label="Previous review"
-                        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
-                      >
-                        <ChevronLeft
-                          size={20}
-                          strokeWidth={2}
-                        />
-                      </button>
-
-                      {/* REVIEW NUMBER */}
-
-                      <span className="min-w-[60px] text-center text-sm font-semibold text-[#2E473B]">
-                        {currentIndex + 1} / {reviews.length}
-                      </span>
-
-                      {/* NEXT */}
-
-                      <button
-                        type="button"
-                        onClick={nextReview}
-                        aria-label="Next review"
-                        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2E473B] text-white shadow-md transition-all hover:bg-[#23392F] hover:scale-105"
-                      >
-                        <ChevronRight
-                          size={20}
-                          strokeWidth={2}
-                        />
-                      </button>
-
-                    </div>
-                  )}
-
-                </div>
-
-              ) : (
-
-                <div className="rounded-[24px] border border-[#E8E3DA] bg-[#F8F5EF] px-6 py-10 text-center">
-
-                  <p className="text-[#2E473B] font-semibold">
-                    No customer reviews yet.
+                  {/* REVIEW */}
+                  <p className="mt-4 text-sm sm:text-base text-gray-600 leading-7">
+                    “{item.review}”
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-500">
-                    Be the first to share your experience with R & N Botanics.
+                  {/* CUSTOMER */}
+                  <p className="mt-5 font-semibold text-[#2E473B]">
+                    — {item.name}
                   </p>
 
                 </div>
 
-              )}
+              </div>
 
-            </div>
+            ))}
 
           </div>
 
         </div>
+
+        {/* CONTROLS */}
+        {reviews.length > 1 && (
+          <div className="mt-5 flex items-center justify-center gap-4">
+
+            {/* PREVIOUS */}
+            <button
+              type="button"
+              onClick={previousReview}
+              aria-label="Previous review"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                bg-[#2E473B]
+                text-white
+                shadow-md
+                transition-all
+                hover:bg-[#23392F]
+                hover:scale-105
+              "
+            >
+              <ChevronLeft size={20} />
+            </button>
+
+            {/* NUMBER */}
+            <span className="min-w-[60px] text-center text-sm font-semibold text-[#2E473B]">
+              {currentIndex + 1} / {reviews.length}
+            </span>
+
+            {/* NEXT */}
+            <button
+              type="button"
+              onClick={nextReview}
+              aria-label="Next review"
+              className="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                bg-[#2E473B]
+                text-white
+                shadow-md
+                transition-all
+                hover:bg-[#23392F]
+                hover:scale-105
+              "
+            >
+              <ChevronRight size={20} />
+            </button>
+
+          </div>
+        )}
+
+      </div>
+
+    ) : (
+
+      <div className="rounded-[24px] border border-[#E8E3DA] bg-[#F8F5EF] px-6 py-10 text-center">
+
+        <p className="text-[#2E473B] font-semibold">
+          No customer reviews yet.
+        </p>
+
+        <p className="mt-2 text-sm text-gray-500">
+          Be the first to share your experience with R & N Botanics.
+        </p>
+
+      </div>
+
+    )}
+
+  </div>
+</div>        </div>
 
         {/* =========================================
             WRITE REVIEW DROPDOWN
