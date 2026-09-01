@@ -28,6 +28,6 @@ discount: 10,
     "/images/product1.jpg",
     "/images/product2.jpg",
     "/images/product3.jpg",
-    "/images/product4.jpeg",
+    "/images/product4.jpg",
   ],
 };
