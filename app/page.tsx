@@ -12,8 +12,8 @@ export default function Home() {
     <>
       <main className="w-full overflow-x-hidden">
         <Hero />
-        <BrandPromise />
         <FeaturedProducts />
+        <BrandPromise />
         <Ingredients />
         <WhyChooseUs />
         <OurStory />
