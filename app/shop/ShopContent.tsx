@@ -11,9 +11,7 @@ export default function ShopContent() {
   const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    const handleOpenCart = () => {
-      setCartOpen(true);
-    };
+    const handleOpenCart = () => setCartOpen(true);
 
     window.addEventListener("open-cart", handleOpenCart);
 
@@ -25,32 +23,21 @@ export default function ShopContent() {
   return (
     <>
       <main className="min-h-screen bg-[#F8F5EF]">
-
         {/* Collection Header */}
-        <section className="px-4 pb-4 pt-12 text-center md:pt-4">
-          {/* <p className="text-sm uppercase tracking-[0.3em] text-[#7C9A7D]">
-            R & N Botanics
-          </p> */}
-
-          <h3 className="mt-3 text-2xl font-semibold text-[#2E473B] md:text-3xl">
+        <section className="px-4 pb-6 pt-10 text-center md:pt-8">
+          <h1 className="text-2xl font-semibold text-[#2E473B] sm:text-3xl">
             Our Collection
-          </h3>
-
-         {/* <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-gray-600 md:text-base">
-  Discover thoughtfully crafted botanical essentials, inspired by
-  nature and created to bring a little everyday luxury to your routine.
-</p> */}
-
+          </h1>
         </section>
 
         {/* Product Collection */}
-        <section className="mx-auto max-w-4xl px-4 pb-10">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mx-auto max-w-7xl px-3 pb-12 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
             {PRODUCTS.map((product) => (
               <Link
                 key={product.id}
                 href={`/shop/${product.slug}`}
-                className="group overflow-hidden rounded-2xl border border-[#E5E0D7] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="group min-w-0 overflow-hidden rounded-xl border border-[#E5E0D7] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:rounded-2xl"
               >
                 {/* Product Image */}
                 <div className="relative aspect-square overflow-hidden bg-[#F4F1EA]">
@@ -58,58 +45,58 @@ export default function ShopContent() {
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-contain p-8 transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-105 sm:p-5"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
 
                   {/* Discount Badge */}
                   {product.discount > 0 && (
-                    <span className="absolute left-4 top-4 rounded-full bg-[#2E473B] px-3 py-1.5 text-xs font-semibold text-white">
+                    <span className="absolute left-2 top-2 rounded-full bg-[#2E473B] px-2 py-1 text-[9px] font-semibold text-white sm:left-3 sm:top-3 sm:px-2.5 sm:text-[11px]">
                       {product.discount}% OFF
                     </span>
                   )}
                 </div>
 
                 {/* Product Information */}
-                <div className="p-5">
-                  <p className="text-xs uppercase tracking-[0.18em] text-[#7C9A7D]">
+                <div className="p-3 sm:p-4">
+                  <p className="text-[9px] uppercase tracking-[0.12em] text-[#7C9A7D] sm:text-[10px] sm:tracking-[0.16em]">
                     {product.type === "bundle"
                       ? "Bundle"
                       : product.type === "shampoo"
-                      ? "Hair Care"
-                      : product.type === "comb"
-                      ? "Hair Care Essential"
-                      : "Signature Collection"}
+                        ? "Hair Care"
+                        : product.type === "comb"
+                          ? "Hair Care Essential"
+                          : "Signature Collection"}
                   </p>
 
-                  <h2 className="mt-2 text-lg font-semibold leading-6 text-[#2E473B]">
+                  <h2 className="mt-1.5 line-clamp-2 text-sm font-semibold leading-5 text-[#2E473B] sm:text-base">
                     {product.name}
                   </h2>
 
-                  <p className="mt-2 text-sm leading-5 text-gray-500">
+                  <p className="mt-1.5 line-clamp-2 text-xs leading-4 text-gray-500 sm:text-sm sm:leading-5">
                     {product.shortDescription}
                   </p>
 
                   {/* Price */}
-                  <div className="mt-4 flex items-center gap-2">
-                    <span className="text-lg font-semibold text-[#2E473B]">
+                  <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="text-sm font-semibold text-[#2E473B] sm:text-base">
                       Rs. {product.salePrice.toLocaleString()}
                     </span>
 
                     {product.discount > 0 && (
-                      <span className="text-sm text-gray-400 line-through">
+                      <span className="text-[10px] text-gray-400 line-through sm:text-xs">
                         Rs. {product.originalPrice.toLocaleString()}
                       </span>
                     )}
                   </div>
 
                   {/* View Product */}
-                  <div className="mt-5 flex items-center justify-between border-t border-[#EEEAE2] pt-4">
-                    <span className="text-sm font-medium text-[#2E473B]">
+                  <div className="mt-3 flex items-center justify-between border-t border-[#EEEAE2] pt-3">
+                    <span className="text-xs font-medium text-[#2E473B] sm:text-sm">
                       View Product
                     </span>
 
-                    <span className="text-lg text-[#7C9A7D] transition-transform duration-300 group-hover:translate-x-1">
+                    <span className="text-base text-[#7C9A7D] transition-transform duration-300 group-hover:translate-x-1">
                       →
                     </span>
                   </div>
