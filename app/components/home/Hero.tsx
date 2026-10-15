@@ -10,14 +10,15 @@ export default function Hero() {
     >
       {/* Full-width hero banner */}
       <div className="relative min-h-[420px] w-full sm:min-h-[560px] lg:min-h-[680px]">
-        <Image
-          src="/images/hero-products.png"
-          alt="R & N Botanics hair oil, Coffee Velvet Shampoo and Conditioner, and wooden comb"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        
+<Image
+  src="/images/hero-products.png"
+  alt="R & N Botanics hair oil, Coffee Velvet Shampoo and Conditioner, and wooden comb"
+  fill
+  priority
+  sizes="100vw"
+  className="object-contain object-center sm:object-cover"
+/>
 
         {/* Optional clickable overlay area for the call to action */}
         <div className="absolute inset-0 flex items-end justify-center pb-6 sm:pb-10 lg:pb-12">
