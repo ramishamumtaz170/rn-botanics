@@ -1,13 +1,5 @@
-import ProductDetail from "../../components/shop/ProductDetail";
-import ProductInfoTabs from "../../components/shop/ProductInfoTabs";
+import { redirect } from "next/navigation";
 
 export default function HairOilPage() {
-  return (
-    <main className="bg-[#F8F5EF] pb-24">
-        <div className="max-w-7xl mx-auto px-6">
-        <ProductDetail />
-        <ProductInfoTabs />
-      </div>
-    </main>
-  );
+  redirect("/shop/signature-hair-oil");
 }

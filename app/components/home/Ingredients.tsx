@@ -1,96 +1,114 @@
+
 import Image from "next/image";
 
 export default function Ingredients() {
   const ingredients = [
     {
-      name: "Coconut Oil",
-      image: "/images/ingredients/coconut.png",
-      description: "Deeply moisturizes and nourishes dry hair.",
+      name: "Amla",
+      image: "/images/ingredients/amla.png",
+      description: "A traditional botanical treasured in hair care.",
     },
     {
-      name: "Mustard Oil",
-      image: "/images/ingredients/mustard3.png",
-      description: "Traditionally used to strengthen and nourish hair.",
+      name: "Reetha",
+      image: "/images/ingredients/reetha.png",
+      description: "A traditional ingredient used in herbal hair care.",
+    },
+    {
+      name: "Shikakai",
+      image: "/images/ingredients/shikakai.png",
+      description: "A botanical long valued in traditional hair rituals.",
     },
     {
       name: "Rosemary",
       image: "/images/ingredients/rosemary1.png",
-      description: "Supports healthy-looking, fuller hair.",
-    },
-    {
-      name: "Amla",
-      image: "/images/ingredients/amla.png",
-      description: "Rich in nutrients that help improve natural shine.",
+      description: "An aromatic herb included in botanical hair care.",
     },
     {
       name: "Hibiscus",
       image: "/images/ingredients/hibiscus.png",
-      description: "Helps condition and soften hair.",
+      description: "A flower cherished in traditional hair-care rituals.",
+    },
+    {
+      name: "Aloe Vera",
+      image: "/images/ingredients/aloe-vera.png",
+      description: "A familiar botanical used in personal-care formulations.",
+    },
+    {
+      name: "Vitamin E",
+      image: "/images/ingredients/vitamin-e.png",
+      description: "A widely used ingredient in personal-care products.",
     },
     {
       name: "Bhringraj",
       image: "/images/ingredients/bhringraj.png",
-      description: "A treasured Ayurvedic herb for hair care.",
+      description: "A traditional Ayurvedic botanical for hair care.",
     },
     {
       name: "Fenugreek",
       image: "/images/ingredients/fenugreek.png",
-      description: "Helps nourish and smooth the hair.",
+      description: "A seed traditionally used in herbal hair-care rituals.",
     },
     {
-      name: "Jatamansi",
-      image: "/images/ingredients/jatamansi.png",
-      description: "A traditional botanical used in herbal hair care.",
+      name: "Black Seed",
+      image: "/images/ingredients/black-seed.png",
+      description: "Also known as kalonji, a traditional botanical ingredient.",
+    },
+    {
+      name: "Flaxseed",
+      image: "/images/ingredients/flaxseed.png",
+      description: "A plant-derived ingredient used in hair-care formulations.",
     },
   ];
 
   return (
     <section
       id="ingredients"
-      className="scroll-mt-24 bg-white py-14 sm:py-20 lg:py-10 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden"
+      className="scroll-mt-24 w-full overflow-x-hidden bg-white px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-16"
     >
-      <div className="max-w-7xl mx-auto">
-
+      <div className="mx-auto max-w-7xl">
         {/* Heading Section */}
-        <div className="text-center flex flex-col items-center w-full">
-          <p className="uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold">
-            Botanical Blend
+        <div className="flex w-full flex-col items-center text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#7C9A7D] sm:text-sm">
+            Inspired by Nature
           </p>
 
-          <h3 className="mt-3 sm:mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2E473B]">
+          <h3 className="mt-3 font-serif text-3xl text-[#2E473B] sm:mt-4 sm:text-4xl lg:text-5xl">
             Nature&apos;s Finest Ingredients
           </h3>
 
-          <p className="mt-3 sm:mt-5 text-center text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-xl mx-auto px-6 sm:px-0">
-            Every bottle is handcrafted using premium botanical oils and
-            carefully selected herbs inspired by traditional hair care rituals.
+          <p className="mx-auto mt-4 max-w-2xl px-4 text-center text-sm leading-relaxed text-gray-600 sm:mt-5 sm:px-0 sm:text-base md:text-lg">
+            Discover the botanicals and traditional ingredients that
+            inspire R &amp; N Botanics. Each product has its own
+            thoughtfully developed formulation, crafted with care
+            for your everyday hair-care ritual.
           </p>
         </div>
 
         {/* Ingredient Cards Grid */}
-        <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10 sm:mt-16 w-full px-4 sm:px-0">
+        <div className="mt-10 grid w-full grid-cols-1 justify-items-center gap-4 px-2 sm:mt-14 sm:grid-cols-2 sm:gap-5 sm:px-0 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
           {ingredients.map((ingredient) => (
             <div
               key={ingredient.name}
-              className="group bg-[#F8F5EF] rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-row items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg w-full max-w-[320px] sm:max-w-none mx-auto"
+              className="group mx-auto flex w-full max-w-[380px] flex-row items-center gap-4 rounded-[24px] bg-[#F8F5EF] p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:rounded-[28px] sm:p-6"
             >
-              {/* Left Side: Image */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0">
+              {/* Ingredient Image */}
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white shadow-sm sm:h-20 sm:w-20">
                 <Image
                   src={ingredient.image}
                   alt={ingredient.name}
-                  width={45}
-                  height={45}
-                  className="object-contain sm:w-[55px] sm:h-[55px] transition duration-300 group-hover:scale-105"
+                  width={55}
+                  height={55}
+                  className="h-11 w-11 object-contain transition duration-300 group-hover:scale-105 sm:h-[55px] sm:w-[55px]"
                 />
               </div>
 
-              {/* Right Side: Title & Description */}
-              <div className="flex-1 text-left">
-                <h3 className="text-lg sm:text-xl font-semibold text-[#2E473B]">
+              {/* Ingredient Name & Description */}
+              <div className="min-w-0 flex-1 text-left">
+                <h3 className="text-lg font-semibold text-[#2E473B] sm:text-xl">
                   {ingredient.name}
                 </h3>
-                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-gray-600 leading-relaxed">
+
+                <p className="mt-1 text-xs leading-relaxed text-gray-600 sm:mt-2 sm:text-sm">
                   {ingredient.description}
                 </p>
               </div>
@@ -98,22 +116,18 @@ export default function Ingredients() {
           ))}
         </div>
 
-        {/* Additional Ingredients Box with mt-10 sm:mt-16 directly on the bg-[#F8F5EF] card */}
-        <div className="flex justify-center w-full px-4 sm:px-0">
-          <div className="mt-10 sm:mt-16 mb-6 sm:mb-10 w-full max-w-[320px] xs:max-w-[360px] sm:max-w-4xl bg-[#F8F5EF] rounded-[24px] sm:rounded-[30px] p-6 sm:p-10 text-center shadow-sm mx-auto flex flex-col items-center justify-center">
-            <h3 className="text-xl sm:text-2xl font-semibold text-[#2E473B] text-center">
-              Enriched With More Botanical Goodness
-            </h3>
+        {/* Closing Statement */}
+        <div className="mx-auto mt-12 max-w-3xl text-center sm:mt-16">
+          <div className="mx-auto mb-5 h-px w-16 bg-[#7C9A7D]" />
 
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed px-4 sm:px-0 text-center">
-              Infused with Aloe Vera Oil, Vitamin E Oil, Shikakai, Reetha,
-              Curry Leaves, Kalonji (Black Seed), Ratanjot and other carefully
-              selected botanical herbs to create a rich and luxurious hair
-              care experience.
-            </p>
-          </div>
+          <p className="font-serif text-xl italic text-[#2E473B] sm:text-2xl">
+            Rooted in Tradition. Inspired by Nature.
+          </p>
+
+          <p className="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+            Thoughtfully bringing botanical inspiration into your everyday care.
+          </p>
         </div>
-
       </div>
     </section>
   );

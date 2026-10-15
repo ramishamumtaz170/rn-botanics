@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
+import {
+  X,
+  Plus,
+  Minus,
+  Trash2,
+  ShoppingBag,
+} from "lucide-react";
 import { useCart } from "@/app/context/CartContext";
 
 declare global {
@@ -36,6 +42,25 @@ export default function CartDrawer({
     (sum, item) => sum + item.quantity,
     0
   );
+
+  const getProductTypeLabel = (type: string) => {
+    switch (type) {
+      case "oil":
+        return "Hair Oil";
+
+      case "shampoo":
+        return "Shampoo";
+
+      case "comb":
+        return "Wooden Comb";
+
+      case "bundle":
+        return "Bundle";
+
+      default:
+        return "Hair Care";
+    }
+  };
 
   return (
     <>
@@ -86,7 +111,10 @@ export default function CartDrawer({
         {cart.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center bg-white px-8 text-center">
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#F8F5EF] text-[#2E473B]">
-              <ShoppingBag size={32} strokeWidth={1.5} />
+              <ShoppingBag
+                size={32}
+                strokeWidth={1.5}
+              />
             </div>
 
             <h3 className="mt-6 text-2xl font-semibold text-[#2E473B]">
@@ -130,11 +158,16 @@ export default function CartDrawer({
 
                     {/* Product Details */}
                     <div className="min-w-0 flex-1">
-
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="min-w-0 text-base font-bold leading-5 text-[#2E473B] sm:text-lg">
-                          {item.name}
-                        </h3>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-[#7C9A7D]">
+                            {getProductTypeLabel(item.type)}
+                          </p>
+
+                          <h3 className="mt-1 text-base font-bold leading-5 text-[#2E473B] sm:text-lg">
+                            {item.name}
+                          </h3>
+                        </div>
 
                         <button
                           type="button"
@@ -159,13 +192,11 @@ export default function CartDrawer({
 
                   {/* Quantity Controls */}
                   <div className="mt-4 flex items-center justify-between border-t border-[#F0ECE5] pt-4">
-
                     <span className="text-xs font-medium uppercase tracking-[0.12em] text-[#8A9089]">
                       Quantity
                     </span>
 
                     <div className="flex items-center overflow-hidden rounded-full border border-[#E8E3DA] bg-[#F8F5EF]">
-
                       <button
                         type="button"
                         onClick={() =>
@@ -194,7 +225,6 @@ export default function CartDrawer({
                       >
                         <Plus size={15} />
                       </button>
-
                     </div>
                   </div>
                 </div>
@@ -203,9 +233,7 @@ export default function CartDrawer({
 
             {/* Cart Summary */}
             <div className="shrink-0 border-t border-[#E8E3DA] bg-white px-5 py-5 sm:px-7 sm:py-6">
-
               <div className="flex items-end justify-between gap-4">
-
                 <div>
                   <p className="text-sm text-[#7A807A]">
                     Subtotal
@@ -225,7 +253,6 @@ export default function CartDrawer({
                     {totalItems}
                   </p>
                 </div>
-
               </div>
 
               {/* Free Delivery */}
@@ -240,7 +267,7 @@ export default function CartDrawer({
               </div>
 
               <div className="mt-5 grid gap-3">
-
+                {/* Continue Shopping */}
                 <button
                   type="button"
                   onClick={onClose}
@@ -249,26 +276,35 @@ export default function CartDrawer({
                   Continue Shopping
                 </button>
 
-               <Link
-  href="/checkout"
-  onClick={() => {
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "InitiateCheckout", {
-        content_ids: cart.map((item) => item.id),
-        content_type: "product",
-        value: total,
-        currency: "PKR",
-        num_items: totalItems,
-      });
-    }
+                {/* Checkout */}
+                <Link
+                  href="/checkout"
+                  onClick={() => {
+                    if (
+                      typeof window !== "undefined" &&
+                      window.fbq
+                    ) {
+                      window.fbq(
+                        "track",
+                        "InitiateCheckout",
+                        {
+                          content_ids: cart.map(
+                            (item) => item.id
+                          ),
+                          content_type: "product",
+                          value: total,
+                          currency: "PKR",
+                          num_items: totalItems,
+                        }
+                      );
+                    }
 
-    onClose();
-  }}
-  className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#2E473B] px-5 text-sm font-semibold text-white transition hover:bg-[#23392F]"
->
-  Proceed to Checkout
-</Link>
-
+                    onClose();
+                  }}
+                  className="flex min-h-12 w-full items-center justify-center rounded-full bg-[#2E473B] px-5 text-sm font-semibold text-white transition hover:bg-[#23392F]"
+                >
+                  Proceed to Checkout
+                </Link>
               </div>
             </div>
           </div>

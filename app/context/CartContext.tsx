@@ -8,20 +8,28 @@ import {
   ReactNode,
 } from "react";
 
-type CartItem = {
-  id: number;
+export type ProductType =
+  | "oil"
+  | "shampoo"
+  | "comb"
+  | "bundle";
+
+  
+export type CartItem = {
+  id: string | number;
   name: string;
   price: number;
   image: string;
   quantity: number;
+  type: ProductType;
 };
 
 type CartContextType = {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: number) => void;
-  increaseQuantity: (id: number) => void;
-  decreaseQuantity: (id: number) => void;
+  removeFromCart: (id: string | number) => void;
+  increaseQuantity: (id: string | number) => void;
+  decreaseQuantity: (id: string | number) => void;
   clearCart: () => void;
   cartCount: number;
 };
@@ -44,16 +52,19 @@ export function CartProvider({
       const savedCart = localStorage.getItem(CART_STORAGE_KEY);
 
       if (savedCart) {
-        const parsedCart: CartItem[] = JSON.parse(savedCart);
+        const parsedCart = JSON.parse(savedCart);
 
-        // Remove old cap data if an old cart still exists
-        const cleanedCart: CartItem[] = parsedCart.map((item) => ({
-          id: item.id,
-          name: item.name,
-          price: item.price,
-          image: item.image,
-          quantity: item.quantity,
-        }));
+        // Clean/migrate existing cart data
+        const cleanedCart: CartItem[] = parsedCart.map(
+          (item: CartItem) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            quantity: item.quantity,
+            type: item.type || "oil",
+          })
+        );
 
         setCart(cleanedCart);
       }
@@ -82,17 +93,18 @@ export function CartProvider({
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
       const existing = prev.find(
-        (i) => i.id === item.id
+        (cartItem) => cartItem.id === item.id
       );
 
       if (existing) {
-        return prev.map((i) =>
-          i.id === item.id
+        return prev.map((cartItem) =>
+          cartItem.id === item.id
             ? {
-                ...i,
-                quantity: i.quantity + item.quantity,
+                ...cartItem,
+                quantity:
+                  cartItem.quantity + item.quantity,
               }
-            : i
+            : cartItem
         );
       }
 
@@ -101,14 +113,14 @@ export function CartProvider({
   };
 
   // Remove product
-  const removeFromCart = (id: number) => {
+  const removeFromCart = (id: string | number) => {
     setCart((prev) =>
       prev.filter((item) => item.id !== id)
     );
   };
 
   // Increase quantity
-  const increaseQuantity = (id: number) => {
+  const increaseQuantity = (id: string | number) => {
     setCart((prev) =>
       prev.map((item) =>
         item.id === id
@@ -122,7 +134,7 @@ export function CartProvider({
   };
 
   // Decrease quantity
-  const decreaseQuantity = (id: number) => {
+  const decreaseQuantity = (id: string | number) => {
     setCart((prev) =>
       prev
         .map((item) =>
@@ -148,7 +160,7 @@ export function CartProvider({
     }
   };
 
-  // Total cart quantity
+  // Total number of products in cart
   const cartCount = cart.reduce(
     (total, item) => total + item.quantity,
     0

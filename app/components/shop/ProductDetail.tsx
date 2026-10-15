@@ -5,16 +5,19 @@ import Image from "next/image";
 import { useCart } from "@/app/context/CartContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { PRODUCT } from "@/app/constants/product";
+import type { Product } from "@/app/constants/product";
 
-// Adjust this to match your actual sticky header height
-const HEADER_HEIGHT = "64px";
+type ProductDetailProps = {
+  product: Product;
+};
 
-export default function ProductDetail() {
+export default function ProductDetail({
+  product,
+}: ProductDetailProps) {
   const router = useRouter();
   const { addToCart } = useCart();
 
-  const images = PRODUCT.images;
+  const images = product.images;
 
   const [selectedImage, setSelectedImage] = useState(images[0]);
   const [quantity, setQuantity] = useState(1);
@@ -24,25 +27,30 @@ export default function ProductDetail() {
   };
 
   const decrease = () => {
-    setQuantity((previous) => (previous > 1 ? previous - 1 : 1));
+    setQuantity((previous) =>
+      previous > 1 ? previous - 1 : 1
+    );
   };
 
   const addProductToCart = () => {
     addToCart({
-      id: PRODUCT.id,
-      name: PRODUCT.name,
-      price: PRODUCT.salePrice,
-      image: PRODUCT.image,
+      id: product.id,
+      name: product.name,
+      price: product.salePrice,
+      image: product.image,
       quantity,
+      type: product.type,
     });
   };
 
   const handleAddToCart = () => {
     addProductToCart();
 
-    toast.success(`${PRODUCT.name} added to your cart.`, {
+    toast.success(`${product.name} added to your cart.`, {
       duration: 1200,
     });
+
+    window.dispatchEvent(new Event("open-cart"));
   };
 
   const handleBuyNow = () => {
@@ -50,67 +58,74 @@ export default function ProductDetail() {
     router.push("/checkout");
   };
 
+  const collectionLabel =
+    product.type === "bundle"
+      ? "Bundle Collection"
+      : product.type === "shampoo"
+      ? "Hair Care Collection"
+      : product.type === "comb"
+      ? "Hair Care Essential"
+      : "Signature Collection";
+
   return (
-    <section
-      className="grid gap-4 overflow-hidden lg:grid-cols-2 lg:gap-10"
-      style={{ height: `calc(100dvh - ${HEADER_HEIGHT})` }}
-    >
+    <section className="grid gap-4 overflow-hidden lg:grid-cols-2 lg:gap-10">
       {/* ================= LEFT SIDE ================= */}
       <div className="flex min-h-0 flex-col items-center justify-center overflow-hidden">
-        
         {/* Product Image */}
         <Image
           src={selectedImage}
-          alt={PRODUCT.name}
+          alt={product.name}
           width={420}
           height={420}
+          priority
           className="relative z-10 object-contain drop-shadow-2xl transition duration-500"
         />
 
         {/* Thumbnail Selector */}
-        <div className="mt-2 flex justify-center gap-1.5">
-          {images.map((image, index) => {
-            const selected = selectedImage === image;
+        {images.length > 1 && (
+          <div className="mt-2 flex justify-center gap-1.5">
+            {images.map((image, index) => {
+              const selected = selectedImage === image;
 
-            return (
-              <button
-                key={index}
-                type="button"
-                onClick={() => setSelectedImage(image)}
-                className={`overflow-hidden rounded-lg border-2 bg-white p-0.5 transition-all duration-300 ${
-                  selected
-                    ? "border-[#2E473B] scale-105"
-                    : "border-[#E8E3DA] hover:border-[#7C9A7D] hover:scale-105"
-                }`}
-              >
-                <Image
-                  src={image}
-                  alt={`Product ${index + 1}`}
-                  width={44}
-                  height={44}
-                  className="h-9 w-9 rounded-md object-cover sm:h-11 sm:w-11"
-                />
-              </button>
-            );
-          })}
-        </div>
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => setSelectedImage(image)}
+                  className={`overflow-hidden rounded-lg border-2 bg-white p-0.5 transition-all duration-300 ${
+                    selected
+                      ? "scale-105 border-[#2E473B]"
+                      : "border-[#E8E3DA] hover:scale-105 hover:border-[#7C9A7D]"
+                  }`}
+                >
+                  <Image
+                    src={image}
+                    alt={`${product.name} ${index + 1}`}
+                    width={44}
+                    height={44}
+                    className="h-9 w-9 rounded-md object-cover sm:h-11 sm:w-11"
+                  />
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* ================= RIGHT SIDE ================= */}
       <div className="flex min-h-0 flex-col overflow-hidden">
         <div className="min-h-0">
-
           {/* Collection */}
           <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#7C9A7D] sm:text-xs">
-            Signature Collection
+            {collectionLabel}
           </p>
 
           {/* Product Name */}
           <h1 className="mt-0.5 text-lg font-bold leading-tight text-[#2E473B] sm:text-2xl">
-            {PRODUCT.name}
+            {product.name}
           </h1>
 
-          {/* Rating */}
+          {/* Rating / Tagline */}
           <div className="mt-1 flex items-center gap-1.5">
             <span
               className="text-xs tracking-wide text-[#C7A25A] sm:text-sm"
@@ -120,28 +135,31 @@ export default function ProductDetail() {
             </span>
 
             <span className="truncate text-[10px] text-gray-500 sm:text-xs">
-              {PRODUCT.tagline}
+              {product.tagline}
             </span>
           </div>
 
           {/* Description */}
-          <p className="mt-1.5 line-clamp-2 text-[11px] leading-snug text-gray-600 sm:mt-2 sm:text-sm">
-            {PRODUCT.description}
-          </p>
-
+         <p className="whitespace-pre-line">
+  {product.description}
+</p>
           {/* Price */}
           <div className="mt-2 flex flex-wrap items-baseline gap-2">
             <h2 className="text-xl font-bold text-[#2E473B] sm:text-2xl">
-              Rs. {PRODUCT.salePrice.toLocaleString()}
+              Rs. {product.salePrice.toLocaleString()}
             </h2>
 
-            <span className="text-xs text-gray-400 line-through">
-              Rs. {PRODUCT.originalPrice.toLocaleString()}
-            </span>
+            {product.discount > 0 && (
+              <>
+                <span className="text-xs text-gray-400 line-through">
+                  Rs. {product.originalPrice.toLocaleString()}
+                </span>
 
-            <span className="rounded-full bg-[#E8F3EA] px-2 py-0.5 text-[10px] font-semibold text-[#2E473B]">
-              Save {PRODUCT.discount}%
-            </span>
+                <span className="rounded-full bg-[#E8F3EA] px-2 py-0.5 text-[10px] font-semibold text-[#2E473B]">
+                  Save {product.discount}%
+                </span>
+              </>
+            )}
           </div>
 
           {/* Free Delivery Announcement */}
@@ -164,7 +182,6 @@ export default function ProductDetail() {
 
         {/* Quantity & Actions */}
         <div className="mt-auto flex flex-wrap items-center gap-2.5 pt-2.5">
-
           {/* Quantity */}
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-[#2E473B]">
@@ -198,7 +215,6 @@ export default function ProductDetail() {
 
           {/* Buttons */}
           <div className="flex min-w-[200px] flex-1 items-center gap-2">
-
             {/* Add to Cart */}
             <button
               type="button"
@@ -216,7 +232,6 @@ export default function ProductDetail() {
             >
               Buy Now
             </button>
-
           </div>
         </div>
       </div>

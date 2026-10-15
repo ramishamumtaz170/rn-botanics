@@ -13,13 +13,13 @@ export default function CallToAction() {
   
  const addProductToCart = () => {
   addToCart({
-    id: PRODUCT.id,
-    name: PRODUCT.name,
-    price: PRODUCT.salePrice,
-    image: PRODUCT.image,
-    quantity: 1,
-    
-  });
+  id: PRODUCT.id,
+  name: PRODUCT.name,
+  price: PRODUCT.salePrice,
+  image: PRODUCT.image,
+  quantity: 1,
+  type: PRODUCT.type,
+});
 };
 
 const handleAddToCart = () => {

@@ -4,6 +4,7 @@ export default function Ingredients() {
   const ingredients = [
     "Mustard Oil",
     "Coconut Oil",
+
     "Amla",
     "Rosemary",
     "Hibiscus",

@@ -1,98 +1,104 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PRODUCT } from "@/app/constants/product";
+import { PRODUCTS } from "@/app/constants/product";
 
 export default function FeaturedProducts() {
+  const featuredProducts = PRODUCTS.slice(0, 3);
+
   return (
-    <section className="bg-[#F8F5EF] pt-10 sm:pt-16 lg:pt-6 pb-12 sm:pb-24 px-4 sm:px-6 lg:px-8 w-full overflow-x-hidden flex flex-col items-center justify-center text-center">
-      <div className="max-w-7xl w-full mx-auto flex flex-col items-center justify-center text-center">
+    <section className="w-full bg-[#F8F5EF] px-4 py-12 text-center sm:px-6 sm:py-20 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl">
+        {/* Heading */}
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#7C9A7D] sm:text-sm">
+          Discover R & N Botanics
+        </p>
 
-        {/* Heading Section */}
-        <div className="text-center max-w-3xl w-full mx-auto px-4 flex flex-col items-center justify-center">
-          <p className="uppercase tracking-[0.25em] text-[#7C9A7D] text-xs sm:text-sm font-semibold text-center">
-            Signature Collection
-          </p>
+        <h2 className="mt-3 text-2xl font-bold text-[#2E473B] sm:text-3xl lg:text-4xl">
+          Our Botanical Essentials
+        </h2>
 
-          <h3 className="mt-3 sm:mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2E473B] text-center">
-            Crafted For Healthy Hair
-          </h3>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base">
+          Thoughtfully crafted essentials inspired by nature,
+          bringing everyday luxury to your routine.
+        </p>
 
-          <p className="mt-3 sm:mt-5 text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto text-center">
-            Nourish your scalp and strengthen your hair with our handcrafted botanical hair oil.
-          </p>
-        </div>
-
-        {/* Product Card Wrapper */}
-        <div className="mt-8 sm:mt-12 flex justify-center w-full">
-          <div className="bg-white rounded-[28px] sm:rounded-[36px] overflow-hidden max-w-md w-full hover:-translate-y-1 transition duration-500 mx-auto flex flex-col items-center text-center">
-
-            {/* Product Image Container */}
-            <div className="relative bg-[#F8F5EF] flex justify-center items-center w-full p-6 sm:p-10">
-              {/* Discount Badge */}
-              <span className="absolute top-4 right-4 sm:top-6 sm:right-6 bg-[#C7A25A] text-[#2E473B] px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold shadow-sm">
-                {PRODUCT.discount}% OFF
-              </span>
-
-              <Image
-                src={PRODUCT.image}
-                alt={PRODUCT.name}
-                width={220}
-                height={220}
-                className="object-contain sm:w-[250px] sm:h-[250px] mx-auto"
-              />
-            </div>
-
-            {/* Product Details */}
-            <div className="p-6 sm:p-8 text-center flex flex-col items-center justify-center w-full">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#2E473B] text-center w-full">
-                {PRODUCT.name}
-              </h2>
-
-              {/* Price Row */}
-              <div className="mt-4 sm:mt-6 flex items-center justify-center gap-3 w-full">
-                <span className="text-gray-400 line-through text-lg sm:text-xl">
-                  Rs. {PRODUCT.originalPrice.toLocaleString()}
-                </span>
-
-                <span className="bg-[#E8F3EA] text-[#2E473B] px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
-                  Save Rs. {(PRODUCT.originalPrice - PRODUCT.salePrice).toLocaleString()}
-                </span>
-              </div>
-
-              <h4 className="text-3xl sm:text-5xl font-bold text-[#2E473B] mt-2 sm:mt-3 text-center w-full">
-                Rs. {PRODUCT.salePrice.toLocaleString()}
-              </h4>
-
-              {/* CTA Button capped at max-w-[260px] sm:max-w-[280px] */}
+        {/* Featured Products */}
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:mt-12">
+          {featuredProducts.map((product) => (
+            <article
+              key={product.id}
+              className="group overflow-hidden rounded-3xl border border-[#E5E0D7] bg-white text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              {/* Image */}
               <Link
-                href="/shop"
-                className="mt-6 sm:mt-8 inline-flex items-center justify-center 
-                           w-full max-w-[260px] sm:max-w-[280px] mx-auto
-                           bg-[#C7A25A] text-[#2E473B]
-                           rounded-full py-3.5 sm:py-4 px-6
-                           text-base sm:text-lg font-bold
-                           shadow-md
-                           hover:bg-[#D7B56D]
-                           hover:shadow-lg
-                           transition-all duration-300
-                           active:scale-95 text-center"
+                href={`/shop/${product.slug}`}
+                className="relative flex aspect-square items-center justify-center overflow-hidden bg-[#F4F1EA] p-8"
               >
-                Shop Now →
+                {product.discount > 0 && (
+                  <span className="absolute left-4 top-4 z-10 rounded-full bg-[#2E473B] px-3 py-1.5 text-xs font-semibold text-white">
+                    {product.discount}% OFF
+                  </span>
+                )}
+
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-contain p-8 transition-transform duration-500 group-hover:scale-105"
+                />
               </Link>
 
-              {/* Product Info */}
-              <p className="mt-6 sm:mt-8 text-sm sm:text-base text-gray-600 leading-relaxed px-2 sm:px-0 text-center w-full">
-                {PRODUCT.tagline}
-              </p>
+              {/* Details */}
+              <div className="p-5 sm:p-6">
+                <p className="text-xs uppercase tracking-wider text-[#7C9A7D]">
+                  {product.tagline}
+                </p>
 
-              <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-[#7C9A7D] font-medium text-center w-full">
-                {PRODUCT.bottleSize} • 100% Botanical Formula
-              </p>
-            </div>
+                <h3 className="mt-2 text-lg font-semibold text-[#2E473B]">
+                  {product.name}
+                </h3>
 
-          </div>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                  {product.shortDescription}
+                </p>
+
+                {product.size && (
+                  <p className="mt-3 text-sm text-gray-500">
+                    {product.size}
+                  </p>
+                )}
+
+                <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <span className="text-xl font-bold text-[#2E473B]">
+                    Rs. {product.salePrice.toLocaleString()}
+                  </span>
+
+                  {product.discount > 0 && (
+                    <span className="text-sm text-gray-400 line-through">
+                      Rs. {product.originalPrice.toLocaleString()}
+                    </span>
+                  )}
+                </div>
+
+                <Link
+                  href={`/shop/${product.slug}`}
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-[#2E473B] px-5 py-3 font-semibold text-white transition hover:bg-[#23392F]"
+                >
+                  View Product →
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
 
+        {/* Full Collection */}
+        <Link
+          href="/shop"
+          className="mt-8 inline-flex items-center justify-center rounded-full border-2 border-[#2E473B] px-8 py-3.5 font-semibold text-[#2E473B] transition hover:bg-[#2E473B] hover:text-white sm:mt-10"
+        >
+          Explore All Products
+        </Link>
       </div>
     </section>
   );
