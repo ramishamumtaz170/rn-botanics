@@ -38,34 +38,28 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="bg-[#F8F5EF] py-6">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="faq" className="bg-[#F8F5EF] ">
+      <div className="max-w-5xl mx-auto px-4">
 
         {/* Heading */}
 
         <div className="w-full flex justify-center">
           <div className="max-w-3xl text-center">
 
-            <p className="uppercase tracking-[0.35em] text-[#7C9A7D] text-sm font-medium">
-              FAQ
-            </p>
-
-            <h4 className="mt-5 text-2xl md:text-6xl lg:text-7xl font-bold text-[#2E473B] leading-[1.05]">
+            <h4 className="mt-3 text-2xl md:text-6xl lg:text-7xl font-bold text-[#2E473B] leading-[1.05]">
               Frequently Asked
               <br />
               Questions
             </h4>
 
-            <p className="mt-8 text-lg text-gray-600 leading-8">
-              Everything you need to know about R & N Botanics Hair Oil.
-            </p>
-
+           
+           
           </div>
         </div>
 
         {/* FAQ List */}
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-4 flex justify-center">
 
           <div className="w-full max-w-3xl">
 
