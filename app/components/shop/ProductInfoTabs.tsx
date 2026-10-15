@@ -351,27 +351,28 @@ export default function ProductInfoTabs({
   return (
     <section className="w-full bg-[#F8F5EF]">
       <div className="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-x-7 gap-y-3 border-b border-[#2E473B]/15">
-          {tabs.map((tab) => (
-            <button
-              key={tab.key}
-              type="button"
-              onClick={() => handleTabChange(tab.key)}
-              className={`relative pb-4 text-sm transition-colors sm:text-base ${
-                activeTab === tab.key
-                  ? "font-semibold text-[#2E473B]"
-                  : "text-[#2E473B]/60 hover:text-[#2E473B]"
-              }`}
-            >
-              {tab.label}
+  
+{/* Tabs */}
+<div className="flex flex-nowrap gap-4 overflow-x-auto border-b border-[#2E473B]/15 sm:gap-7 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+  {tabs.map((tab) => (
+    <button
+      key={tab.key}
+      type="button"
+      onClick={() => handleTabChange(tab.key)}
+      className={`relative shrink-0 whitespace-nowrap pb-3 text-xs transition-colors sm:pb-4 sm:text-base ${
+        activeTab === tab.key
+          ? "font-semibold text-[#2E473B]"
+          : "text-[#2E473B]/60 hover:text-[#2E473B]"
+      }`}
+    >
+      {tab.label}
 
-              {activeTab === tab.key && (
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-[#2E473B]" />
-              )}
-            </button>
-          ))}
-        </div>
+      {activeTab === tab.key && (
+        <span className="absolute inset-x-0 bottom-0 h-0.5 bg-[#2E473B]" />
+      )}
+    </button>
+  ))}
+</div>
 
         <div className="min-h-[250px] py-7 sm:py-9">
           {/* Description */}
