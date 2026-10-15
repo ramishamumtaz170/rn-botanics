@@ -129,7 +129,7 @@ description: "• Helps reduce hair fall \n • Nourishes the scalp\n• Strengt
   {
     id: "oil-shampoo-bundle",
     slug: "oil-shampoo-bundle",
-    name: "Oil + Shampoo Bundle",
+    name: "The Botanical Hair Ritual Duo ",
     type: "bundle",
 
     tagline: "Your Two-Step Hair-Care Ritual",
@@ -164,7 +164,7 @@ description: "• Helps reduce hair fall \n • Nourishes the scalp\n• Strengt
   {
     id: "complete-haircare-bundle",
     slug: "complete-haircare-bundle",
-    name: "Complete Haircare Bundle",
+    name: "R&N Botanics Complete Haircare Bundle",
     type: "bundle",
 
     tagline: "Three Essentials. One Thoughtful Routine.",

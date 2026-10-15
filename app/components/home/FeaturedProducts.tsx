@@ -3,8 +3,7 @@ import Link from "next/link";
 import { PRODUCTS } from "@/app/constants/product";
 
 export default function FeaturedProducts() {
-  const featuredProducts = PRODUCTS.slice(0, 3);
-
+   const featuredProducts = PRODUCTS;
   return (
     <section className="w-full bg-[#F8F5EF] px-3 py-10 text-center sm:px-6 sm:py-16 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
