@@ -17,7 +17,7 @@ export default function Hero() {
   fill
   priority
   sizes="100vw"
-  className="object-contain object-center sm:object-cover"
+  className="object-cover object-center"
 />
 
         {/* Optional clickable overlay area for the call to action */}
