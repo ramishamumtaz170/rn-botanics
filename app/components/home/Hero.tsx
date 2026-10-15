@@ -21,7 +21,7 @@ export default function Hero() {
 />
 
         {/* Optional clickable overlay area for the call to action */}
-        <div className="absolute inset-0 flex items-end justify-center pb-6 sm:pb-10 lg:pb-12">
+        <div className="absolute inset-0 flex items-end  pb-6 sm:pb-10 lg:pb-12">
           <Link
             href="/shop"
             className="inline-flex min-h-11 items-center justify-center gap-3 rounded-full bg-[#2E473B] px-7 py-3 text-xs font-medium uppercase tracking-[0.18em] text-white shadow-lg transition hover:bg-[#23392F] active:scale-95 sm:px-9 sm:py-4 sm:text-sm"
