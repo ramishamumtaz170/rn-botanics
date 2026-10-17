@@ -131,7 +131,7 @@ export default function Navbar() {
       </header>
 
       {/* Keeps page content below the fixed announcement bar and navbar */}
-      <div aria-hidden="true" className="h-[50px] sm:h-[12px]" />
+      <div aria-hidden="true" className="h-[10px] sm:h-[0px]" />
 
       {/* Cart Drawer */}
       <CartDrawer
