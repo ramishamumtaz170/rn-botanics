@@ -13,162 +13,131 @@ export default function Navbar() {
   const { cartCount } = useCart();
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full bg-[#F8F5EF]/90 backdrop-blur-md border-b border-[#E8E3DA] z-50">
-      <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#F8F5EF]/90 backdrop-blur-md">
 
-        {/* Logo */}
-
-        <Link
-          href="/"
-          className="text-3xl font-bold text-[#2E473B]"
-        >
-          R & N Botanics
-        </Link>
-
-        {/* Desktop Navigation */}
-
-        <nav className="hidden md:flex items-center gap-8">
-
-          <Link
-            href="/"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            Home
-          </Link>
-
-          <Link
-            href="/shop"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            Shop
-          </Link>
-
-          <Link
-            href="/faq"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            FAQ
-          </Link>
-
-          <Link
-            href="/#ingredients"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            About
-          </Link>
-
-          <a
-            href="https://wa.me/923094289165"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#2E473B] hover:text-[#7C9A7D] transition"
-          >
-            Contact
-          </a>
-
-        </nav>
-
-        {/* Right Side */}
-
-        <div className="flex items-center gap-5">
-
-          {/* Cart */}
-
-          <button
-            onClick={() => setCartOpen(true)}
-            className="relative flex items-center justify-center w-11 h-11 rounded-full border border-[#E8E3DA] hover:bg-white transition"
-          >
-            <ShoppingBag
-              size={22}
-              className="text-[#2E473B]"
-            />
-
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-[#2E473B] text-white text-xs font-semibold flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
-          {/* Mobile Menu Button */}
-
-          <button
-            className="md:hidden text-[#2E473B]"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle Menu"
-          >
-            {open ? <X size={30} /> : <Menu size={30} />}
-          </button>
-
+        {/* Free Shipping Announcement Bar */}
+        <div className="w-full bg-[#2E473B] px-3 py-2 text-center text-[10px] font-medium uppercase tracking-[0.15em] text-white sm:py-2.5 sm:text-xs sm:tracking-[0.2em]">
+          Free Shipping Nationwide
         </div>
 
-      </div>
+        {/* Main Navigation */}
+        <div className="border-b border-[#E8E3DA]">
+          <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
 
-      {/* Mobile Menu */}
-
-      {open && (
-        <div className="absolute top-full left-0 w-full md:hidden bg-[#F8F5EF] border-t border-[#E8E3DA] px-6 py-6 shadow-lg">
-
-          <nav className="flex flex-col gap-5">
-
+            {/* Logo */}
             <Link
               href="/"
-              onClick={() => setOpen(false)}
-              className="text-[#2E473B]"
+              className="text-2xl font-bold text-[#2E473B] sm:text-3xl"
             >
-              Home
+              R & N Botanics
             </Link>
 
-            <Link
-              href="/shop"
-              onClick={() => setOpen(false)}
-              className="text-[#2E473B]"
-            >
-              Shop
-            </Link>
+            {/* Desktop Navigation */}
+            <nav className="hidden items-center gap-8 md:flex">
+              <Link href="/" className="text-[#2E473B] transition hover:text-[#7C9A7D]">
+                Home
+              </Link>
 
-            {/* FAQ */}
+              <Link href="/shop" className="text-[#2E473B] transition hover:text-[#7C9A7D]">
+                Shop
+              </Link>
 
-            <Link
-              href="/faq"
-              onClick={() => setOpen(false)}
-              className="text-[#2E473B]"
-            >
-              FAQ
-            </Link>
+              <Link href="/faq" className="text-[#2E473B] transition hover:text-[#7C9A7D]">
+                FAQ
+              </Link>
 
-            <Link
-              href="/#ingredients"
-              onClick={() => {
-                setTimeout(() => setOpen(false), 100);
-              }}
-              className="text-[#2E473B]"
-            >
-              About
-            </Link>
+              <Link href="/#ingredients" className="text-[#2E473B] transition hover:text-[#7C9A7D]">
+                About
+              </Link>
 
-            <a
-              href="https://wa.me/923094289165"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="text-[#2E473B]"
-            >
-              Contact
-            </a>
+              <a
+                href="https://wa.me/923094289165"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#2E473B] transition hover:text-[#7C9A7D]"
+              >
+                Contact
+              </a>
+            </nav>
 
-          </nav>
+            {/* Right Side */}
+            <div className="flex items-center gap-4 sm:gap-5">
 
+              {/* Cart */}
+              <button
+                onClick={() => setCartOpen(true)}
+                aria-label="Open shopping cart"
+                className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#E8E3DA] transition hover:bg-white sm:h-11 sm:w-11"
+              >
+                <ShoppingBag size={22} className="text-[#2E473B]" />
+
+                {cartCount > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#2E473B] text-xs font-semibold text-white">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+
+              {/* Mobile Menu Button */}
+              <button
+                className="text-[#2E473B] md:hidden"
+                onClick={() => setOpen(!open)}
+                aria-label="Toggle Menu"
+                aria-expanded={open}
+              >
+                {open ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+          </div>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        {open && (
+          <div className="absolute left-0 top-full w-full border-t border-[#E8E3DA] bg-[#F8F5EF] px-6 py-6 shadow-lg md:hidden">
+            <nav className="flex flex-col gap-5">
+              <Link href="/" onClick={() => setOpen(false)} className="text-[#2E473B]">
+                Home
+              </Link>
+
+              <Link href="/shop" onClick={() => setOpen(false)} className="text-[#2E473B]">
+                Shop
+              </Link>
+
+              <Link href="/faq" onClick={() => setOpen(false)} className="text-[#2E473B]">
+                FAQ
+              </Link>
+
+              <Link
+                href="/#ingredients"
+                onClick={() => setOpen(false)}
+                className="text-[#2E473B]"
+              >
+                About
+              </Link>
+
+              <a
+                href="https://wa.me/923094289165"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="text-[#2E473B]"
+              >
+                Contact
+              </a>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Keeps page content below the fixed announcement bar and navbar */}
+      <div aria-hidden="true" className="h-[100px] sm:h-[112px]" />
 
       {/* Cart Drawer */}
-
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}
       />
-
-    </header>
+    </>
   );
 }
