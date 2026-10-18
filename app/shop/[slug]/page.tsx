@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import RelatedProducts from "@/app/components/shop/RelatedProducts";
 
 import { PRODUCTS } from "@/app/constants/product";
 import ProductDetail from "@/app/components/shop/ProductDetail";
@@ -45,6 +46,10 @@ export default async function ProductPage({
       <div className="mx-auto max-w-7xl px-6">
         <ProductInfoTabs product={product} />
       </div>
+
+       <RelatedProducts currentProduct={product} />
     </main>
+    
+    
   );
 }
