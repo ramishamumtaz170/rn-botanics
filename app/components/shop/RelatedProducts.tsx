@@ -21,7 +21,7 @@ export default function RelatedProducts({
 
   return (
     <section className="w-full bg-[#F8F5EF]">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-0">
         <div className="mb-8 text-center sm:mb-10">
           <p className="mb-3 text-xs uppercase tracking-[0.2em] text-[#7C9A7D]">
             Discover More
@@ -31,10 +31,10 @@ export default function RelatedProducts({
             You May Also Like
           </h2>
 
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#2E473B]/65 sm:text-base">
+          {/* <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#2E473B]/65 sm:text-base">
             Explore more from R & N Botanics and find
             your everyday hair-care essentials.
-          </p>
+          </p> */}
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
